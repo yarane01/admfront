@@ -1,0 +1,98 @@
+<div ng-include src="'partials/settings.html'"/>
+<div ng-include src="'partials/settings/settingnodes.html'"/>
+
+<div ng-controller="GroupsCtrl">
+    <div ng-include src="'partials/delete.html'"/>
+    <div ng-include src="'partials/groups/edit.html'"/>
+    <div ng-include src="'partials/groups/create.html'"/>
+    <div ng-include src="'partials/loading.html'"/>
+    <div class="top-buttons">
+        <div class="btn-group">
+            <a href="javascript:;"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div class="loading-label" ng-show="!groups.settingList">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="dropdown dropdown-hover" style="display: inline">
+            <button class="btn btn-default dropdown-toggle" type="button"
+                    ng-show="groups.settingList"
+                    data-toggle="dropdown">
+                Setting locator
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-scroll">
+                <li ng-repeat="s in groups.settingList">
+                    <a href="Javascript:;" title="{{s.description}}"
+                       ng-click="locateSetting(s)">{{s.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="table-filter-hint" ng-show="groups.state.externalFilter.applied">
+            <span class="text-danger">Filtered by name <strong>{{groups.state.externalFilter.name}}</strong></span>
+            <a href="javascript:;" style="margin-left: 20px"
+               ng-click="clearExternalFilter()"
+               class='btn btn-warning btn-sm' role='button'>Clear filter
+            </a>
+        </div>
+
+        <div id="rigth-group" class="pull-right">
+            <a class="export-placeholder"></a>
+        </div>
+    </div>
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Groups under {{rootNodeName}}
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Parent</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot ng-show="!groups.state.externalFilter.applied">
+                    <tr>
+                        <td>
+                            <table-search name="id" size="6" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="name" size="10" placeholder="Name"></table-search>
+                        </td>
+                        <td>
+                            <table-search size="10" placeholder="Parent"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="type" size="10" placeholder="Type"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="dsc" size="10" placeholder="Description"></table-search>
+                        </td>
+                        <td>
+                            <a href="javascript:;"
+                               ng-click="clearAllFilters()"
+                               class='btn btn-warning btn-sm' role='button'>Clear All
+                            </a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="animated fadeIn" ng-if="!context.dataerror">
+    <div ng-show="!context.dataloaded" class="loading">
+        <h4><i class="fa fa-spinner fa-spin"></i> Loading...</h4>
+    </div>
+</div>
+
+<div class="animated fadeIn" ng-show="context.dataerror" class="loading">
+    <h4 class="text-danger">{{context.errorMessage}}</h4>
+</div>

@@ -1,0 +1,45 @@
+<div id="setDateFilters"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="setDateFilter()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <strong>Select filter</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/datesSelect.html'"></div>
+                    <div class="form-group" ng-show="dates.show">
+                        <label for="trades"
+                               class="col-sm-4 control-label">
+                            Show:</label>
+
+                        <div class="col-sm-7">
+                            <select class="form-control" id="trades"
+                                    ng-model="dates.show">
+                                <option value="All">All</option>
+                                <option value="Open">Open</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            ng-disabled="form.$invalid"
+                            class="btn btn-primary">OK
+                    </button>
+                    <button type="button" class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

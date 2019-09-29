@@ -1,0 +1,50 @@
+<div ng-controller="RiskManagementCtrl">
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="selectedUnit" class="control-label col-sm-2">
+                Display data for unit:
+            </label>
+
+            <div class="col-sm-5">
+                <select id="selectedUnit" class="form-control" ng-model="selectedUnit"
+                        ng-options="unit.systemid as unit.name for unit in selectableUnits"
+                        ng-change="unitSelected()">
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="layout" riskmanagement>
+
+    <div class="row">
+
+        <div class="column col-sm-4 lobipanel-parent-sortable" sortable>
+
+        </div>
+
+        <div class="column col-sm-5 lobipanel-parent-sortable" sortable>
+
+        </div>
+
+        <div class="column col-sm-3 lobipanel-parent-sortable" sortable>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="column col-sm-9 lobipanel-parent-sortable" sortable>
+
+        </div>
+
+        <div class="column col-sm-3 lobipanel-parent-sortable" sortable>
+
+        </div>
+
+    </div>
+
+</div>

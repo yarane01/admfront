@@ -1,0 +1,187 @@
+<div id="editTrade"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="updateTrade()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-edit fa-2x"></i>
+                        <strong>Edit trade {{trade.tradeid}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+
+                    <div class="form-group">
+                        <label for="symbol"
+                               class="col-lg-3 control-label">
+                            Symbol</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="symbol"
+                                   ng-model="trade.symbol"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accountn"
+                               class="col-lg-3 control-label">
+                            Account</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="accountn"
+                                   ng-model="trade.accountn"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trader"
+                               class="col-lg-3 control-label">
+                            Trader</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="trader"
+                                   ng-model="trade.trader"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="owner"
+                               class="col-lg-3 control-label">
+                            Owner</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="owner"
+                                   ng-model="trade.owner"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="form-group">
+                        <label for="openDate"
+                               class="col-lg-3 control-label">
+                            Open date</label>
+
+
+                        <div class="col-lg-7">
+                            <div date-time-picker
+                                 ng-model="trade.opendate"
+                                 class="input-group date">
+                                <input type="text" id="openDate"
+                                       ng-model="trade.opendate"
+                                       name="opendate"
+                                       class="form-control">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="openRate"
+                               class="col-lg-3 control-label">
+                            Open rate</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="openRate"
+                                   ng-model="trade.openrate"
+                                   name="openrate"
+                                   float
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="openAmount"
+                               class="col-lg-3 control-label">
+                            Open amount</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="openAmount"
+                                   ng-model="trade.openamount"
+                                   name="openamount"
+                                   integer
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="closeDate"
+                               class="col-lg-3 control-label">
+                            Close date</label>
+
+                        <div class="col-lg-7">
+                            <div date-time-picker
+                                 ng-model="trade.closedate"
+                                 class="input-group date">
+                                <input type="text" id="closeDate"
+                                       ng-model="trade.closedate"
+                                       ng-disabled="tradeNotClosed"
+                                       name="closedate"
+                                       class="form-control">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="closeRate"
+                               class="col-lg-3 control-label">
+                            Close rate</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="closeRate"
+                                   ng-model="trade.closerate"
+                                   ng-disabled="tradeNotClosed"
+                                   name="closerate"
+                                   float
+                                   optional="true"
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="closeAmount"
+                               class="col-lg-3 control-label">
+                            Close amount</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="closeAmount"
+                                   ng-model="trade.closeamount"
+                                   ng-disabled="tradeNotClosed"
+                                   name="closeamount"
+                                   integer
+                                   optional="true"
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            ng-disabled="form.$invalid"
+                            class="btn btn-primary">OK
+                    </button>
+                    <button type="button" class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div id="exposure"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div>
+    <h4 class="text-center">
+        <i class="fa fa-spinner fa-spin"></i> Processing...</h4>
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-money fa-2x"></i>
+                    <strong>Exposure of {{exposure.title}}</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div ng-show="!exposure.loaded">
+                    <h4 class="text-center">
+                        <i class="fa fa-spinner fa-spin"></i> Loading...</h4>
+                </div>
+
+                <div ng-show="!exposure.hasData">
+                    <h4 class="text-center">
+                    There are no open positions
+                    </h4>
+                </div>
+
+                <table ng-show="exposure.data!=null"
+                       class="table table-condensed" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Buy</th>
+                        <th>Sell</th>
+                        <th>Net</th>
+                        <th>Pnl</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in exposure.data">
+                        <td>{{item.instrumentname}}</td>
+                        <td>{{item.buyamount}}</td>
+                        <td>{{item.sellamount}}</td>
+                        <td>{{item.netamount}}</td>
+                        <td>{{item.pnl.toFixed(2)}} {{item.currency}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                        data-dismiss="modal">OK
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

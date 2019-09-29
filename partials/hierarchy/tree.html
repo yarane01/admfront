@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div role="search" style="width: 15em; display: table-cell">
+            <div class="input-group">
+                <input type="text"
+                       id="search-box"
+                       ng-model="context.filter"
+                       class="form-control"
+                       placeholder="Filter...">
+
+                <div class="input-group-btn">
+                    <button id="clear-search"
+                            ng-click="clearFilter()"
+                            class="btn btn-default">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="input-group" style="display: table-cell; vertical-align: middle; padding-left: 20px">
+            <input type="checkbox"
+                   ng-click="hideServiceAccounts()"
+                   ng-model="context.hideServiceAccounts">
+            Hide service accounts
+        </div>
+
+    </div>
+    <div class="panel-body"
+         style="height: 600px;
+                     overflow: auto;
+                     margin: 10px;
+                     padding: 20px">
+        <treecontrol class="tree-light"
+                     tree-model="treeData"
+                     options="treeOptions"
+                     selected-node="context.selected"
+                     expanded-nodes="expandedNodes"
+                     filter-expression="context.filter"
+                     on-selection="nodeSelected(node)"
+                >
+                    <span ng-switch="" on="node.systemidtype">
+                        <span ng-switch-when="0"><i class="fa fa-money"></i> </span>
+                        <span ng-switch-when="1"><i class="fa fa-user"></i> </span>
+                        <span ng-switch-when="2"><i class="fa fa-bank"></i> </span>
+                        <span ng-switch-when="3"><i class="fa fa-users"></i> </span>
+                    </span> {{node.name}}
+                    <span class="badge pull-right" ng-show="node.children.length>0">
+                    {{node.children.length}}
+                    </span>
+        </treecontrol>
+    </div>
+</div>

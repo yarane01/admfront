@@ -1,0 +1,62 @@
+<div ng-controller="stpOrdersCtrl">
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+    <div class="top-buttons">
+        <selector field="statusFilter" label="Filter" ng-if="filterReady" style="display: inline"></selector>
+        <button class="btn btn-default" type="button"
+                ng-click="showAll()">Show all
+        </button>
+        <div id="rigth-group" class="pull-right">
+            <button class="btn btn-default" type="button"
+                    ng-click="exportToCSV()">Export to CSV
+            </button>
+        </div>
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                STP Transactions
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover stp-orders"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th>Account ID</th>
+                        <th>VTS Order ID</th>
+                        <th>Price</th>
+                        <th>Bank</th>
+                        <th>Amount</th>
+                        <th>Side</th>
+                        <th>Order ID</th>
+                        <th>Bank Trade ID</th>
+                        <th>Counterparty</th>
+                        <th>Status</th>
+                        <th>Instrument</th>
+                        <th>Filled Amount</th>
+                        <th>Execution Price</th>
+                        <th>Quote ID</th>
+                        <th>Filled Partially</th>
+                        <th>Report Organization</th>
+                        <th>Totally Filled</th>
+                        <th>Type</th>
+                        <th>Broadcast</th>
+                        <th>Update</th>
+                        <th>Create</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

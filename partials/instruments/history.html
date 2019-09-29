@@ -1,0 +1,68 @@
+<div ng-if="context.showHistory"
+     ng-controller="InstrumentsHistoryCtrl">
+    <div id="settingsHistory"
+         class="modal fade"
+         data-backdrop="static"
+         role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="padding: 10px">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-info-circle"></i>
+                        Settings history
+                    </h4>
+                </div>
+                <div class="modal-body" style="min-height: 200px">
+                    <div ng-show="!context.dataloaded" class="loading">
+                        <h4><i class="fa fa-spinner fa-spin"></i> Loading...</h4>
+                    </div>
+                    <div ng-show="context.dataerror" style="text-align: center">
+                        <h4 class="text-danger">{{context.errorMessage}}</h4>
+                    </div>
+                    <div ng-show="context.dataloaded&&(!context.dataerror)">
+                        <table id="history-table"
+                               class="table table-hover"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Symbol</th>
+                                <th>Update date</th>
+                                <th>Update type</th>
+                                <th>User</th>
+                                <th>IP</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <td>
+                                    <table-search size="1" placeholder="ID"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="10" placeholder="Symbol"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Date"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Type"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="User"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="IP"></table-search>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

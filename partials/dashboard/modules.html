@@ -1,0 +1,167 @@
+<div id="system" class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-modules"
+     float-panel
+     ng-controller="ModulesInfoCtrl">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Modules
+            <a href=""
+               data-toggle="popover"
+               data-trigger="hover"
+               data-html="true"
+               data-placement="right"
+               title="<b class='text-danger'>Warning</b>"
+               data-content="<p>You will be redirected to logon page after restarting.</p>
+                    <p>If you cannot logon after several minutes call system administrator</p>">
+                <i class="fa fa-question-circle"></i>
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"/>
+        <div ng-show="context.dataloaded&&(!context.dataerror)">
+            <div class="row">
+                <div class="col-sm-3">Trade server</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="Trade server" if="tradeserverstatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="Trade server" if="tradeserverstatus=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <button type="button"
+                            class="btn btn-danger btn-sm"
+                            ng-click="restartTradeserver()"
+                            style="width: 100%"
+                            >Restart
+                    </button>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Feed bridge</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="Feed bridge" if="feedbridgestatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="Feed bridge" if="feedbridgestatus=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <div class="btn-group-justified">
+                        <a href="Javascript:;"
+                           ng-disabled="feedbridgestatus=='STOPPED'"
+                           ng-click="stopFeedBridge()"
+                           class="btn btn-danger btn-sm">Stop</a>
+                        <a href="Javascript:;"
+                           ng-disabled="feedbridgestatus=='RUNNING'"
+                           ng-click="startFeedBridge()"
+                           class="btn btn-success btn-sm">Start</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Beacon</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="Beacon" if="beaconstatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="Beacon" if="beaconstatus=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <div class="btn-group-justified">
+                        <a href="Javascript:;"
+                           ng-disabled="beaconstatus=='STOPPED'"
+                           ng-click="stopBeacon()"
+                           class="btn btn-danger btn-sm">Stop</a>
+                        <a href="Javascript:;"
+                           ng-disabled="beaconstatus=='RUNNING'"
+                           ng-click="startBeacon()"
+                           class="btn btn-success btn-sm">Start</a>
+                        <!--<a href="Javascript:;" class="btn btn-default btn-sm">Restart</a>-->
+                    </div>
+                </div>
+            </div>
+<!--
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">JFRS</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="JFRS" if="jfrsstatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="JFRS" if="jfrsstatus=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <div class="btn-group-justified">
+                        <a href="Javascript:;"
+                           ng-disabled="jfrsstatus=='STOPPED'"
+                           ng-click="stopJFRS()"
+                           class="btn btn-danger btn-sm">Stop</a>
+                        <a href="Javascript:;"
+                           ng-disabled="jfrsstatus=='RUNNING'"
+                           ng-click="startJFRS()"
+                           class="btn btn-success btn-sm">Start</a>
+                    </div>
+                </div>
+            </div>
+-->
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">STP</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="STP" if="stpstatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="STP" if="stpstatus=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <div class="btn-group-justified">
+                        <a href="Javascript:;"
+                           ng-disabled="stpstatus=='STOPPED'"
+                           ng-click="stopSTP()"
+                           class="btn btn-danger btn-sm">Stop</a>
+                        <a href="Javascript:;"
+                           ng-disabled="stpstatus=='RUNNING'"
+                           ng-click="startSTP()"
+                           class="btn btn-success btn-sm">Start</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">MT4Sync</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="MT4 Sync" if="mt4status=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="MT4 Sync" if="mt4status=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <div class="btn-group-justified">
+                        <a href="Javascript:;"
+                           ng-disabled="mt4status=='STOPPED'"
+                           ng-click="stopMT4()"
+                           class="btn btn-danger btn-sm">Stop</a>
+                        <a href="Javascript:;"
+                           ng-disabled="mt4status=='RUNNING'"
+                           ng-click="startMT4()"
+                           class="btn btn-success btn-sm">Start</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Reports</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="Reports" if="reportStatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="Reports" if="reportStatus=='RUNNING'"></modules-yes-sign>
+                </div>
+                <div class="col-sm-7">
+                    <div class="btn-group-justified">
+                        <a href="Javascript:;"
+                           ng-disabled="reportStatus=='STOPPED'"
+                           ng-click="stopReports()"
+                           class="btn btn-danger btn-sm">Stop</a>
+                        <a href="Javascript:;"
+                           ng-disabled="reportStatus=='RUNNING'"
+                           ng-click="startReports()"
+                           class="btn btn-success btn-sm">Start</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row" style="padding: 0px 10px" ng-show="context.dataloaded&&(!context.dataerror)">
+            <button type="button" class="btn btn-danger pull-right"
+                    ng-click="restartall()"
+                    >Restart all
+            </button>
+        </div>
+    </div>
+</div>
+

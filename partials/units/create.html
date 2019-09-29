@@ -1,0 +1,151 @@
+<div ng-if="context.createUnit">
+    <div id="createUnit"
+         class="modal fade"
+         role="dialog"
+         data-backdrop="static"
+         aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content" style="padding: 10px">
+                <form name="form" class="form-horizontal"
+                      ng-submit="createUnit()"
+                      role="form" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="fa fa-file-o fa-2x"></i>
+                            <strong>Create unit</strong>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-include src="'partials/processing.html'"/>
+
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Parent</label>
+
+                                <div class="col-sm-10">
+                                    <select class='form-control'
+                                            ng-model="unit.parentnodeid"
+                                            name="parentnodeid"
+                                            required>
+                                        <option ng-repeat="u in units.data"
+                                                value='{{u.hierarchynodeid}}'>
+                                            {{u.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Name</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"
+                                           ng-model="unit.name"
+                                           name="name"
+                                           id="unit-create"
+                                           autofocus
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Type</label>
+
+                                <div class="col-sm-10">
+                                    <select class='form-control'
+                                            ng-disabled="unit.type==0"
+                                            ng-model="unit.type"
+                                            name="type"
+                                            required>
+
+                                        <option value='0'>Market maker</option>
+                                        <option value='1'>Clearing House</option>
+                                        <option value='2'>None Clearing Broker</option>
+                                        <option value='3'>Introducing Broker</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Currency</label>
+
+                            <div class="col-sm-10">
+                                <select class='form-control'
+                                        ng-model="unit.defaultcurrency"
+                                        ng-options="key as value for (key,value) in ::currencies">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Timezone</label>
+
+                            <div class="col-sm-10">
+                                <select class='form-control'
+                                        ng-model="unit.timezone"
+                                        ng-options="key as value for (key,value) in ::timezones">
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Description</label>
+
+                            <div class="col-sm-10">
+                                <input ng-model="unit.description"
+                                       type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                URL</label>
+
+                            <div class="col-sm-10">
+                                <input ng-model="unit.url" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="unit.type==0">
+                            <label class="col-sm-2 control-label">
+                                STP</label>
+
+                            <div class="col-sm-10">
+                                <select class='form-control' ng-model="unit.hasstp">
+                                    <option value="Y">Enabled</option>
+                                    <option value="N">Disabled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                Closed</label>
+
+                            <div class="col-sm-10">
+                                <select class='form-control' ng-model="unit.closed">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"
+                                ng-disabled="form.$invalid">Submit
+                        </button>
+                        <button type="button"
+                                class="btn btn-warning"
+                                data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

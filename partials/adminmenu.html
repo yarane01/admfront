@@ -1,0 +1,37 @@
+<div class="nav nav-tabs nav-justified">
+    <li ng-disabled="!units.valid"
+        ng-class="{'active': page=='units'}">
+        <a href="#/units">Units
+            <span class="badge pull-right">{{units.data.length}}</span>
+        </a>
+    </li>
+    <li ng-disabled="!groups.valid"
+        ng-class="{'active': page=='groups'}">
+        <a href="#/groups">Groups
+            <span class="badge pull-right"> {{groups.data.length}}</span>
+        </a>
+    </li>
+    <li ng-disabled="!users.valid"
+        ng-class="{'active': page=='users'}">
+        <a href="#/users">Users
+            <span class="badge pull-right"> {{users.data.length}}</span>
+        </a>
+    </li>
+    <li ng-disabled="!accounts.valid"
+        ng-class="{'active': page=='accounts'}">
+        <a href="#/accounts">Accounts
+            <span class="badge pull-right"> {{accounts.data.length}}</span>
+        </a>
+    </li>
+    <li ng-disabled="!instruments.valid"
+        ng-class="{'active': page=='instruments'}">
+        <a href="#/instruments">Instruments
+            <span class="badge pull-right"> {{instruments.data.length}}</span>
+        </a>
+    </li>
+    <li ng-class="{'active': page=='hierarchy'}">
+
+        <a href="#/hierarchy">Hierarchy
+        </a>
+    </li>
+</div>

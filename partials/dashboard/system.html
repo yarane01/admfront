@@ -1,0 +1,152 @@
+<div id="system" class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-system"
+     float-panel
+     data-reload="false"
+     ng-controller="OSInfoCtrl">
+    <div class="panel-heading">
+        <div class="panel-title">
+            System
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"/>
+        <div style="padding: 0px 10px">
+            <div class="row"
+                 ng-show="context.dataloaded&&(!context.dataerror)">
+<!--
+                <div class="gauges">
+                    <div id="gauges" style="margin: auto"></div>
+                </div>
+-->
+
+                <div class="panel panel-info"
+                     data-stateful="true"
+                     data-inner-id="dashboard-entities"
+                     data-reload="false"
+                     data-unpin="false"
+                     data-expand="false"
+                     data-sortable="false"
+                     float-panel>
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Entities
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>Units <span class="badge pull-right">{{units.data.length}}</span></p>
+
+                        <p>Groups <span class="badge pull-right">{{groups.data.length}}</span></p>
+
+                        <p>Users <span class="badge pull-right">{{users.total}}</span></p>
+
+                        <p>Accounts <span class="badge pull-right">{{accounts.total}}</span></p>
+
+                        <p>Instruments <span class="badge pull-right">{{instruments.data.length}}</span></p>
+                    </div>
+                </div>
+                <div class="panel panel-info"
+                     data-stateful="true"
+                     data-inner-id="dashboard-cpu"
+                     data-reload="false"
+                     data-unpin="false"
+                     data-expand="false"
+                     data-sortable="false"
+                     float-panel>
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            CPU & Memory usage
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>CPU %<span class="badge pull-right">{{cpu}}</span></p>
+
+                        <p>Total memory, Mb<span class="badge pull-right">{{totalmemory}}</span></p>
+
+                        <p>Free memory, Mb<span class="badge pull-right">{{freememory}}</span></p>
+
+                        <p>Swap used, Mb<span class="badge pull-right">{{swapused}}</span></p>
+
+                        <p>Trade server max memory, Mb<span class="badge pull-right">{{javamaxmemory}}</span></p>
+
+                        <p>Trade server free memory, Mb<span class="badge pull-right">{{javafreememory}}</span></p>
+                        <table class="fixed-table">
+                            <tr>
+                                <td>
+                                    <div id="cpu-chart"/>
+                                </td>
+                                <td>
+                                    <div id="mem-chart"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-info"
+                     data-stateful="true"
+                     data-inner-id="dashboard-storage"
+                     data-reload="false"
+                     data-unpin="false"
+                     data-expand="false"
+                     data-sortable="false"
+                     float-panel>
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Storage
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed">
+                            <thead>
+                            <th>Filesystem</th>
+                            <th>Size</th>
+                            <th>Used</th>
+                            <th>Avail</th>
+                            <th>Use%</th>
+                            <th>Mounted on</th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="d in disks">
+                                <td>{{d.fileSystem}}</td>
+                                <td>{{d.size}}</td>
+                                <td>{{d.used}}</td>
+                                <td>{{d.avail}}</td>
+                                <td>{{d.use}}</td>
+                                <td>{{d.mount}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-info"
+                     data-stateful="true"
+                     data-inner-id="dashboard-config"
+                     data-reload="false"
+                     data-unpin="false"
+                     data-expand="false"
+                     data-sortable="false"
+                     float-panel>
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Configuration
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>File</td><td>appconfig.json</td>
+                            </tr>
+                            <tr>
+                                <td>Reports</td><td>{{config.reports}}</td>
+                            </tr>
+                            <tr>
+                                <td>Production</td><td>{{config.production}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

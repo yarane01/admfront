@@ -1,0 +1,90 @@
+<div class="panel panel-default" ng-controller="StatCtrl">
+    <div ng-include src="'partials/users/create.html'"/>
+    <div ng-include src="'partials/units/create.html'"/>
+    <div ng-include src="'partials/accounts/create.html'"/>
+    <div ng-include src="'partials/groups/create.html'"/>
+
+    <div class="panel-heading">
+        <div class="row dashboard-header">
+            <div class="col-xs-3">
+                <i class="fa fa-list-alt"></i>
+            </div>
+            <div class="col-xs-8 text-right">
+                <div class="dashboard-header">Entities</div>
+            </div>
+            <div class="col-xs-1 text-right">
+                <a href='Javascript:;'
+                   class="dashboard-header"
+                   data-toggle="collapse"
+                   data-target="#stat-body">
+                    <i class="fa fa-arrow-circle-down"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="stat-body" class="collapse in">
+        <div class="panel-body">
+            <div ng-include src="'partials/loading.html'"/>
+            <div class="row" ng-show="context.dataloaded">
+                <div style="padding: 0px 20px">
+                    <div class="row">
+                        <div class="col-sm-10 valign">
+                            Units
+                            <span class="badge pull-right">{{units.data.length}}</span>
+                        </div>
+                        <div class="col-sm-2 valign">
+                            <a href="javascript:;" ng-click="createUnitDialog()"
+                               ng-if="access.units.Create()"
+                               class='btn btn-primary btn-sm' role='button'>Create
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-sm-10 valign">
+                            Groups
+                            <span class="badge pull-right">{{groups.data.length}}</span>
+                        </div>
+                        <div class="col-sm-2 valign">
+                            <a href="javascript:;" ng-click="createGroupDialog()"
+                               ng-if="access.groups.Create()"
+                               class='btn btn-primary btn-sm' role='button'>Create
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-sm-10 valign">
+                            Users
+                            <!--<span class="badge pull-right">{{users.total}}</span>-->
+                            <span class="badge pull-right">{{userslist.data.length}}</span>
+                        </div>
+                        <div class="col-sm-2 valign">
+                            <a href="javascript:;" ng-click="createUserDialog()"
+                               ng-if="access.users.Create()"
+                               class='btn btn-primary btn-sm' role='button'>Create
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-sm-10 valign">
+                            Accounts
+                            <!--<span class="badge pull-right">{{accounts.total}}</span>-->
+                            <span class="badge pull-right">{{accountslist.data.length}}</span>
+                        </div>
+                        <div class="col-sm-2 valign">
+                            <a href="javascript:;" ng-click="createAccountDialog()"
+                               ng-if="access.accounts.Create()"
+                               class='btn btn-primary btn-sm' role='button'>Create
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-sm-10">
+                            Instruments
+                            <span class="badge pull-right">{{instruments.data.length}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

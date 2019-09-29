@@ -1,0 +1,46 @@
+<div id="changeParent"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="changeParent()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Change parent for <strong>{{updateParent.loginname}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Move to</label>
+
+                        <div class="col-sm-9">
+                            <select class='form-control'
+                                    placholder="Select..."
+                                    ng-model="updateParent.changeParentTo">
+                                <option ng-repeat="p in updateParent.parents | orderBy: 'name'"
+                                        value='{{p.systemid}}'>
+                                    {{p.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                            ng-disabled="form.$invalid">Submit
+                    </button>
+                    <button type="button"
+                            class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

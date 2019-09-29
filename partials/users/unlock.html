@@ -1,0 +1,28 @@
+<div id="unlockUser"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-unlock fa-2x"></i>
+                    <strong>{{current.loginname}}</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div ng-include src="'partials/processing.html'"/>
+                <h3 class="text-center">Unlock user?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                        ng-click="unlockUser()">Submit
+                </button>
+                <button type="button"
+                        class="btn btn-warning"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<div ng-include src="'partials/settings.html'"></div>
+<div ng-include src="'partials/settings/settingnodes.html'"></div>
+
+
+<div ng-controller="UnitsCtrl">
+    <div ng-include src="'partials/delete.html'"/>
+    <div ng-include src="'partials/units/edit.html'"/>
+    <div ng-include src="'partials/units/create.html'"/>
+    <div ng-include src="'partials/exposure.html'"/>
+    <div ng-include src="'partials/loading.html'"/>
+    <div ng-include src="'partials/users/createDemoUsers.html'"></div>
+    <div class="top-buttons">
+        <div class="btn-group">
+            <a href="javascript:"
+               ng-if="access.units.Create()"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div class="loading-label" ng-show="!units.settingList">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="dropdown dropdown-hover" style="display: inline">
+            <button class="btn btn-default dropdown-toggle" type="button"
+                    ng-show="units.settingList"
+                    data-toggle="dropdown">
+                Setting locator
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-scroll">
+                <li ng-repeat="s in units.settingList">
+                    <a href="Javascript:;" title="{{s.description}}"
+                       ng-click="locateSetting(s)">{{s.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="table-filter-hint" ng-show="units.state.externalFilter.applied">
+            <span class="text-danger">Filtered by name <strong>{{units.state.externalFilter.name}}</strong></span>
+            <a href="javascript:;" style="margin-left: 20px"
+               ng-click="clearExternalFilter()"
+               class='btn btn-warning btn-sm' role='button'>Clear filter
+            </a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+            <a class="export-placeholder"></a>
+        </div>
+    </div>
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Units under {{rootNodeName}}
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover units"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Parent</th>
+                        <th title="Unit currency">Cur</th>
+                        <th title="has STP">STP</th>
+                        <th>Time zone</th>
+                        <th title="Market status">Mkt</th>
+                        <th title="Closed">Cls</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot ng-show="!units.state.externalFilter.applied">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <table-search name="id" size="6" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="name" size="8" placeholder="Name"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="type" size="8" placeholder="Type"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="parent" size="8" placeholder="Parent"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="cur" size="2" placeholder="Currency"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="stp" size="2" placeholder="STP"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="tz" size="8" placeholder="Time zone"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="ms" size="1" placeholder="Market"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closed" size="1" placeholder="Closed"></table-search>
+                        </td>
+                        <td>
+                            <a href="javascript:;"
+                               ng-click="clearAllFilters()"
+                               class='btn btn-warning btn-sm' role='button'>Clear All
+                            </a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

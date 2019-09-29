@@ -1,0 +1,82 @@
+<div class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-mc-accounts"
+     float-panel
+     ng-controller="MCAccountsCtrl">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Accounts in margin call
+            <i class="fa fa-spinner fa-spin" ng-if="context.dataloaded && busy"></i>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"></div>
+        <div ng-show="(context.dataloaded)&&(!context.dataerror)">
+            <div ng-show="context.data.length==0">
+                No accounts
+            </div>
+            <div id="mc-accounts" ng-show="context.data.length>0" class="pre-scrollable">
+                <table class="table table-condensed table-striped" ts-wrapper>
+                    <thead>
+                    <!--<th></th>-->
+                    <th ts-criteria="accountid">ID</th>
+                    <th ts-criteria="accountn" ts-default>Name</th>
+                    <th ts-criteria="balance">Balance</th>
+                    <th ts-criteria="usedmargin">Used</th>
+                    <!--<th ts-criteria="used_margin_p" ts-default="descending">%</th>-->
+                    <!--<th ts-criteria="equity">Equity</th>-->
+                    <th ts-criteria="usablemargin">Usable</th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="a in context.data" ts-repeat
+                        ng-class="{'text-danger text-bold':a.inMarginCall}">
+<!--
+                        <td class="icon">
+                            <span ng-show="a.inMarginCall"><i class="fa fa-exclamation"/></span>
+                        </td>
+-->
+                        <td>{{a.systemid}}</td>
+                        <td>{{a.accountn}}</td>
+                        <td>{{a.balance | currency : "": 0}}</td>
+                        <td>{{a.usedmargin | currency : "": 0}}</td>
+                        <!--<td>{{a.used_margin_p}}</td>-->
+                        <!--<td>{{a.equity}}</td>-->
+                        <td>{{a.usablemargin | currency : "": 0}}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm"
+                                    ng-click="forceMC(a)">
+                                Force MC
+                            </button>
+                        </td>
+                        <!--
+                                                <td class="actions">
+                                                    <span ng-switch on="a.inMarginCall">
+                                                    <span ng-switch-when="null"><i class="fa fa-spinner fa-spin"/></span>
+                                                    <span ng-switch-when="true">
+                                                        <button class="btn btn-danger btn-sm"
+                                                                ng-click="forceMC(a)">
+                                                        Force MC</button>
+                                                    </span>
+                                                    <span ng-switch-when="false"></span>
+                                                    </span>
+                                                </td>
+                        -->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--
+        <div class="panel-footer">
+            <div class="row" style="padding: 0px 10px" ng-show="context.dataloaded&&(!context.dataerror)">
+                <div id="margin-slider">
+                    <span class="label bi-slider-label" style="font-size: medium; margin-right: 20px">{{level}}%</span>
+                    <input type="text" slider>
+                </div>
+            </div>
+        </div>
+    -->
+</div>
+

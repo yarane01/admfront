@@ -1,0 +1,89 @@
+<div ng-controller="RiskManagementBlotterCtrl">
+
+    <div ng-include="'partials/riskmanagement/dialogs/settings/blotter-settings.html'"></div>
+
+    <div class="panel panel-default riskmanagement-panel"
+         float-panel
+         data-reload="false"
+         data-inner-id="blotter">
+
+        <div class="panel-heading">
+
+            <div class="panel-title" id="blotter-panel-title">
+
+                Blotter
+
+                <button class="btn btn-default" data-toggle="collapse" data-target="#blotter-table-settings"
+                        aria-expanded="false">
+                    <i class="fa fa-filter"></i>
+                </button>
+
+                <button class="btn btn-default"
+                        ng-click="showSettingsDialog()">
+                    <i class="fa fa-cog"></i>
+                </button>
+
+                <a class="export-placeholder"></a>
+
+                <i class="fa fa-spinner fa-spin" ng-if="!context.dataloaded && !context.firsttimeload"></i>
+
+            </div>
+
+        </div>
+
+        <div class="panel-body">
+
+            <div ng-include="'partials/riskmanagement/loading.html'"></div>
+
+            <div ng-show="context.dataloaded && context.dataerror">
+                {{context.errormessage}}
+            </div>
+
+            <div ng-show="(context.dataloaded || !context.firsttimeload) && (!context.dataerror)">
+
+                <div ng-show="items.length == 0">
+                    No data
+                </div>
+
+                <div ng-show="items.length > 0">
+
+                    <div id="blotter-table-settings" class="collapse">
+
+                        <div class="input-group">
+
+                            <input id="blotterfilter" type="text" class="form-control"
+                                   placeholder="Search...">
+
+                            <span class="input-group-btn">
+
+                                <button class="btn btn-default" type="button" ng-click="clearFilter()">
+
+                                    <i class="fa fa-close"></i>
+
+                                </button>
+
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <table d-table id="blottertable" class="compact stripe pretty">
+
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Instrument</th>
+                                <th>Amount</th>
+                                <th>Avg. Rate</th>
+                                <th>Client</th>
+                                <th>Exposure</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

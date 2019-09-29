@@ -1,0 +1,173 @@
+<div ng-if="context.showSettings">
+    <div id="ratesSettings"
+         class="modal fade"
+         role="dialog"
+         ng-controller="StoredSymbolsCtrl"
+         data-backdrop="static"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="padding: 10px">
+                <form name="form" class="form-horizontal"
+                      ng-submit="saveSettings()"
+                      role="form" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="fa fa-gear fa-2x"></i>
+                            <strong>Show panels</strong>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row" style="margin: 10px">
+                            <div class="btn-group btn-group-justified">
+                                <a href="Javascript:;" class="btn btn-default"
+                                   id="select-all"
+                                   ng-click="selectAll()">Select All</a>
+                                <a href="Javascript:;" class="btn btn-default"
+                                   id="deselect-all"
+                                   ng-click="deselectAll()" ()>Deselect All</a>
+                                <a href="Javascript:;" class="btn btn-default"
+                                   id="invert"
+                                   ng-click="invertSelection()">Invert Selection</a>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-sm-3 control-label">
+                                Symbol</label>
+
+                            <div>
+                                <div class="col-sm-6 input-group" style="float: left">
+                                    <input type="text"
+                                           ng-model="context.filter"
+                                           class="form-control"
+                                           placeholder="Filter...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default"
+                                            ng-click="clearFilter()"
+                                            type="button"><i
+                                            class="fa fa-close"></i>
+                                    </button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-sm-offset-1 col-sm-8">
+                                <table class="table table-condensed scrolling-table">
+                                    <thead>
+                                    <th></th>
+                                    <th class="text-center">Symbol</th>
+                                    <th class="text-center">Type</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in context.filtered=(context.instruments | symbol: context.filter)"
+                                        ng-class="{'row-selected': item.selected}">
+                                        <td>
+                                            <input type="checkbox"
+                                                   ng-model="item.selected"
+                                                   ng-click="itemSelected($index)"/>
+                                        </td>
+                                        <td class="text-center text-bold">{{item.symbol}}
+                                        </td>
+                                        <td class="text-center">{{context.mapType[item.instrumenttype]}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="btn-group-vertical">
+                                    <button type="button" class="btn btn-default"
+                                            ng-repeat="(key, value) in context.mapType"
+                                            id="{{'button-'+key}}"
+                                            ng-click="selectByType(key)">
+                                        {{value}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px">
+                            <div class="form-group">
+                                <label for="level1"
+                                       class="col-sm-8 control-label">
+                                    Mark quote as <span class="rate-none-level1">delayed</span> after</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" id="level1"
+                                           ng-model="feedDecor.level1"
+                                           name="level1"
+                                           integer
+                                           required
+                                           class="form-control">
+                                </div>
+                                <label class="col-sm-1 control-label">
+                                    minute</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="level2"
+                                       class="col-sm-8 control-label">
+                                    Mark quote as <span class="rate-none-level2">invalid</span> after</label>
+
+                                <div class="col-sm-2">
+                                    <input type="text" id="level2"
+                                           ng-model="feedDecor.level2"
+                                           name="level1"
+                                           integer
+                                           required
+                                           class="form-control">
+                                </div>
+                                <label class="col-sm-1 control-label">
+                                    minute</label>
+                            </div>
+<!--
+                            <select class='form-control'
+                                    ng-model="feedDecor.units">
+                                <option value='seconds'>Seconds</option>
+                                <option value='minutes'>Minutes</option>
+                            </select>
+-->
+
+                        </div>
+
+                        <!--
+                                                <div class="row" style="margin-top: 10px">
+                                                    <div class="form-group">
+                                                        <label for="interval"
+                                                               class="col-sm-4 control-label">
+                                                            Update interval</label>
+
+                                                        <div class="col-sm-3">
+                                                            <input type="text" id="interval"
+                                                                   ng-model="context.interval"
+                                                                   name="interval"
+                                                                   integer
+                                                                   required
+                                                                   class="form-control">
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">
+                                                            (sec)</label>
+
+                                                    </div>
+                                                </div>
+                        -->
+                    </div>
+                    <div class="modal-footer">
+                        <div style="float: left">
+                            {{context.selected}} selected out of {{context.instruments.length}}
+                            <div ng-show="context.filter!=''">{{context.filtered.length}} filtered</div>
+                        </div>
+
+                        <button type="submit"
+                                ng-disabled="form.$invalid"
+                                class="btn btn-primary">OK
+                        </button>
+                        <button type="button" class="btn btn-warning"
+                                data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div id="progress"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="min-height: 30vh">
+                <div class="centered-div">
+                    <div ng-show="!context.progressError">
+                        <h4>{{context.progressMessage}}</h4>
+                    </div>
+                    <div ng-show="context.progressError">
+                        <h4 class="text-danger">{{context.progressErrorMessage}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" ng-show="context.progressError">
+                <button type="button"
+                        class="btn btn-warning"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

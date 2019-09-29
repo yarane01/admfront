@@ -1,0 +1,71 @@
+<div id="depositAccount"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="depositAccount()"
+                  role="form" novalidate>
+
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-database fa-2x"></i>
+                        Deposit account <strong>{{deposit.accountn}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Balance</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                   ng-model="deposit.balance"
+                                   name="balance"
+                                   disabled>
+                        </div>
+                        <label class="col-sm-1 control-label">
+                            {{deposit.currency}}</label>
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Amount</label>
+
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control"
+                                       ng-model="deposit.amount"
+                                       name="amount"
+                                       id="account-deposit"
+                                       float required>
+                            </div>
+                            <label class="col-sm-1 control-label">
+                                {{deposit.currency}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Description</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   ng-model="deposit.description"
+                                   name="description">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                            ng-disabled="form.$invalid">Submit
+                    </button>
+                    <button type="button"
+                            class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

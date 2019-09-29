@@ -1,0 +1,61 @@
+<div id="logWindow"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-edit fa-2x"></i>
+                    <strong>{{context.logfile}}</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form name="form" class="form-horizontal"
+                          role="form" novalidate>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                Number of lines from EOF</label>
+
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control"
+                                       ng-model="context.lines"
+                                       name="lines"
+                                       autofocus
+                                       integer>
+                            </div>
+                            <label class="col-sm-2 control-label">
+                                Text to find</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ng-model="context.grep"
+                                       name="grep">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div style="height: 500px; overflow-y: scroll">
+                    <div class="centered-div" ng-if="!context.loaded">
+                        <h4><i class="fa fa-spinner fa-spin"></i> Loading...</h4>
+                    </div>
+                    <div ng-if="context.loaded">
+                        <pre style="white-space: pre-wrap;word-break: normal;">
+                            {{context.log}}
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                        ng-click="refreshlog()">Refesh
+                </button>
+                <button type="button" class="btn btn-warning"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

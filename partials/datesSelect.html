@@ -1,0 +1,51 @@
+<div id="datesSelect">
+    <div class="form-group">
+        <label class="col-lg-2 checkbox text-right">
+            <input type="checkbox"
+                   ng-model="dateFilter.useFromFilter">
+        </label>
+        <label for="fromDate"
+               class="col-lg-2 control-label">
+            From
+        </label>
+
+
+        <div class="col-lg-7">
+            <div date-time-picker
+                 ng-model="dateFilter.fromdate"
+                 class="input-group date">
+                <input type="text" id="fromDate"
+                       ng-model="dateFilter.fromdate"
+                       name="fromDate"
+                       class="form-control">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 checkbox text-right">
+            <input type="checkbox"
+                   ng-model="dateFilter.useToFilter">
+        </label>
+        <label for="toDate"
+               class="col-lg-2 control-label">
+            To
+        </label>
+
+        <div class="col-lg-7">
+            <div date-time-picker
+                 ng-model="dateFilter.todate"
+                 class="input-group date">
+                <input type="text" id="toDate"
+                       ng-model="dateFilter.todate"
+                       name="todate"
+                       class="form-control">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                    </span>
+            </div>
+        </div>
+    </div>
+</div>

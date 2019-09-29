@@ -1,0 +1,44 @@
+<div style="margin-top: 30px" ng-controller="LogsCtrl">
+    <div style="margin-top: 30px" ng-controller="LogsCtrl">
+        <div ng-include src="'partials/dashboard/logWindow.html'"/>
+        <div class="row"
+             ng-repeat="p in panels">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            {{p.title}}
+                            <a href='Javascript:;'
+                               class="pull-right"
+                               ng-click="Refresh($index)">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel-body pre-scrollable">
+                        <div ng-show="p.loading" class="loading">
+                            <h4><i class="fa fa-spinner fa-spin"></i> Loading...</h4>
+                        </div>
+                        <div class="row"
+                             ng-show="!p.loading">
+                            <div ng-show="p.error">
+                                <p class="text-danger">{{context.tradeserver.errorMessage}}</p>
+                            </div>
+                            <div class="dl three-column"
+                                 ng-show="!p.error"
+                                 style="padding: 10px">
+                                <dl>
+                                    <dd ng-repeat="fd in p.logs">&nbsp;&nbsp;
+                                        <a href="Javascript:;"
+                                           ng-click="showLog($parent.$index,fd.name)">
+                                            {{fd.name}} ({{fd.size}} {{fd.sizetype}})</a>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

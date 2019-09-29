@@ -1,0 +1,256 @@
+<div id="createInstrument"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-pencil-square-o fa-2x"></i>
+                    <strong>Create instrument</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div ng-include src="'partials/processing.html'"/>
+                <form name="form" class="form-horizontal"
+                      role="form" novalidate>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Symbol</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control"
+                                       ng-model="instrument.symbol"
+                                       name="name"
+                                       id="instrument-create"
+                                       required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                ID</label>
+
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control"
+                                       ng-model="instrument.instrumentid"
+                                       name="instrumentid"
+                                       id="instrumentid"
+                                       integer=""
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Base symbol</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control"
+                                       ng-model="instrument.basesymbol"
+                                       name="basesymbol"
+                                       required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Derived symbol</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control"
+                                       ng-model="instrument.derivedsymbol"
+                                       name="derivedsymbol"
+                                       required>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 control-label">
+                            Type</label>
+
+                        <div class="col-sm-2">
+                            <select class='form-control'
+                                    ng-model="instrument.instrumenttype"
+                                    ng-options="key as value for (key,value) in instrumenttypemap">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!--<div ng-class="{'has-error': form.maxpipsupdate.$invalid}">-->
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Spread</label>
+
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control"
+                                       ng-model="instrument.spread"
+                                       name="spread"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       integer required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Trader range</label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.traderrange"
+                                       name="traderrange"
+                                       type="number" class="form-control"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       integer required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Dealer range</label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.dealerrange"
+                                       name="dealerrange"
+                                       type="number"
+                                       class="form-control"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       integer required>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Max pips update</label>
+
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control"
+                                       ng-model="instrument.maxpipsupdate"
+                                       name="maxpipsupdate"
+                                       id="maxpipsupdate"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       integer required>
+                            </div>
+                        </div>
+
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Margin requirement</label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.marginrequirement"
+                                       name="marginrequirement"
+                                       type="number" class="form-control"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       float required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Pip position
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.pipposition"
+                                       name="pipposition"
+                                       type="number" class="form-control"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       integer required>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Trading period
+                            </label>
+
+                            <div class="col-sm-10">
+                                <input ng-model="instrument.tradingperiod"
+                                       title="0-unlimited
+else format must be '10:00-12:00 14:00-24:00 [Sunday 18:00, Friday 16:00]'"
+                                       name="tradingperiod"
+                                       type="text" class="form-control"
+                                        >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-4 control-label">
+                                Round
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.round"
+                                       name="round"
+                                       type="number" class="form-control"
+                                       min="0"
+                                       title="{{integerType}}"
+                                       integer required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Lot size
+                            </label>
+
+                            <div class="col-sm-3">
+                                <input ng-model="instrument.lotsize"
+                                       name="lotsize"
+                                       type="number" class="form-control"
+                                       min="1"
+                                       title="{{integerType}}"
+                                       integer required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-4 control-label">
+                                Buy rate
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.buyrate"
+                                       name="buyrate"
+                                       type="number" class="form-control"
+                                       float
+                                       required>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Sell rate
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.sellrate"
+                                       name="sellrate"
+                                       type="number" class="form-control"
+                                       float
+                                       required>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                        ng-disabled="form.$invalid"
+                        ng-click="createInstrument()">Submit
+                </button>
+                <button type="button" class="btn btn-warning"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

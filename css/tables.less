@@ -1,0 +1,205 @@
+.dropdown-menu-item() {
+  display: inline-block;
+  width: 24px;
+  font-family: fontawesome;
+  font-style: normal;
+  font-size: large;
+}
+
+.dropdown-menu li {
+  a.delete-link:before {
+    content: "\f00d";
+    color: #cb2027;
+    .dropdown-menu-item;
+  }
+  a.edit-link:before {
+    content: "\f044";
+    .dropdown-menu-item;
+  }
+  a.settings-link:before {
+    content: "\f013";
+    .dropdown-menu-item;
+  }
+  a.link:before {
+    display: inline-block;
+    content: "";
+    width: 24px;
+  }
+}
+
+.selector-image() {
+  display: inline-block;
+  font-family: fontawesome;
+  font-style: normal;
+  width: 24px;
+}
+
+.selector {
+  &-show:before {
+    content: "\f00c";
+    color: darkgreen;
+    .selector-image;
+  }
+  &-hide:before {
+    content: "\f05e";
+    color: #cb2027;
+    .selector-image;
+  }
+}
+
+.details-image() {
+  display: inline-block;
+  font-family: fontawesome;
+  font-style: normal;
+  font-size: larger;
+  width: 24px;
+}
+
+.table.dataTable tbody {
+  th, td {
+    padding: 3px 5px;
+  }
+  td.details.closed:before {
+    content: "\f196";
+    .details-image
+  }
+  td.details.opened:before {
+    content: "\f147";
+    .details-image
+  }
+  div.dropdown.actions {
+    width: 50px;
+  }
+}
+
+.fix-width-column(@width) {
+  max-width: @width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accounts.dataTable {
+  td.opendate {
+    .fix-width-column(60px);
+  }
+}
+
+.units.dataTable {
+  td.timezone {
+    .fix-width-column(60px);
+  }
+}
+
+.stp-orders.dataTable {
+
+}
+
+.instruments.dataTable {
+  td:not(.actions) {
+    max-width: 70px;
+  }
+  td.spread {
+    max-width: 20px;
+  }
+  tr.trading-disabled td {
+    color: red;
+  }
+  td.tradingperiod {
+    .fix-width-column(70px);
+  }
+}
+
+.stp-orders.dataTable {
+  td.opendate,
+  td.closedate {
+    min-width: 100px;
+    line-height: 1;
+  }
+}
+
+.trades.dataTable {
+  //td:not(.actions) {
+  //  max-width: 70px;
+  //}
+  td.opendate,
+  td.closedate {
+    min-width: 100px;
+    /*white-space: nowrap;*/
+    /*font-size: smaller;*/
+    line-height: 1;
+    /*font-family: "Lucida Console"*/
+  }
+}
+
+.table-filter-hint {
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.users.dataTable {
+  tr.row-admin > td:nth-child(3) {
+    /*background-color: lightblue;*/
+    color: #a94442;
+  }
+}
+
+.not-active {
+  /*pointer-events: none;*/
+  cursor: not-allowed;
+}
+
+/*Fix wrong sorting marks placement for compact tables*/
+table.dataTable.compact thead{
+  th.sorting:after,
+  th.sorting_asc:after,
+  th.sorting_desc:after {
+    top: 4px !important;
+  }
+}
+
+table#blottertable td.highlight {
+  background-color: lightgoldenrodyellow;
+}
+
+div.riskmanagement-panel {
+  td.positivevalue {
+    color: blue;
+  }
+  td.negativevalue {
+    color: red;
+  }
+  td.padded {
+    padding-left: 10px !important;
+  }
+}
+
+#mc-accounts {
+  .actions {
+    width: 100px;
+    text-align: center;
+  }
+  .icon {
+    width: 20px;
+    text-align: center;
+    color: darkred;
+  }
+  td {
+    vertical-align: middle;
+  }
+}
+
+table td.integer{
+  text-align: center;
+}
+
+
+.dataTables_length {
+  label {
+    font-weight: 100;
+  }
+  select{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

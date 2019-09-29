@@ -1,0 +1,110 @@
+<div class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-feed-providers"
+     float-panel
+     ng-controller='FeedProvidersCtrl'>
+    <div class="panel-heading">
+        <div class="panel-title">
+            Feed providers
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"/>
+        <div ng-show="context.inprogress" class="text-center">
+            <h4><i class="fa fa-spinner fa-spin"></i> Processing... </h4>
+        </div>
+
+        <div ng-show="context.error" style="width: 60%">
+            <h4 class="text-danger">{{context.errorMessage}}</h4>
+        </div>
+        <div class="row animated dash-animation"
+             ng-show="context.dataloaded&&(!context.dataerror)&&(!context.inprogress)&&(!context.error)"
+             style="padding: 0px 10px">
+            <div>
+                <table class="table table-condensed table-centered table-middle-td"
+                       style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th><i class="fa fa-download"></i></th>
+                        <th>Name</th>
+                        <th colspan="3">Feed</th>
+                        <th colspan="3">Trading</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="p in feedproviders">
+                        <td>
+                            <providers-sign name="p.name"
+                                            ok="p.loaded"
+                                            prefix="provider"
+                                            postfix="loaded"></providers-sign>
+                        </td>
+                        <td><b>{{p.name}}</b></td>
+                        <td>
+                            <div ng-if="p.loaded">
+                                <providers-sign name="p.name"
+                                                ok="p.feedConnected"
+                                                prefix="feed"
+                                                postfix="connected"></providers-sign>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="p.loaded">
+                                <providers-sign name="p.name"
+                                                ok="p.feedEnabled"
+                                                prefix="feed"
+                                                postfix="enabled"></providers-sign>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="p.loaded">
+                                <div class="btn-group">
+                                    <a href="Javascript:;"
+                                       ng-click="DisconnectFeed(p.name)"
+                                       class="btn btn-danger btn-sm">OFF</a>
+                                    <a href="Javascript:;"
+                                       ng-click="ConnectFeed(p.name)"
+                                       class="btn btn-success btn-sm">ON</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="p.loaded">
+                                    <span ng-repeat="(name,value) in p.tradingConnected">
+                                        {{name}}
+                                        <providers-sign name="name"
+                                                        style="float: right"
+                                                        ok="value"
+                                                        prefix="trading"
+                                                        postfix="connected"></providers-sign>
+                                    </span>
+                                <br>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="p.loaded">
+                                <providers-sign name="p.name"
+                                                ok="p.tradingEnabled"
+                                                prefix="trading"
+                                                postfix="enabled"></providers-sign>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="p.loaded">
+                                <div class="btn-group">
+                                    <a href="Javascript:;"
+                                       ng-click="DisconnectTrading(p.name)"
+                                       class="btn btn-danger btn-sm">OFF</a>
+                                    <a href="Javascript:;"
+                                       ng-click="ConnectTrading(p.name)"
+                                       class="btn btn-success btn-sm">ON</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

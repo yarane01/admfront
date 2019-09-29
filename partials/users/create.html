@@ -1,0 +1,289 @@
+<div ng-if="context.createUser">
+    <div id="createUser"
+         class="modal fade"
+         role="dialog"
+         data-backdrop="static"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="padding: 10px">
+                <form name="form" class="form-horizontal"
+                      ng-submit="createUser()"
+                      role="form" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            <i class="fa fa-file-o fa-2x"></i>
+                            <strong>Create user</strong>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-include src="'partials/processing.html'"/>
+
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Parent node</label>
+
+                                <div class="col-sm-5">
+                                    <select class='form-control'
+                                            ng-model="user.parentsystemid"
+                                            name="parentsystemid"
+                                            required>
+                                        <option ng-repeat="p in ::parents | orderBy: 'name'"
+                                                ng-selected="p.systemid==user.parentsystemid"
+                                                value='{{p.systemid}}'>
+                                            {{p.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Login name</label>
+
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.loginname"
+                                           maxlength="20"
+                                           name="loginname"
+                                           id="user-create"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    First name</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.firstname"
+                                           maxlength="50"
+                                           name="firstname"
+                                           required>
+                                </div>
+                            </div>
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Last name</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.lastname"
+                                           maxlength="50"
+                                           name="lastname"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Address</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           maxlength="255"
+                                           ng-model="user.address"
+                                           name="address">
+                                </div>
+                            </div>
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    City</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.city"
+                                           maxlength="200"
+                                           name="city">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label class="col-sm-2 control-label">
+                                    State</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.state"
+                                           maxlength="40"
+                                           name="state">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="col-sm-2 control-label">
+                                    ZIP</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.zip"
+                                           maxlength="40"
+                                           name="zip">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Country</label>
+
+                                <div class="col-sm-4">
+                                    <select class='form-control'
+                                            ng-model='user.country'
+                                            name="country">
+
+                                        <option ng-repeat="item in countries | orderBy: '$value'"
+                                                value='{{item.$key}}'>{{item.$value}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Email</label>
+
+                                <div class="col-sm-4">
+                                    <input type="email" class="form-control"
+                                           ng-model="user.email"
+                                           maxlength="50"
+                                           name="email"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Day phone</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.dayphone"
+                                           maxlength="80"
+                                           name="dayphone">
+                                </div>
+                            </div>
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Home phone</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.homephone"
+                                           maxlength="80"
+                                           name="homephone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Reset password Email</label>
+
+                                <div class="col-sm-3">
+                                    <input type="email" class="form-control"
+                                           ng-model="user.resetpasswordemail"
+                                           maxlength="50"
+                                           name="resetpasswordemail">
+                                </div>
+                            </div>
+                            <div mark-errors>
+                                <label class="col-sm-3 control-label"
+                                       style="padding-top: 0px">
+                                    Password
+                                    <!--
+                                                                    <a href="Javascript:"
+                                                                       ng-click='user.newpassword = generatePassword()'>generate</a>
+                                    -->
+                                </label>
+
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control"
+                                           ng-model="user.password"
+                                           name='password'
+                                           password
+                                           required>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group" ng-show="portalUser.isaccountmanager">
+                            <div class="checkbox col-sm-offset-2 col-sm-2">
+                                <label>
+                                    <input ng-model='user.istrader'
+                                           type="checkbox"><strong> Trader</strong>
+                                </label>
+                            </div>
+                            <div class="checkbox col-sm-2">
+                                <label>
+                                    <input ng-model='user.ismoneyowner'
+                                           type="checkbox">
+                                    <strong> Money owner</strong>
+                                </label>
+                            </div>
+                            <label class="col-sm-2 control-label">
+                                Trading</label>
+
+                            <div class="col-sm-4">
+                                <select class='form-control'
+                                        ng-model='user.tradingstate'>
+                                    <option value="E">enabled</option>
+                                    <option value="D">disabled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="portalUser.issystemmanager">
+                            <div class="checkbox col-sm-offset-1 col-sm-2">
+                                <label>
+                                    <input ng-model='user.issystemmanager'
+                                           type="checkbox">
+                                    <strong> System manager</strong>
+                                </label>
+                            </div>
+                            <div class="checkbox col-sm-2">
+                                <label>
+                                    <input ng-model='user.isaccountmanager'
+                                           type="checkbox">
+                                    <strong> Account manager</strong>
+                                </label>
+                            </div>
+                            <div class="checkbox col-sm-2">
+                                <label>
+                                    <input ng-model='user.issettingmanager'
+                                           type="checkbox">
+                                    <strong> Settings manager</strong>
+                                </label>
+                            </div>
+                            <div class="checkbox col-sm-2">
+                                <label>
+                                    <input ng-model='user.isdealer'
+                                           type="checkbox">
+                                    <strong> Dealer</strong>
+                                </label>
+                            </div>
+                            <div class="checkbox col-sm-2">
+                                <label>
+                                    <input ng-model='user.isratemanager'
+                                           type="checkbox">
+                                    <strong> Rate manager</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit"
+                                ng-disabled="form.$invalid"
+                                class="btn btn-primary">Submit
+                        </button>
+                        <button type="button" class="btn btn-warning"
+                                data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

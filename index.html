@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="pragma" content="no-cache"/>
+
+    <title>Admin</title>
+    <!--<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/tree-control.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/dataTables.fontAwesome.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/lobipanel.css">
+    <link rel="stylesheet" href="css/tablesort.css"/>
+    <link rel="stylesheet" href="css/bootstrap-slider.css"/>
+    <link rel="stylesheet" href="css/buttons.dataTables.min.css"/>
+    <link rel="stylesheet" href="css/biInfo.css"/>
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/site.css">
+
+    <!--<script src="https://www.google.com/jsapi"></script>-->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.json.min.js"></script>
+    <script src="js/lobipanel.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/xml2json.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.js"></script>
+    <script src="js/dataTables.colSel.js"></script>
+    <script src="js/dataTables.scroller.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/dataTables.colSel.js"></script>
+    <script src="js/angular-tree-control.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/angular-tablesort.js"></script>
+    <script src="js/bootstrap-slider.js"></script>
+    <script src="js/dataTables.buttons.min.js"></script>
+    <script src="js/buttons.html5.min.js"></script>
+    <script src="js/buttons.bootstrap.min.js"></script>
+    <script src="js/json2csv.js"></script>
+    <script src="js/d3.v4.min.js"></script>
+    <script src="js/xlsx.core.min.js"></script>
+    <script src="js/sjcl.js"></script>
+
+    <script src="app/revision.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/data.js"></script>
+    <script src="app/app.js"></script>
+    <script src="js/application.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/filters.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/misc.js"></script>
+    <script src="app/graphs.js"></script>
+    <script src="app/tables.js"></script>
+    <script src="app/trading.js"></script>
+    <script src="partials/units/units.js"></script>
+    <script src="partials/groups/groups.js"></script>
+    <script src="partials/users/users.js"></script>
+    <script src="partials/trades/trades.js"></script>
+    <script src="partials/orders/orders.js"></script>
+    <script src="partials/accounts/accounts.js"></script>
+    <script src="partials/instruments/instruments.js"></script>
+    <script src="partials/instruments/submitInterests.js"></script>
+    <script src="partials/dashboard/dashboard.js"></script>
+    <script src="partials/dashboard/MCAccounts.js"></script>
+    <script src="partials/settings/settings.js"></script>
+    <script src="partials/hierarchy/hierarchy.js"></script>
+    <script src="partials/feed/feed.js"></script>
+    <script src="partials/feed/subscription.js"></script>
+    <script src="partials/feed/subscriptionservice.js"></script>
+    <script src="partials/logs/logs.js"></script>
+    <script src="partials/riskmanagement/riskmanagementservice.js"></script>
+    <script src="partials/riskmanagement/controllers/exposure.js"></script>
+    <script src="partials/riskmanagement/controllers/blotter.js"></script>
+    <script src="partials/riskmanagement/controllers/bbookusd.js"></script>
+    <script src="partials/riskmanagement/controllers/abookusd.js"></script>
+    <script src="partials/riskmanagement/controllers/abookplusbbookusd.js"></script>
+    <script src="partials/riskmanagement/controllers/pl.js"></script>
+    <script src="partials/riskmanagement/controllers/plsummary.js"></script>
+    <script src="partials/riskmanagement/controllers/rates.js"></script>
+    <script src="partials/riskmanagement/riskmanagement.js"></script>
+    <script src="partials/settings/settingnodes.js"></script>
+    <script src="partials/stp/stp.js"></script>
+</head>
+
+<body ng-app="portal">
+<div>
+    <div id="loadLabel" class="centered-div" ng-if="initialLoad">
+        <h3><i class="fa fa-spinner fa-spin"></i> Initializing app ...</h3>
+    </div>
+    <div id="cpuAlert" class="cpuAlert" ng-show="cpuAlert"></div>
+    <div ng-include src="'partials/dashboard/about.html'"></div>
+    <div ng-include src="'partials/appmenu.html'"></div>
+
+    <div id="content" class="container-fluid">
+        <div ng-view></div>
+    </div>
+</div>
+<!--
+<div class="app-copyright">
+    &copy; Visual Trading, Inc
+</div>
+-->
+<script>
+    google.charts.load('current', {'packages': ['corechart', 'gauge']});
+    google.charts.setOnLoadCallback(googleLoaded);
+//    google.charts.setOnLoadCallback(Google.loaded);
+
+    $(function () {
+//        Bootstrap();
+        handleModalsOpenedTwice();
+        handleDropdownHover();
+    });
+    $(window).unload(function () {
+    });
+    window.onresize = function () {
+        $('div.graph-content').trigger('redraw');
+    };
+</script>
+</body>
+</html>

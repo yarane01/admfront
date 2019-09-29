@@ -1,0 +1,169 @@
+<div ng-controller="TradesCtrl">
+    <div ng-include src="'partials/trades/edit.html'"/>
+    <div ng-include src="'partials/trades/create.html'"/>
+    <div ng-include src="'partials/trades/setDateFilters.html'"/>
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+
+    <div class="top-buttons">
+        <div class="btn-group">
+            <a href="javascript:"
+               ng-if="access.trades.Create()"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+        </div>
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Trades under {{rootNodeName}}
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover trades"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Account</th>
+                        <th>Owner</th>
+                        <th>Trader</th>
+                        <th>Symbol</th>
+                        <th>PL</th>
+                        <th>Open<br>rate</th>
+                        <th>Close<br>rate</th>
+                        <th>Open<br>amount</th>
+                        <th>Close<br>amount</th>
+                        <th>Open<br>date</th>
+                        <th>Close<br>date</th>
+                        <th>Open<br>order</th>
+                        <th>Open<br>client order</th>
+                        <th>Open<br>bank order</th>
+                        <th>Close<br>order</th>
+                        <th>Close<br>client order</th>
+                        <th>Close<br>bank order</th>
+                        <th>Open<br>bank</th>
+                        <th>Close<br>bank</th>
+                        <th>Open<br>bank trade ID</th>
+                        <th>Close<br>bank trade ID</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <td>
+                            <table-search name="id" size="5" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="account" size="6" placeholder="Account"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="owner" size="5" placeholder="Owner"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="trader" size="2" placeholder="Trader"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="symbol" size="5" placeholder="Symbol"></table-search>
+                        </td>
+                        <td>
+                            <table-search-highlighted name="pl" size="5" placeholder="*PL"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <table-search-highlighted name="orate" size="5"
+                                                      placeholder="*Open"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <table-search-highlighted name="crate" size="3"
+                                                      placeholder="*Close"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <table-search-highlighted name="oamount" size="5"
+                                                      placeholder="*Open"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <table-search-highlighted name="camount" size="5"
+                                                      placeholder="*Close"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <!--<table-search name="odate" size="1" placeholder="Open"></table-search>-->
+                            <a href="javascript:;" ng-click="createOpenDateFilter()"
+                               style="width: 80%"
+                               class='btn btn-default btn-sm' role='button'>Filter
+                            </a>
+                        </td>
+                        <td>
+                            <!--<table-search name="cdate" size="1" placeholder="Close"></table-search>-->
+                            <a href="javascript:;" ng-click="createCloseDateFilter()"
+                               style="width: 80%"
+                               class='btn btn-default btn-sm' role='button'>Filter
+                            </a>
+                        </td>
+                        <td>
+                            <table-search name="openorderid" size="5"
+                                                      placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="openclientorderid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="openbankorderid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closeorderid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closeclientorderid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closebankorderid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="openbank" size="5"
+                                          placeholder="Bank"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closebank" size="5"
+                                          placeholder="Bank"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="openbanktradeid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closebanktradeid" size="5"
+                                          placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <a href="javascript:;"
+                               ng-click="clearAllFilters()"
+                               class='btn btn-warning btn-sm' role='button'>Clear All
+                            </a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="text-highlighted">
+                <p>* Enter an expression, like "<100" or "=100"</p>
+            </div>
+        </div>
+    </div>
+</div>

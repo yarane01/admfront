@@ -1,0 +1,29 @@
+<div id="group-info" class="info-animation"
+     ng-show="context.mode == 'group'">
+    <div>
+        <i class="fa fa-users fa-3x"></i>
+        <button class="btn btn-info pull-right"
+                ng-click="editGroupDialog()">
+            Edit
+        </button>
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>{{group.systemid}}</dd>
+            <dt>Hierarchy ID</dt>
+            <dd>{{group.hierarchynodeid}}</dd>
+            <dt>Description</dt>
+            <dd>{{group.description}}</dd>
+            <dt>Group type</dt>
+            <dd>
+               <span ng-switch on="group.type">
+               <span ng-switch-when="0">  Accounts</span>
+               <span ng-switch-when="1">  Users</span>
+           </span>
+            </dd>
+            <dt>Parent</dt>
+            <dd>{{group.parentName}}</dd>
+        </dl>
+    </div>
+</div>

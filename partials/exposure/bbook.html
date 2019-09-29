@@ -1,0 +1,94 @@
+<div id="bbook" class="panel panel-default"
+     ng-controller="BBookCtrl">
+    <div class="panel-heading">
+        <div class="row dashboard-header">
+            <div class="col-xs-11">
+                B-Book exposure
+            </div>
+            <div class="col-xs-1 text-right">
+                <a href='Javascript:;'
+                   class="dashboard-header"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="module-body" class="collapse in">
+        <div class="panel-body animated dash-animation">
+            <div ng-include src="'partials/loading.html'"/>
+            <div ng-show="context.dataloaded&&(!context.dataerror)">
+                <div ng-show="symbols.length==0">
+                    No open positions
+                </div>
+                <div ng-show="symbols.length>0">
+                    <div class="col-sm-4">
+                        <h4>Symbols</h4>
+
+                        <div class="pre-scrollable">
+                            <table class="table">
+                                <thead>
+                                <th>Symbol</th>
+                                <th>Amount</th>
+                                <th>USD</th>
+                                </thead>
+                                <tbody>
+                                <!--<tr ng-repeat="s in symbols | orderBy: 'symbol'">-->
+                                <tr ng-repeat="s in symbols">
+                                    <td><a href="" ng-click="SymbolDetails(s.symbol)">{{s.symbol}}</a></td>
+                                    <td>{{s.amount}}</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <div ng-include src="'partials/processing.html'"/>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h4>Accounts for {{context.symbol}}</h4>
+
+                        <div ng-show="context.accountsloaded" class="pre-scrollable">
+                            <table class="table">
+                                <thead>
+                                <th>Account</th>
+                                <th>Amount</th>
+                                <th>USD</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="a in accounts | orderBy: orderAmount">
+                                    <td><a href="" ng-click="AccountDetails(context.symbol, a.name)">{{a.name}}</a></td>
+                                    <td>{{a.amount}}</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Trades for {{context.account}}</h4>
+
+                        <div ng-show="context.tradesloaded" class="pre-scrollable">
+                            <table class="table">
+                                <thead>
+                                <th>Trade</th>
+                                <th>Amount</th>
+                                <th>USD</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="a in trades | orderBy: orderAmount">
+                                    <td>{{a.id}}</a></td>
+                                    <td>{{a.amount}}</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

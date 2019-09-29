@@ -1,0 +1,110 @@
+<div ng-if="context.createAccount">
+    <div id="createAccount"
+         ng-controller="OwnerAndTraderCtrl"
+         class="modal fade"
+         data-backdrop="static"
+         role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="padding: 10px">
+
+                <form name="form" class="form-horizontal"
+                      ng-submit="createAccount()"
+                      role="form" novalidate>
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="fa fa-file-o fa-2x"></i>
+                            <strong>Create account</strong>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-include src="'partials/loading.html'"/>
+                        <div ng-include src="'partials/processing.html'"/>
+                        <div ng-show="context.dataloaded">
+                            <div class="form-group">
+                                <div mark-errors>
+                                    <label class="col-sm-1 control-label">
+                                        Name</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control"
+                                               ng-model="account.accountn"
+                                               name="accountn"
+                                               id="account-create"
+                                               required>
+                                    </div>
+                                </div>
+                                <label class="col-sm-1 control-label">
+                                    Parent</label>
+
+                                <div class="col-sm-5">
+                                    <select class='form-control'
+                                            ng-model="account.parentsystemid"
+                                            name="parentsystemid"
+                                            required>
+                                        <option ng-repeat="p in ::parents | orderBy: 'name'"
+                                                ng-selected="p.systemid==account.parentsystemid"
+                                                value='{{p.systemid}}'>
+                                            {{::p.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <div class="border" style="padding: 10px 10px 0px">
+                                        <div ng-include src="'partials/accounts/owner.html'"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="border" style="padding: 10px 10px 0px">
+                                        <div ng-include src="'partials/accounts/trader.html'"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">
+                                    Currency</label>
+
+                                <div class="col-sm-3">
+                                    <select class='form-control'
+                                            ng-model="account.basecurrency"
+                                            ng-options="key as value for (key,value) in ::currencies">
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">
+                                    Description</label>
+
+                                <div class="col-sm-6">
+                                    <input ng-model="account.description"
+                                           id="user-create-account"
+                                           type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">
+                                    Type</label>
+
+                                <div class="col-sm-3">
+                                    <select ng-model="account.type" class='form-control'>
+                                        <option value='0'>Trading</option>
+                                        <option value='2'>Compensation</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"
+                                ng-disabled="form.$invalid">Submit
+                        </button>
+                        <button type="button"
+                                class="btn btn-warning"
+                                data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

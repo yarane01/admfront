@@ -1,0 +1,21 @@
+<div ng-controller="FeedCtrl">
+    <div ng-include src="'partials/dashboard/ratesSettings.html'"/>
+    <!--<div ng-if="access.feed.Subscription()"-->
+         <!--ng-include src="'partials/feed/subscription.html'"/>-->
+    <div class="btn-group" style="margin-bottom: 20px">
+        <a href="javascript:;"
+           ng-click="panelsDialog()"
+           class='btn btn-primary' role='button'>Settings
+        </a>
+    </div>
+    <selector field="columns" label="Columns" drop="dropdown-menu-right" class="pull-right"/>
+
+    <div>
+        <div ng-repeat="p in panels"
+             ng-controller='FeedPanelCtrl as panel'
+             ng-init="panel.setSymbol(p.symbol)">
+            <div ng-include src="'partials/feed/panel.html'"/>
+        </div>
+    </div>
+
+</div>

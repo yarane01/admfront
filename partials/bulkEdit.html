@@ -1,0 +1,68 @@
+<div id="bulkEdit"
+     class="modal"
+     role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="bulkContext.submit()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-pencil-square-o fa-2x"></i>
+                        <strong>{{bulkContext.title}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Value</label>
+
+                        <div class="col-sm-5">
+                            <input ng-model="bulkContext.value"
+                                   ng-change="bulkContext.valueChanged()"
+                                   type="text" class="form-control" autofocus>
+                        </div>
+                        <label class="col-sm-1 control-label"
+                               ng-show="bulkContext.showTypes">
+                            <a href=""
+                               data-toggle="popover"
+                               data-trigger="hover"
+                               data-html="true"
+                               data-placement="right"
+                               data-container="body"
+                               title="<b>Instrument types</b>"
+                               data-content="{{getInstrumentsTypesDescription()}}">
+                                <i class="fa fa-question-circle"></i>
+                            </a>
+
+                        </label>
+                    </div>
+                    <div class="border" style="margin: 20px; padding: 20px">
+                        <div class="pre-scrollable">
+                            <table class="table borderless table-condensed">
+                                <tr ng-repeat="item in bulkContext.items">
+                                    <td class="text-center">{{item.name}}</td>
+                                    <td class="text-center"
+                                        ng-bind-html="bulkContext.getDisplayText($index) | unsafe"></td>
+                                    <td class="text-center"
+                                        ng-bind-html="bulkContext.getNewValueText($index) | unsafe"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            class="btn btn-primary">Submit
+                    </button>
+                    <button type="button"
+                            class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

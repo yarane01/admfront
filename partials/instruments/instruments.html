@@ -1,0 +1,149 @@
+<div ng-controller="InstrumentsCtrl">
+
+    <div ng-include="'partials/instruments/edit.html'"></div>
+    <div ng-include="'partials/instruments/create.html'"></div>
+    <div ng-include="'partials/instruments/history.html'"></div>
+    <div ng-include="'partials/instruments/submitInterests.html'"></div>
+    <div ng-include="'partials/bulkEdit.html'"></div>
+    <div ng-include="'partials/modalProgress.html'"></div>
+
+    <div class="top-buttons" ng-show="context.dataloaded">
+        <div class="btn-group">
+            <a href="javascript:;"
+               ng-if="access.instruments.Create()"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+            <a href="javascript:;"
+               ng-if="access.instruments.History()"
+               ng-click="showHistory()"
+               class='btn btn-info' role='button'>History
+            </a>
+
+            <div class="btn-group" ng-if="access.instruments.Edit()">
+                <a id="select-all" href="Javascript:;" class="btn btn-default" role="button"
+                   ng-click="selectAll()">Select All</a>
+                <a id="unselect-all" href="Javascript:;" class="btn btn-default" role="button"
+                   ng-click="unselectAll()">Unselect All</a>
+                <a id="invert-select" href="Javascript:;" class="btn btn-default" role="button"
+                   ng-click="invertSelection()">Invert Selection</a>
+            </div>
+
+            <div class="dropdown dropdown-hover" style="display: inline">
+                <button class="btn btn-warning dropdown-toggle bulk-action" type="button"
+                        ng-disabled="selected.length<2"
+                        data-toggle="dropdown">
+                    Bulk Update
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="Javascript:;" ng-click="maxPipsBulkDialog()">Max pips update</a></li>
+                    <li><a href="Javascript:;" ng-click="spreadBulkDialog()">Spread</a></li>
+                    <li><a href="Javascript:;" ng-click="tradingPeriodBulkDialog()">Trading period</a></li>
+                    <li><a href="Javascript:;" ng-click="marginBulkDialog()">Margin req</a></li>
+                    <li><a href="Javascript:;" ng-click="pipBulkDialog()">Pip position</a></li>
+                    <li><a href="Javascript:;" ng-click="roundBulkDialog()">Round</a></li>
+                    <li><a href="Javascript:;" ng-click="typeBulkDialog()">Type</a></li>
+                    <li><a href="Javascript:;" ng-click="lotBulkDialog()">Lot size</a></li>
+                    <li><a href="Javascript:;" ng-click="disableTradingBulk()">Disable trading</a></li>
+                    <li><a href="Javascript:;" ng-click="enableTradingBulk()">Enable trading</a></li>
+                </ul>
+            </div>
+
+            <a class="btn btn-default" role="button"
+               ng-click="showSubmitInterestsDialog()">Upload Swaps</a>
+
+            <a class="export-placeholder"></a>
+            <!--<filter-box></filter-box>-->
+        </div>
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Instruments
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-include="'partials/loading.html'"></div>
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover instruments"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Symbol</th>
+                        <th title="Max pips update">Pips</th>
+                        <th title="Spread (pips)">Spr</th>
+                        <th title="Trading period">Trading</th>
+                        <th title="Margin requirement mode">Mrg</th>
+                        <th title="Pip position">Pip</th>
+                        <th title="Number of fractional digits">Rnd</th>
+                        <th title="Instrument type">Type</th>
+                        <th title="Lot size">Lot</th>
+                        <th title="Base buy shift">BShift</th>
+                        <th title="Base sell shift">SShift</th>
+                        <th title="Interest buy">IBuy</th>
+                        <th title="Interest sell">ISell</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <td>
+                            <table-search name="id" size="1" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="symbol" size="1" placeholder="Symbol"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="pips" size="1" placeholder="Max pips"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="spread" size="1" placeholder="Spread"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="period" size="1" placeholder="Period"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="margin" size="1" placeholder="Margin"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="pip" size="1" placeholder="Pip"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="round" size="1" placeholder="Round"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="type" size="1" placeholder="Type"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="lot" size="1" placeholder="Lot"></table-search>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="javascript:;"
+                               ng-click="clearAllFilters()"
+                               class='btn btn-warning btn-sm' role='button'>Clear All
+                            </a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+                <div>
+                    <p>* Select several rows to bulk update</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

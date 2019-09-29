@@ -1,0 +1,90 @@
+<div ng-controller="RiskManagementPLCtrl">
+
+    <div ng-include="'partials/riskmanagement/dialogs/settings/pl-settings.html'"></div>
+
+    <div class="panel panel-default riskmanagement-panel"
+         float-panel
+         data-reload="false"
+         data-inner-id="pl">
+
+        <div class="panel-heading clearfix">
+
+            <div class="panel-title" id="pl-panel-title">
+
+                P&L
+
+                <button class="btn btn-default" data-toggle="collapse" data-target="#pl-table-settings"
+                        aria-expanded="false">
+                    <i class="fa fa-filter"></i>
+                </button>
+
+                <button class="btn btn-default"
+                        ng-click="showSettingsDialog()">
+                    <i class="fa fa-cog"></i>
+                </button>
+
+                <a class="export-placeholder"></a>
+
+                <i class="fa fa-spinner fa-spin" ng-if="!context.dataloaded && !context.firsttimeload"></i>
+
+            </div>
+
+        </div>
+
+        <div class="panel-body">
+
+            <div ng-include="'partials/riskmanagement/loading.html'"></div>
+
+            <div ng-show="context.dataloaded && context.dataerror">
+                {{context.errormessage}}
+            </div>
+
+            <div ng-show="(context.dataloaded || !context.firsttimeload) && (!context.dataerror)">
+
+                <div ng-show="items.length == 0">
+                    No data
+                </div>
+
+                <div ng-show="items.length > 0">
+
+                    <div id="pl-table-settings" class="collapse">
+
+                        <div class="input-group">
+
+                            <input id="plfilter" type="text" class="form-control"
+                                   placeholder="Search...">
+
+                            <span class="input-group-btn">
+
+                                <button class="btn btn-default" type="button" ng-click="clearFilter()">
+
+                                    <i class="fa fa-close"></i>
+
+                                </button>
+
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <table d-table id="pltable" class="compact stripe pretty">
+
+                        <thead>
+                            <tr>
+                                <th>Instrument</th>
+                                <th>B-book</th>
+                                <th>A-book</th>
+                                <th>PL</th>
+                                <th>B-book (Month)</th>
+                                <th>A-book (Month)</th>
+                                <th>PL (Month)</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

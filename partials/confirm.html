@@ -1,0 +1,31 @@
+<div id="confirm"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="confirmOK()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-question fa-2x"></i>
+                        <strong>Confirmation</strong></h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <h4 class="text-center">{{context.confirmMessage}}</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            class="btn btn-primary">Yes
+                    </button>
+                    <button type="button"
+                            class="btn btn-warning"
+                            data-dismiss="modal">No
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div id="bbook" class="panel panel-default"
+     ng-controller="DashBBookCtrl">
+    <div class="panel-heading">
+        <div class="row dashboard-header">
+            <div class="col-xs-11">
+                B-Book exposure
+            </div>
+            <div class="col-xs-1 text-right"
+                 ng-show="config.autoupdate==false">
+                <a href='Javascript:;'
+                   class="dashboard-header"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="panel-body animated dash-animation">
+            <div ng-include src="'partials/loading.html'"/>
+            <div ng-show="context.dataloaded&&(!context.dataerror)">
+                <div ng-show="symbols.length==0">
+                    No open positions
+                </div>
+                <div class="pre-scrollable"
+                     ng-show="symbols.length>0">
+                    <table class="table">
+                        <thead>
+                        <th>Symbol</th>
+                        <th>Amount</th>
+                        <th>USD</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="s in symbols">
+                            <td><strong>{{s.symbol}}</strong></td>
+                            <td>{{s.amount}}</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

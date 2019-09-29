@@ -1,0 +1,73 @@
+<!--<div ng-include src="'partials/adminmenu.html'" ng-init="page='hierarchy'"/>-->
+
+<div id="page-wrapper" ng-controller="HierarchyCtrl">
+    <div ng-include src="'partials/users/create.html'"/>
+    <div ng-include src="'partials/users/edit.html'"/>
+    <div ng-include src="'partials/units/create.html'"/>
+    <div ng-include src="'partials/units/edit.html'"/>
+    <div ng-include src="'partials/accounts/create.html'"/>
+    <div ng-include src="'partials/accounts/edit.html'"/>
+    <div ng-include src="'partials/groups/create.html'"/>
+    <div ng-include src="'partials/groups/edit.html'"/>
+    <div class="row">
+        <div ng-include src="'partials/loading.html'"/>
+        <!--<div ng-include src="'partials/processing.html'"/>-->
+    </div>
+
+    <div class="row page-animation" style="margin-top: 20px" ng-if="context.dataloaded">
+        <div class="col-sm-5">
+            <div ng-include src="'partials/hierarchy/tree.html'"/>
+        </div>
+        <div class="col-sm-7">
+            <div class="row" ng-if="access.hierarchy.Create()">
+                <div ng-include src="'partials/hierarchy/createButtons.html'"/>
+            </div>
+            <div class="row" style="margin-top: 20px">
+                <div class="pull-right" ng-if="access.hierarchy.Move()">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label>
+                                Move to
+                            </label>
+
+                            <select class='form-control'
+                                    placholder="Select..."
+                                    ng-model="context.changeParentTo">
+                                <option ng-repeat="p in context.parents | orderBy: 'name'"
+                                        value='{{p.systemid}}'>
+                                    {{p.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <button type="button"
+                                class="btn btn-primary"
+                                ng-disabled="context.changeParentTo==0"
+                                ng-click="changeParent()">Move
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div id="info" class="row" style="margin-top: 20px"
+                 ng-if="context.selected">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <strong>{{context.title}}</strong>
+                    </div>
+                    <div class="panel-body"
+                         style="height: 500px; overflow: auto; margin: 10px">
+                        <div ng-show="!infoloaded" class="loading">
+                            <h4><i class="fa fa-spinner fa-spin"></i> Loading...</h4>
+                        </div>
+                        <div ng-show="infoloaded&&infoerror" class="loading">
+                            <h4 class="text-danger">{{errorMessage}}</h4>
+                        </div>
+                        <div ng-include src="'partials/hierarchy/unitInfo.html'"/>
+                        <div ng-include src="'partials/hierarchy/groupInfo.html'"/>
+                        <div ng-include src="'partials/hierarchy/userInfo.html'"/>
+                        <div ng-include src="'partials/hierarchy/accountInfo.html'"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

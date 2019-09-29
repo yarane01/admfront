@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>{{symbolname}}</strong>
+    </div>
+    <div class="panel-body" style="padding: 0px 15px 0px 15px;">
+        <div ng-include src="'partials/loading.html'"/>
+        <div ng-show="context.dataloaded&&(!context.dataerror)">
+            <table class='table table-condensed feed-table'
+                   style="margin-bottom: 0px">
+                <thead>
+                <tr>
+                    <th>Provider</th>
+                    <th>Bid</th>
+                    <th>Offer</th>
+                    <th ng-if="columns.spread">Spread</th>
+                    <th ng-if="columns.quotespersec">Quotes/sec</th>
+                    <th ng-if="columns.maxbid">Max bid</th>
+                    <th ng-if="columns.minbid">Min bid</th>
+                    <th ng-if="columns.maxask">Max ask</th>
+                    <th ng-if="columns.minask">Min ask</th>
+                    <th ng-if="columns.trading">Trading</th>
+                    <th ng-if="columns.time">Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(p, quote) in symbol">
+                    <td>{{p}}</td>
+                    <td ng-class="getBidClass(quote)">
+                        {{quote.bid}}
+                    </td>
+                    <td ng-class="getAskClass(quote)">
+                        {{quote.ask}}
+                    </td>
+                    <td ng-if="columns.spread">{{quote.spread}}</td>
+                    <td ng-if="($index==0) && columns.quotespersec" rowspan="{{symbol.$count}}">{{quote.quotespersec}}
+                    </td>
+                    <td ng-if="($index==0) && columns.maxbid" rowspan="{{symbol.$count}}">{{quote.highsellrate}}</td>
+                    <td ng-if="($index==0) && columns.minbid" rowspan="{{symbol.$count}}">{{quote.lowsellrate}}</td>
+                    <td ng-if="($index==0) && columns.maxask" rowspan="{{symbol.$count}}">{{quote.highbuyrate}}</td>
+                    <td ng-if="($index==0) && columns.minask" rowspan="{{symbol.$count}}">{{quote.lowbuyrate}}</td>
+                    <td ng-if="columns.trading">{{quote.istraded}}</td>
+                    <td ng-if="columns.time" style="line-height: 1">{{quote.updatedate}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div id="withdrawAccount"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="withdrawAccount()"
+                  role="form" novalidate>
+
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-database fa-2x"></i>
+                        Withdraw money from account <strong>{{withdraw.accountn}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Balance</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                   ng-model="withdraw.balance"
+                                   name="balance"
+                                   disabled>
+                        </div>
+                        <label class="col-sm-1 control-label">
+                            {{withdraw.currency}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Available</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                   ng-model="withdraw.available"
+                                   name="available"
+                                   disabled>
+                        </div>
+                        <label class="col-sm-1 control-label">
+                            {{withdraw.currency}}</label>
+                        <div class="col-sm-4">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    ng-click="withdraw.amount=withdraw.available">Copy to amount
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Amount</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control"
+                                       ng-model="withdraw.amount"
+                                       name="amount"
+                                       id="account-withdraw"
+                                       float required>
+                            </div>
+                            <label class="col-sm-1 control-label">
+                                {{withdraw.currency}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            Description</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   ng-model="withdraw.description"
+                                   name="description">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"
+                            ng-disabled="form.$invalid">Submit
+                    </button>
+                    <button type="button"
+                            class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+<div ng-include src="'partials/settings.html'"/>
+<div ng-include src="'partials/settings/settingnodes.html'"/>
+<div ng-controller="UsersCtrl">
+    <div ng-include src="'partials/delete.html'"/>
+    <div ng-include src="'partials/exposure.html'"/>
+    <div ng-include src="'partials/users/lock.html'"/>
+    <div ng-include src="'partials/users/unlock.html'"/>
+    <div ng-include src="'partials/users/changePassword.html'"/>
+    <div ng-include src="'partials/users/changeParent.html'"/>
+    <div ng-include src="'partials/users/edit.html'"/>
+    <div ng-include src="'partials/users/create.html'"/>
+    <div ng-include src="'partials/users/accountInfo.html'"/>
+    <div ng-include src="'partials/loading.html'"/>
+    <div ng-include src="'partials/accounts/create.html'"/>
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+
+    <div class="top-buttons">
+        <div class="btn-group">
+            <a href="javascript:"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div class="loading-label" ng-show="!users.settingList">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="dropdown dropdown-hover" style="display: inline">
+            <button class="btn btn-default dropdown-toggle" type="button"
+                    ng-show="users.settingList"
+                    data-toggle="dropdown">
+                Setting locator
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-scroll">
+                <li ng-repeat="s in users.settingList">
+                    <a href="Javascript:;" title="{{s.description}}"
+                       ng-click="locateSetting(s)">{{s.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="table-filter-hint" ng-show="users.state.externalFilter.applied">
+            <span class="text-danger">Filtered by name <strong>{{users.state.externalFilter.name}}</strong></span>
+            <a href="javascript:;" style="margin-left: 20px"
+               ng-click="clearExternalFilter()"
+               class='btn btn-warning btn-sm' role='button'>Clear filter
+            </a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+            <button class="btn btn-default" type="button"
+                    ng-click="exportToCSV()">Export to CSV
+            </button>
+        </div>
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Users under {{rootNodeName}}
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover users"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Login Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Parent</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>ZIP</th>
+                        <th title="Closed">Cls</th>
+                        <th title="Locked">Lkd</th>
+                        <th title="Trading state">Trading</th>
+                        <th>Online</th>
+                        <th>Last logged</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot ng-show="!users.state.externalFilter.applied">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <table-search name="id" size="5" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="name" size="6" placeholder="Name"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="firstname" size="6" placeholder="Name"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="lastname" size="6" placeholder="Name"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="parent" size="5" placeholder="Parent"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="country" size="2" placeholder="Country"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="city" size="5" placeholder="City"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="state" size="5" placeholder="State"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="zip" size="3" placeholder="ZIP"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="closed" size="1" placeholder="Y/N"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="locked" size="1" placeholder="Y/N"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="state" size="1" placeholder="E/D"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="online" size="1" placeholder="Y/N"></table-search>
+                        </td>
+                        <td></td>
+                        <td>
+                            <a href="javascript:;"
+                               ng-click="clearAllFilters()"
+                               class='btn btn-warning btn-sm' role='button'>Clear All
+                            </a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div id="instrumentsDelete"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger"><i class="fa fa-remove fa-2x"></i>
+                    Delete <strong>{{bulkContext.title}}</strong>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div ng-include src="'partials/processing.html'"/>
+
+                <div class="row" style="margin: 0px 30px">
+                    <div class="btn-group btn-group-justified">
+                        <a href="Javascript:;" class="btn btn-default"
+                           style="width: 32%"
+                           id="bulk-select-all"
+                           ng-click="bulkContext.selectAll()">Select All</a>
+                        <a href="Javascript:;" class="btn btn-default"
+                           style="width: 32%"
+                           id="bulk-deselect-all"
+                           ng-click="bulkContext.deselectAll()" ()>Deselect All</a>
+                        <a href="Javascript:;" class="btn btn-default"
+                           style="width: 32%"
+                           id="bulk-invert"
+                           ng-click="bulkContext.invertSelection()">Invert Selection</a>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px">
+<!--
+                    <label class="col-sm-offset-1 col-sm-1">Value</label>
+
+                    <div class="col-sm-4">
+                        <input ng-model="bulkContext.value"
+                               ng-change="bulkContext.valueChanged()"
+                               type="text" class="form-control" autofocus>
+                    </div>
+-->
+                    <div class="col-sm-offset-6 col-sm-5 input-group custom-search-form">
+                        <input type="text"
+                               ng-model="bulkContext.filter"
+                               class="form-control"
+                               placeholder="Filter...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default"
+                                            type="button"><i
+                                            class="fa fa-search"></i>
+                                    </button>
+                            </span>
+                    </div>
+                </div>
+                <div class="pre-scrollable"
+                     style="margin: 20px; padding: 20px">
+                    <table class="table table-condensed">
+                        <th></th>
+                        <th>Instrument</th>
+                        <th>Value</th>
+                        <th>Effective node</th>
+                        <tr ng-repeat="item in
+                            bulkContext.filtered=(bulkContext.items | filter: bulkContext.filter)">
+                            <td>
+                                <input type="checkbox"
+                                       ng-model="item.selected"
+                                       ng-disabled="!item.enabled"
+                                       ng-click="bulkContext.itemChecked($index)"/>
+                            </td>
+                            <td class="text-center">{{item.name}}</td>
+                            <td class="text-center" ng-bind-html="bulkContext.getDisplayText($index) | unsafe"></td>
+                            <td class="text-center">{{item.effectiveNodeName}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="bulkContext.submit()">Submit
+                </button>
+                <button type="button"
+                        class="btn btn-warning"
+                        ng-click="instrumentsDeleteClose()"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

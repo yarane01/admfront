@@ -1,0 +1,107 @@
+<div id="createTrade"
+     ng-if="context.createTrade"
+     ng-controller="AccountCreateTradeCtrl"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="createTrade()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-edit fa-2x"></i>
+                        <strong>Create trade for account {{order.account.accountn}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">
+                            Symbol</label>
+
+                        <div class="col-lg-4">
+                            <select class='form-control'
+                                    id="symbol"
+                                    ng-options="i as i.symbol for i in ::instruments | orderBy: 'symbol'"
+                                    ng-model="order.instrument">
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-bid-ask"
+                                 ng-class="{'rate-up': order.quote.bidchange=='Up', 'rate-down': order.quote.bidchange=='Down'}">
+                                {{order.quote.bid}}
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-bid-ask"
+                                 ng-class="{'rate-up': order.quote.askchange=='Up', 'rate-down': order.quote.askchange=='Down'}">
+                                {{order.quote.ask}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lots"
+                               class="col-lg-3 control-label">
+                            Lots</label>
+
+                        <div class="col-lg-2">
+                            <input type="text" id="lots"
+                                   ng-model="order.lots"
+                                   name="lots"
+                                   float
+                                   required
+                                   class="form-control">
+                        </div>
+                        <label for="lot"
+                               class="col-lg-2 control-label">
+                            Lot size</label>
+
+                        <div class="col-lg-3">
+                            <input type="text" id="lot"
+                                   ng-model="order.instrument.lotsize"
+                                   name="lot"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <label class="btn btn-default btn-sm bs-button"
+                                   style="width: 100%"
+                                   ng-model="order.bs"
+                                   ng-click="order.bs='B'"
+                                   ng-class="{'btn-success active-bs-button': order.bs=='B', 'btn-default': order.bs!='B'}">
+                                BUY
+                            </label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="btn btn-default btn-sm bs-button"
+                                   style="width: 100%"
+                                   ng-model="order.bs"
+                                   ng-click="order.bs='S'"
+                                   ng-class="{'btn-danger active-bs-button': order.bs=='S', 'btn-default': order.bs!='S'}">
+                                SELL
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div style="float: left">
+                        {{hint}}
+                    </div>
+                    <button type="submit"
+                            ng-disabled="form.$invalid"
+                            class="btn btn-primary">OK
+                    </button>
+                    <button type="button" class="btn btn-warning"
+                            ng-click="close()">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

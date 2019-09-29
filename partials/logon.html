@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="col-md-3 col-md-offset-5">
+        <div id="record" ng-controller='AppLogonCtrl'>
+            <div id="alert" class="alert alert-danger"
+                 ng-class="{'invisible': !error}">
+                <strong>Error!</strong> {{errorMessage}}
+            </div>
+            <form ng-submit="submit()">
+                <h2 class="form-signin-heading">
+                    <img width="48" height="48" src="images/logon.svg"/> Sign in
+                </h2>
+                <input class="form-control" style="margin-bottom: 15px"
+                       placeholder="User name"
+                       required="" autofocus="" ng-model="portalUser.username">
+                <input name="password" class="form-control" style="margin-bottom: 15px"
+                       placeholder="Password" required="" type="password"
+                       ng-model="portalUser.password">
+
+                <div class="checkbox">
+                    <label>
+                        <input id="remember-me" value="remember-me" type="checkbox"
+                               ng-model="portalUser.remember">
+                        Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block"
+                        ng-disabled="loginDisabled"
+                        type="submit">{{buttonText}}
+                </button>
+            </form>
+            <div class="pull-right" style="margin-top: 30px">
+                <a href="Javascript:;" ng-click="GoResetPassword()">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+</div>

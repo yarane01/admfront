@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "js/application.js",
+    "sourceMap": true
+  },
+  "files": [
+//    "app/classes/google.ts",
+//    "app/classes/config.ts",
+    "partials/biinfo/data.ts",
+    "partials/biinfo/chart.ts",
+    "partials/biinfo/misc.ts",
+    "partials/biinfo/bi.ts",
+    "partials/biinfo/d3PieChart.ts",
+    "partials/biinfo/symbolVolume.ts",
+    "partials/biinfo/accounts.ts",
+    "partials/biinfo/volume.ts",
+    "partials/biinfo/lpVvolume.ts",
+    "partials/biinfo/unitsVolume.ts",
+    "partials/biinfo/revenue.ts",
+    "partials/biinfo/hourVolume.ts",
+    "partials/biinfo/yield.ts"
+  ]
+}

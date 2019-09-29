@@ -1,0 +1,139 @@
+<div ng-include src="'partials/settings.html'"/>
+<div ng-include src="'partials/settings/settingnodes.html'"/>
+<div ng-controller="AccountsCtrl">
+    <div ng-include src="'partials/accounts/edit.html'"/>
+    <div ng-include src="'partials/accounts/create.html'"/>
+    <div ng-include src="'partials/accounts/changeParent.html'"/>
+    <div ng-include src="'partials/accounts/deposit.html'"/>
+    <div ng-include src="'partials/accounts/withdraw.html'"/>
+    <div ng-include src="'partials/accounts/adjust.html'"/>
+    <div ng-include src="'partials/exposure.html'"/>
+    <div ng-include src="'partials/accounts/history.html'"/>
+    <div ng-include src="'partials/accounts/createTrade.html'"/>
+    <div ng-include src="'partials/accounts/createOrder.html'"/>
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+    <div class="top-buttons">
+        <div class="btn-group">
+            <a href="javascript:;"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div class="loading-label" ng-show="!accounts.settingList">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+        <div class="dropdown dropdown-hover" style="display: inline">
+            <button class="btn btn-default dropdown-toggle" type="button"
+                    ng-show="accounts.settingList"
+                    data-toggle="dropdown">
+                Setting locator
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-scroll">
+                <li ng-repeat="s in accounts.settingList">
+                    <a href="Javascript:;" title="{{s.description}}"
+                       ng-click="locateSetting(s)">{{s.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="table-filter-hint" ng-show="accounts.state.externalFilter.applied">
+            <span class="text-danger">Filtered by name <strong>{{accounts.state.externalFilter.name}}</strong></span>
+            <a href="javascript:;" style="margin-left: 20px"
+               ng-click="clearExternalFilter()"
+               class='btn btn-warning btn-sm' role='button'>Clear filter
+            </a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+            <button class="btn btn-default" type="button"
+                    ng-click="exportToCSV()">Export to CSV
+            </button>
+        </div>
+    </div>
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Accounts under {{rootNodeName}}
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div>
+            <div class="panel-body">
+                <div class="datatable" ng-show="context.dataloaded">
+                    <table d-table id="table"
+                           class="table table-hover accounts">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Trader</th>
+                            <th>Parent</th>
+                            <th>Type</th>
+                            <th title="Account currency">Cur</th>
+                            <th>Balance</th>
+                            <th title="Used margin">Used</th>
+                            <th title="Usable margin">Usable</th>
+                            <th>Open</th>
+                            <th title="Closed">Cls</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tfoot ng-show="!accounts.state.externalFilter.applied">
+                        <tr>
+                            <td>
+                                <table-search name="id" size="1" placeholder="ID"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="name" size="8" placeholder="Name"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="owner" size="5" placeholder="Owner"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="trader" size="5" placeholder="Trader"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="parent" size="5" placeholder="Parent"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="type" size="5" placeholder="T/C"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="cur" size="1" placeholder="Currency"></table-search>
+                            </td>
+                            <td>
+                                <table-search-highlighted name="balance" size="5" placeholder="Balance">
+                                </table-search-highlighted>
+                            </td>
+                            <td>
+                                <table-search name="used" size="5" placeholder="*Used margin"></table-search>
+                            </td>
+                            <td>
+                                <!--<table-search size="5" placeholder="Usable margin"></table-search>-->
+                            </td>
+                            <td></td>
+                            <td>
+                                <table-search name="closed" size="1" placeholder="Y/N"></table-search>
+                            </td>
+                            <td>
+                                <a href="javascript:;"
+                                   ng-click="clearAllFilters()"
+                                   class='btn btn-warning btn-sm' role='button'>Clear All
+                                </a>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="text-highlighted">
+                    <p>* Enter an expression, like "<100" or "=100"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

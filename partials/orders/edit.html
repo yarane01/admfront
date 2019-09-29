@@ -1,0 +1,148 @@
+<div id="editOrder"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal"
+                  ng-submit="updateOrder()"
+                  role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-edit fa-2x"></i>
+                        <strong>Edit order {{order.orderid}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+
+                    <div class="form-group">
+                        <label for="symbol"
+                               class="col-lg-3 control-label">
+                            Symbol</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="symbol"
+                                   ng-model="order.symbol"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accountn"
+                               class="col-lg-3 control-label">
+                            Account</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="accountn"
+                                   ng-model="order.accountn"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trader"
+                               class="col-lg-3 control-label">
+                            Trader</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="trader"
+                                   ng-model="order.loginname"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="owner"
+                               class="col-lg-3 control-label">
+                            Order type</label>
+
+                        <div class="col-lg-7">
+                            <input type="text" id="owner"
+                                   ng-model="order.typen"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="openDate"
+                               class="col-lg-3 control-label">
+                            Open date</label>
+
+
+                        <div class="col-lg-7">
+                            <input type="text" id="openDate"
+                                   ng-model="order.opendate"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration"
+                               class="col-lg-3 control-label">
+                            Duration</label>
+
+
+                        <div class="col-lg-7">
+                            <input type="text" id="duration"
+                                   ng-model="order.duration"
+                                   disabled
+                                   class="form-control">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label for="openRate"
+                                   class="col-lg-3 control-label">
+                                Open rate</label>
+
+                            <div class="col-lg-7">
+                                <input type="text" id="openRate"
+                                       ng-model="order.openrate"
+                                       name="openrate"
+                                       float
+                                       required
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label for="amount"
+                                   class="col-lg-3 control-label">
+                                Amount</label>
+
+                            <div class="col-lg-7">
+                                <input type="text" id="amount"
+                                       ng-model="order.amount"
+                                       name="openamount"
+                                       integer
+                                       required
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            ng-disabled="form.$invalid"
+                            class="btn btn-primary">OK
+                    </button>
+                    <button type="button" class="btn btn-warning"
+                            data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

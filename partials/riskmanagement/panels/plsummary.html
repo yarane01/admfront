@@ -1,0 +1,52 @@
+<div class="panel panel-default riskmanagement-panel"
+     float-panel
+     data-reload="false"
+     data-inner-id="plsummary"
+     ng-controller="RiskManagementPLSummaryCtrl">
+
+    <div class="panel-heading clearfix">
+
+        <div class="panel-title">
+
+            P&L Summary
+
+            <i class="fa fa-spinner fa-spin" ng-if="!context.dataloaded && !context.firsttimeload"></i>
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+
+        <div ng-include="'partials/riskmanagement/loading.html'"></div>
+
+        <div ng-show="context.dataloaded && context.dataerror">
+            {{context.errormessage}}
+        </div>
+
+        <div ng-show="(context.dataloaded || !context.firsttimeload) && (!context.dataerror)">
+
+            <div class="singleline">
+                <h4 class="singleline">P&L [{{currentNYDate}}]: </h4>
+                <h4 class="singleline" ng-class="getClass(summary.PL)">{{summary.PLFormatted}}</h4>
+                <h4 class="singleline">(</h4>
+                <h4 class="singleline" ng-class="getClass(summary.Bbook)">{{summary.BbookFormatted}}</h4>
+                <h4 class="singleline"> | </h4>
+                <h4 class="singleline" ng-class="getClass(summary.Abook)">{{summary.AbookFormatted}}</h4>
+                <h4 class="singleline">)</h4>
+                &ensp;
+            </div>
+
+            <div class="singleline">
+                <h4 class="singleline">P&L (Month) [{{lastMonthNYDate}}]: </h4>
+                <h4 class="singleline" ng-class="getClass(summary.PLMonth)">{{summary.PLMonthFormatted}}</h4>
+                <h4 class="singleline">(</h4>
+                <h4 class="singleline" ng-class="getClass(summary.BbookMonth)">{{summary.BbookMonthFormatted}}</h4>
+                <h4 class="singleline"> | </h4>
+                <h4 class="singleline" ng-class="getClass(summary.AbookMonth)">{{summary.AbookMonthFormatted}}</h4>
+                <h4 class="singleline">)</h4>
+            </div>
+
+        </div>
+    </div>
+</div>

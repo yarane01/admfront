@@ -1,0 +1,47 @@
+<div id="online" class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-online-users"
+     float-panel
+     ng-controller="OnlineUsersCtrl">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <div>
+                <div class="col-lg-6">
+                    Online users
+                    <span class="badge" style="margin-left: 10px">{{users.length}}</span>
+                </div>
+                <div class="col-lg-5">
+                    <div class="input-group input-group-sm">
+                        <input type="text"
+                               ng-model="context.filter"
+                               class="form-control"
+                               style="background-color: white"
+                               placeholder="Filter...">
+                       <span class="input-group-btn">
+                         <button class="btn btn-default"
+                                 ng-click="clearFilter()"
+                                 type="button"><i class="fa fa-close"></i>
+                         </button>
+                       </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body pre-scrollable">
+        <div ng-include src="'partials/loading.html'"/>
+        <div ng-show="context.dataloaded && (!context.dataerror)">
+            <div class="row">
+                <div class="three-column" style="padding: 10px">
+                    <div ng-repeat="u in users | toArray: false | filter: {loginname: context.filter}">
+                        <a href="Javascript:;"
+                           ng-click="goUser(u.loginname)">
+                            &nbsp;&nbsp;{{u.loginname}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

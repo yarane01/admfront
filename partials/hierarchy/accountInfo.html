@@ -1,0 +1,35 @@
+<div id="account-info" class="info-animation"
+     ng-show="context.mode == 'account'">
+    <div><i class="fa fa-money fa-3x"></i>
+        <button class="btn btn-info pull-right"
+                ng-click="editAccountDialog()">
+            Edit
+        </button>
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>{{account.systemid}}</dd>
+            <dt>Hierarchy ID</dt>
+            <dd>{{account.hierarchynodeid}}</dd>
+            <dt>Owner</dt>
+            <dd>{{account.ownername}}</dd>
+            <dt>Trader</dt>
+            <dd>{{account.tradername}}</dd>
+            <dt>Currency</dt>
+            <dd>{{account.basecurrency}}</dd>
+            <dt>Balance</dt>
+            <dd>{{account.balance}}</dd>
+            <dt>Parent</dt>
+            <dd>{{account.parenthierarchynodename}}</dd>
+            <dt>Used margin</dt>
+            <dd>{{account.usedmargin}}</dd>
+            <dt>Usable margin</dt>
+            <dd>{{account.usablemargin}}</dd>
+            <dt>Open date</dt>
+            <dd>{{account.opendate}}</dd>
+            <dt>Closed</dt>
+            <dd>{{account.status}}</dd>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div ng-controller="OrdersCtrl">
+    <div ng-include src="'partials/orders/setDateFilters.html'"/>
+    <div ng-include src="'partials/orders/create.html'"/>
+    <div ng-include src="'partials/orders/edit.html'"/>
+    <div ng-include src="'partials/delete.html'"/>
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+    <div class="top-buttons">
+        <div class="btn-group">
+            <a href="javascript:"
+               ng-if="access.orders.Create()"
+               ng-click="createDialog()"
+               class='btn btn-primary' role='button'>Create
+            </a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+        </div>
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Orders under {{rootNodeName}}
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table"
+                       class="table table-hover trades"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Account</th>
+                        <th>Trader</th>
+                        <th>Symbol</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Mode</th>
+                        <th>Rate</th>
+                        <th>Open date</th>
+                        <th>Client order</th>
+                        <th>Bank order</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <td>
+                            <table-search name="id" size="5" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="account" size="6" placeholder="Account"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="trader" size="2" placeholder="Trader"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="symbol" size="5" placeholder="Symbol"></table-search>
+                        </td>
+                        <td>
+                            <table-search-highlighted name="amount" size="5"
+                                                      placeholder="*Amount"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <!--<table-search name="type" size="5" placeholder="Type"></table-search>-->
+                            <!--
+                                                        <form class="form-inline">
+                                                            <select class='form-control'>
+                                                                <option value="-1">Select...</option>
+                                                                <option value="1">Entry Stop</option>
+                                                                <option value="2">Entry Limit</option>
+                                                                <option value="4">Stop</option>
+                                                                <option value="5">Limit</option>
+                                                            </select>
+                                                        </form>
+                            -->
+                        </td>
+                        <td>
+                            <!--<table-search name="mode" size="3" placeholder="Mode"></table-search>-->
+                        </td>
+                        <td>
+                            <table-search-highlighted name="rate" size="3"
+                                                      placeholder="Rate"></table-search-highlighted>
+                        </td>
+                        <td>
+                            <a href="javascript:;" ng-click="createDateFilter()"
+                               style="width: 80%"
+                               class='btn btn-default btn-sm' role='button'>Filter
+                            </a>
+                        </td>
+                        <td>
+                            <table-search name="clientorderid" size="5" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <table-search name="bankorderid" size="5" placeholder="ID"></table-search>
+                        </td>
+                        <td>
+                            <a href="javascript:;"
+                               ng-click="clearAllFilters()"
+                               class='btn btn-warning btn-sm' role='button'>Clear All
+                            </a>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="text-highlighted">
+                <p>* Enter an expression, like "<100" or "=100"</p>
+            </div>
+        </div>
+    </div>
+</div>

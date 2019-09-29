@@ -1,0 +1,20 @@
+<div>
+    <div id="alert" class="alert alert-danger" ng-show="error"
+         ng-controller="APIVersionCtrl">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+    <div id="gauges-panel" class="gauges">
+        <div id="gauges" style="margin: auto"></div>
+    </div>
+
+    <div id="dashboard"
+         ng-controller="DashboardCtrl"
+         storage="portal.dashboard"
+         class="row dashboard"
+         dashboard>
+        <div class="col-sm-6 column lobipanel-parent-sortable" sortable>
+        </div>
+        <div class="col-sm-6 column lobipanel-parent-sortable" sortable>
+        </div>
+    </div>
+</div>

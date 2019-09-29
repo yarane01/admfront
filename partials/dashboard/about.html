@@ -1,0 +1,66 @@
+<div id="aboutWin"
+     class="modal fade"
+     role="dialog"
+     data-backdrop="static"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-body">
+                <h3 class="text-info" style="text-align: center; font-family: 'Helvetica'">
+                    <p>Server Administration Console</p>
+                </h3>
+                <hr>
+                <div class=" about-table">
+                    <table class="table table-striped">
+                        <tr>
+                        <td>App revision</td><td>{{appVersion}}</td>
+                        </tr>
+                        <tr>
+                            <td>API revision</td><td>{{apiVersion}}</td>
+                        </tr>
+                        <tr>
+                            <td>STP revision</td><td>{{stpVersion}}</td>
+                        </tr>
+                        <tr>
+                            <td>Report server revision</td><td>{{reportsVersion}}</td>
+                        </tr>
+<!--
+                        <tr>
+                            <td>Server version</td><td>{{serverVersion}}</td>
+                        </tr>
+-->
+                        <tr>
+                            <td>Server revision</td><td>{{serverRevision}}</td>
+                        </tr>
+                        <tr>
+                            <td>DB patches</td><td>needed {{dbpatches.needed}}<br>applied {{dbpatches.applied}}</td>
+                        </tr>
+                    </table>
+<!--
+                    <p>Version: {{appVersion}}</p>
+
+                    <p>API version: {{apiVersion}}</p>
+
+                    <p>STP version: {{stpVersion}}</p>
+
+                    <p>Server version: {{serverVersion}}</p>
+
+                    <p>Server revision: {{serverRevision}}</p>
+
+                    <p>DB patches: needed {{dbpatches.needed}}
+                        applied {{dbpatches.applied}}
+                    </p>
+-->
+
+                </div>
+                <div class="about-copyright">&copy; Visual Trading, Inc, {{currentTime |
+                    date:'yyyy'}}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+@error-text-color: #a94442;
+@negative-text-color: darkred;
+
+.bi-info-page {
+
+}
+
+.bi-panel-heading {
+  //font-weight: bolder;
+}
+
+.full-size() {
+  width: 100%;
+  height: 100%;
+}
+
+.flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-loading {
+  .full-size;
+  .flex-center;
+}
+
+.small-graph {
+  height: 100px;
+  width: 100%;
+}
+
+.expanded-graph {
+  height: 100%;
+  width: 100%;
+}
+
+.large-graph {
+  height: 400px;
+  width: 100%;
+}
+
+#unit-order-flow-chart {
+  height: 300px;
+  width: 100%;
+}
+
+.graph-content {
+  .full-size;
+  overflow: hidden;
+}
+
+.chart-value {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  /*font-size: large;*/
+  font-weight: bold;
+  font-size: 150%;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  min-width: 30px;
+  text-align: center;
+  cursor: default;
+  padding: 4px;
+  &.negative {
+    color: @negative-text-color;
+  }
+  &:before{
+    content: '$ ';
+  }
+}
+
+.chart-error {
+  .full-size;
+  .flex-center;
+  color: @error-text-color;
+}
+
+#account-margin-slider {
+  float: right;
+  margin: 5px;
+  .bi-slider-label {
+    background-color: #838487;
+  }
+  .slider-handle {
+    @start: #bfbfbf;
+    @end: #595959;
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(@start, @end);
+  }
+}
+
+#account-margins-table {
+  th, td {
+    text-align: center
+  }
+}
+
+.bi-col {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.bi-panel-body {
+  position: relative;
+  padding: 5px;
+}
+
+ .bi-legend {
+   text {
+     font-family: Arial;
+     font-size: 12px;
+   }
+   .symbol {
+     //font-weight: bold;
+   }
+   .value {
+     font-style: italic;
+   }
+ }
+
+.bi-symbol-label{
+  font-family: Arial;
+  font-size: 11px;
+}

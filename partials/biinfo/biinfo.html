@@ -1,0 +1,264 @@
+<div ng-controller="biInfoCtrl" class="bi-info-page">
+    <div class="row">
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="daily-volume-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">Volume</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 bi-col">
+            <!--<div ng-include src="'app/partials/biinfo/revenue.html'"></div>-->
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="revenue-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">Revenue</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 bi-col">
+            <!--<div ng-include src="'app/partials/biinfo/yield.html'"></div>-->
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="yield-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">Yield</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="hour-volume-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">Volume per hour</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                        <!--<canvas class="graph-content"></canvas>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="today-volume-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">% Volume Traded Today</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                        <!--<canvas class="graph-content"></canvas>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="accounts-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">Active accounts</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="month-volume-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">% Volume Traded Last Month</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                        <!--<canvas class="graph-content"></canvas>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="lp-volume-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">% Volume by LP</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                        <!--<canvas class="graph-content"></canvas>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 bi-col">
+            <div class="panel panel-default"
+                 float-panel data-reload="false" data-minimize="false"
+                 id="units-volume-chart">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <span class="bi-panel-heading">% Volume Traded By Unit</span>
+                        <span class="chart-updating" style="display: none"></span>
+<!--
+                        <a href='Javascript:;'
+                           class="pull-right"
+                           ng-click="Refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+-->
+                    </div>
+                </div>
+                <div class="panel-body bi-panel-body">
+                    <div class="bi-graph small-graph">
+                        <div class="chart-error" style="display: none">
+                        </div>
+                        <div class="chart-loading"></div>
+                        <div class="graph-content" style="display: none"></div>
+                        <!--<canvas class="graph-content"></canvas>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

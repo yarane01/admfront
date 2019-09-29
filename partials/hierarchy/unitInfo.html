@@ -1,0 +1,41 @@
+<div id="unit-info" class="info-animation"
+     ng-show="context.mode == 'unit'">
+    <div><i class="fa fa-bank fa-3x"></i>
+        <button class="btn btn-info pull-right"
+                ng-click="editUnitDialog()">
+            Edit
+        </button>
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>ID</dt>
+            <dd>{{unit.systemid}}</dd>
+            <dt>Hierarchy ID</dt>
+            <dd>{{unit.hierarchynodeid}}</dd>
+            <dt>Description</dt>
+            <dd>{{unit.description}}</dd>
+            <dt>URL</dt>
+            <dd><a target="_blank" ng-href="{{unit.url}}">{{unit.url}}</a></dd>
+            <dt>Unit type</dt>
+            <dd>
+                            <span ng-switch on="unit.type">
+                                <span ng-switch-when="0">  Market maker</span>
+                                <span ng-switch-when="1">  Clearing House</span>
+                                <span ng-switch-when="2">  None Clearing Broker</span>
+                                <span ng-switch-when="3">  Introducing Broker</span>
+                            </span>
+            </dd>
+            <dt>Parent</dt>
+            <dd>{{unit.parentName}}</dd>
+            <dt>Time zone</dt>
+            <dd>{{unit.timezone}}</dd>
+            <dt>Currency</dt>
+            <dd>{{unit.defaultcurrency}}</dd>
+            <dt>STP</dt>
+            <dd>{{unit.hasstp}}</dd>
+            <dt>Closed</dt>
+            <dd>{{unit.closed}}</dd>
+
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div ng-controller="SettingsCtrl">
+    <div id="settings"
+         class="modal fade"
+         data-backdrop="static"
+         role="dialog">
+        <div class="modal-dialog modal-super-lg">
+            <div class="modal-content" style="padding: 10px">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h4 class="modal-title"><i class="fa fa-gears fa-2x"></i>
+                                Settings for {{settingsInfoStack.type()}} <strong>{{settingsInfoStack.name()}}</strong>
+                            </h4>
+                        </div>
+                        <div class="col-sm-7" ng-show="settingsInfoStack.level()>0">
+                          <!--<strong>{{settingsInfoStack.breadcrumb()}}</strong>-->
+                            <button type="button" class="btn btn-warning pull-right"
+                                    ng-click="goBack()"><< Go Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body" style="min-height: 100px">
+                    <div ng-include src="'partials/loading.html'"/>
+                    <div class="overlay" ng-show="context.clearing">
+                        <h4><i class="fa fa-spinner fa-spin"></i> Processing {{currentItem}} ...</h4>
+                    </div>
+
+                    <div ng-show="context.clearingerror" class="overlay">
+                        <h4 class="text-danger">{{context.errorMessage}}</h4>
+                    </div>
+
+                    <div ng-show="context.dataloaded&&(!context.dataerror)">
+                        <table id="settings-table"
+                               class="table table-hover fixed-table"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Unit</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                                <th>Default</th>
+                                <th>Node</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <td>
+                                    <table-search size="1" placeholder="ID"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="10" placeholder="Name"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Unit"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Type"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Value"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Value"></table-search>
+                                </td>
+                                <td>
+                                    <table-search size="1" placeholder="Node"></table-search>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div ng-include src="'partials/settings/valueEdit.html'"/>
+    </div>
+    <div>
+        <div ng-include src="'partials/settings/instrumentsEdit.html'"/>
+    </div>
+    <div>
+        <div ng-include src="'partials/settings/instrumentsDelete.html'"/>
+    </div>
+    <div>
+        <div ng-include src="'partials/settings/afcEdit.html'"/>
+    </div>
+</div>

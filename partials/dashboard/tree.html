@@ -1,0 +1,100 @@
+<div class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-hierarchy"
+     float-panel
+     ng-controller="TreeCtrl">
+    <div ng-include src="'partials/confirm.html'"/>
+    <div ng-include src="'partials/users/create.html'"/>
+    <div ng-include src="'partials/units/create.html'"/>
+    <div ng-include src="'partials/accounts/create.html'"/>
+    <div ng-include src="'partials/groups/create.html'"/>
+    <div class="panel-heading">
+        <div class="panel-title">
+            Hierarchy
+            <a href=""
+               data-toggle="popover"
+               data-trigger="hover"
+               data-html="true"
+               title="<b>Legend</b>"
+               data-placement="right"
+               data-content='<p><i class="fa fa-bank"></i> - Unit</p>
+                   <p><i class="fa fa-users"></i> - Group </p>
+                   <p>Drag and drop entity to change its position</p>'>
+                <i class="fa fa-question-circle"></i>
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"/>
+        <div class="animated dash-animation"
+             ng-show="context.dataloaded&&(!context.dataerror)">
+            <div class="col-sm-9 pre-scrollable">
+                <div id="dash-tree-area">
+                    <treecontrol id="dash-tree" class="dash-tree"
+                                 tree-model="treeData"
+                                 options="treeOpt"
+                                 expanded-nodes="expandedNodes"
+                                 selected-node="context.selected"
+                                 on-selection="nodeSelected(node)"
+                            >
+
+                    <span ng-switch="" on="node.systemidtype">
+                            <div dash-tree-item class="dash-tree-unit"
+                                 ng-switch-when="2">
+                                <i class="fa fa-bank"></i> {{node.name}}
+                            </div>
+                            <div dash-tree-item class="dash-tree-group"
+                                 ng-switch-when="3">
+                                <i class="fa fa-users"></i> {{node.name}}
+                            </div>
+                    </span>
+                    </treecontrol>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="btn-group-vertical">
+                    <button ng-click="createUnitDialog()"
+                            ng-if="access.units.Create()"
+                            style="margin-bottom: 10px"
+                            class='btn btn-default' type='button'>Create unit
+                    </button>
+                    <button ng-click="createGroupDialog()"
+                            ng-if="access.groups.Create()"
+                            style="margin-bottom: 10px"
+                            class='btn btn-default' type='button'>Create group
+                    </button>
+                    <button ng-click="createUserDialog()"
+                            ng-if="access.users.Create()"
+                            style="margin-bottom: 10px"
+                            class='btn btn-default' type='button'>Create user
+                    </button>
+                    <button ng-click="createAccountDialog()"
+                            ng-if="access.accounts.Create()"
+                            style="margin-bottom: 10px"
+                            class='btn btn-default' type='button'>Create account
+                    </button>
+                </div>
+                <!--
+                                    <div style="padding: 20px">
+                                        <div class="row">
+                                            Units <span class="badge pull-right">{{units.data.length}}</span>
+                                        </div>
+                                        <div class="row">
+                                            Groups <span class="badge pull-right">{{groups.data.length}}</span>
+                                        </div>
+                                        <div class="row">
+                                            Users <span class="badge pull-right">{{users.total}}</span>
+                                        </div>
+                                        <div class="row">
+                                            Accounts <span class="badge pull-right">{{accounts.total}}</span>
+                                        </div>
+                                        <div class="row">
+                                            Instruments <span class="badge pull-right">{{instruments.data.length}}</span>
+                                        </div>
+                                    </div>
+                -->
+            </div>
+        </div>
+    </div>
+
+</div>

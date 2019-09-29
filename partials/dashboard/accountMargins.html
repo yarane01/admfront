@@ -1,0 +1,47 @@
+<div id="account-margins" class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-account-margins"
+     float-panel
+     ng-controller="accountMarginsCtrl">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <span class="bi-panel-heading">High margin utilization accounts</span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"></div>
+        <div ng-show="context.dataloaded&&(!context.dataerror)">
+            <div id="account-margins-table" class="pre-scrollable">
+                <table class="table table-condensed table-striped" ts-wrapper>
+                    <thead>
+                    <th ts-criteria="accountid">ID</th>
+                    <th ts-criteria="accountn">Name</th>
+                    <th ts-criteria="balance">Balance</th>
+                    <th ts-criteria="used_margin">Used Margin</th>
+                    <th ts-criteria="used_margin_p" ts-default="descending">Used Margin %</th>
+                    <th ts-criteria="equity">Equity</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="a in context.data" ts-repeat>
+                        <td>{{a.accountid}}</td>
+                        <td>{{a.accountn}}</td>
+                        <td>{{a.balance}}</td>
+                        <td>{{a.used_margin}}</td>
+                        <td>{{a.used_margin_p}}</td>
+                        <td>{{a.equity}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row" style="padding: 0px 10px" ng-show="context.dataloaded&&(!context.dataerror)">
+            <div id="account-margin-slider">
+                <span class="label bi-slider-label" style="font-size: medium; margin-right: 20px">{{level}}%</span>
+                <input type="text" slider>
+            </div>
+        </div>
+    </div>
+</div>
+

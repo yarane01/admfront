@@ -1,0 +1,56 @@
+<div class="panel panel-default dashboard-panel"
+     data-stateful="true"
+     data-inner-id="dashboard-feed"
+     float-panel
+     ng-controller='PricesCtrl'>
+    <div ng-include src="'partials/dashboard/ratesSettings.html'"/>
+    <div class="panel-heading">
+        <div class="panel-title">
+            Quotes
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-include src="'partials/loading.html'"/>
+        <div class="row" ng-show="context.dataloaded" style="padding: 0px 10px">
+            <table class='table table-striped table-hover'>
+                <thead>
+                <tr>
+                    <th>Instrument</th>
+                    <th>Bid</th>
+                    <th>Offer</th>
+                    <th>Spread</th>
+                    <th>
+                        Quotes
+                        <br/>
+                        per sec
+                    </th>
+                    <th>Time</th>
+                </tr>
+                </thead>
+                <tbody id="prices">
+                <tr ng-repeat="(key, quote) in symbols">
+                    <td><b>{{key}}</b></td>
+                    <td ng-class="{'rate-up': quote.bidchange=='Up', 'rate-down': quote.bidchange=='Down'}">
+                        {{quote.bid}}
+                    </td>
+                    <td ng-class="{'rate-up': quote.askchange=='Up', 'rate-down': quote.askchange=='Down'}">
+                        {{quote.ask}}
+                    </td>
+                    <td>{{quote.spread}}</td>
+                    <td>{{quote.quotespersec}}</td>
+                    <td>{{quote.updatedate}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a href="Javascript:" ng-click="settingsDialog()">
+            <span class="pull-right">Settings</span>
+            <!--<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>-->
+
+            <div class="clearfix"></div>
+        </a>
+    </div>
+</div>
+</div>

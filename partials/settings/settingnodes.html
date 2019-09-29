@@ -1,0 +1,89 @@
+<div ng-controller="settingnodesCtrl">
+    <div id="settingnodes"
+         class="modal fade"
+         data-backdrop="static"
+         role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="padding: 10px">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-gear fa-2x"></i>
+                        Nodes with explicitly defined value for <strong>{{settingLocator.name}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body" style="min-height: 100px">
+                    <div class="well">{{settingLocator.description}}</div>
+                    <div class="alert alert-danger" ng-show="error">
+                        <strong>Error!</strong> {{errorMessage}}
+                    </div>
+                    <div class="datatable" ng-show="context.dataloaded">
+                        <table d-table id="locatortable"
+                               class="table table-hover trades"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Node</th>
+                                <th>Value</th>
+                                <th>Default value</th>
+                                <th>Node type</th>
+                                <th>Symbol</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <td>
+                                    <table-search name="id" size="5" placeholder="ID"></table-search>
+                                </td>
+                                <td>
+                                    <table-search name="node" size="7" placeholder="Node"></table-search>
+                                </td>
+                                <td>
+                                    <table-search-highlighted name="value" size="5"
+                                                              placeholder="Value"></table-search-highlighted>
+                                </td>
+                                <td>
+                                    <table-search-highlighted name="defvalue" size="5"
+                                                              placeholder="Value"></table-search-highlighted>
+                                </td>
+                                <td>
+                                    <select class='form-control'
+                                            ng-change="selectFilterChanged()"
+                                            ng-model="nodeTypeFilter">
+                                        <option value="-1">All</option>
+                                        <option ng-repeat="(key, value) in systemIdTypeMap"
+                                                value='{{key}}'> {{value}}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class='form-control'
+                                            ng-change="selectFilterChanged()"
+                                            ng-model="symbolFilter">
+                                        <option value="">All</option>
+                                        <option ng-repeat="s in symbols | orderBy:'symbol'"
+                                                value='{{s.symbol}}'> {{s.symbol}}
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-highlighted pull-left">
+                        <p>* Enter an expression, like "<100" or "=100"</p>
+                    </div>
+
+                    <button type="button" class="btn btn-warning"
+                            ng-click="clearAllFilters()">Clear filters
+                    </button>
+
+                    <button type="button" class="btn btn-primary"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
