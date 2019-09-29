@@ -469,7 +469,7 @@ angular.module('portal')
 
             return {
                 start: function () {
-                    list = $rootScope.instruments.getList().slice(0, 10);
+                    list = $rootScope.instruments.getList().slice(0, 100);
                     getSymbols();
                     if ($rootScope.config.autoupdate)
                         interval = setInterval(getSymbols, rateInterval);
@@ -681,7 +681,8 @@ function feedproviders($http, $q) {
                 if (data.data.status == 'OK') {
                     providers = [];
                     for (var i = 0; i < data.data.payload.length; i++) {
-                        if (data.data.payload[i].loaded)
+                        // TODO: why EURUSD not loaded?
+                        //if (data.data.payload[i].loaded)
                             providers.push(data.data.payload[i]);
                     }
                     providers.sort(function (p1, p2) {
