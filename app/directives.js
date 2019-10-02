@@ -1,6 +1,5 @@
 var FLOAT_REGEXP = /^[+-]?\d+(\.\d+)?$/;
 var INTEGER_REGEXP = /^\-?\d+$/;
-var PASSWORD = /^[a-zA-Z_\d]+$/;
 
 angular.module('portal')
     .directive('dTable', [
@@ -197,7 +196,7 @@ angular.module('portal')
             require: 'ngModel',
             link: function (scope, elm, attrs, ctrl) {
                 ctrl.$validators.password = function (modelValue, viewValue) {
-                    if (PASSWORD.test(viewValue)) {
+                    if (viewValue.length >= 8) {
                         return true;
                     }
                     return false;

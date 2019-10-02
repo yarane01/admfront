@@ -48,18 +48,29 @@ angular.module('portal')
                         title: title,
                         hasData: true,
                         loaded: false,
-                        data: null
+                        data: null,
+                        msg: 'Error message here'
                     };
                     return this.get('/' + path + '/' + id + '/exposure', null,
                         $.extend(callbacks, {
                             internalok: function (response) {
+                                console.log("response="+response);
                                 scope.exposure.loaded = true;
                                 var data = response.data.payload[0];
                                 if (data.length > 0) {
                                     scope.exposure.data = data;
                                 }
-                                else scope.exposure.hasData = false;
-                            }
+                                else {
+                                    scope.exposure.msg = 'There are no open positions'
+                                    scope.exposure.hasData = false;
+                                }
+                            }, error:
+                                function(error) {
+                                    scope.exposure.loaded = true;
+                                    scope.exposure.hasData = false;
+                                    scope.exposure.msg = error.data.message;
+                                }
+                            
                         }
                         )
                     );
@@ -469,7 +480,7 @@ angular.module('portal')
 
             return {
                 start: function () {
-                    list = $rootScope.instruments.getList().slice(0, 100);
+                    list = $rootScope.instruments.getList();
                     getSymbols();
                     if ($rootScope.config.autoupdate)
                         interval = setInterval(getSymbols, rateInterval);
@@ -681,8 +692,7 @@ function feedproviders($http, $q) {
                 if (data.data.status == 'OK') {
                     providers = [];
                     for (var i = 0; i < data.data.payload.length; i++) {
-                        // TODO: why EURUSD not loaded?
-                        //if (data.data.payload[i].loaded)
+                        if (data.data.payload[i].loaded)
                             providers.push(data.data.payload[i]);
                     }
                     providers.sort(function (p1, p2) {
