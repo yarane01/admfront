@@ -589,18 +589,23 @@ dashboardControllers.controller('PricesCtrl',
 
             $scope.init = function () {
                 $scope.context.dataloaded = false;
+                var symbols = getStoredSymbols('rates');
+                console.log('Inside PricesCtrl');
+                console.log('symbols '+symbols.list);
+                quotes.update();
                 quotes.init().then(function () {
-                    var symbols = getStoredSymbols('rates');
                     $scope.symbols = {};
                     symbols.list.forEach(function (s) {
                             $scope.symbols[s] = $rootScope.symbols.getFirstProvider(s);
                         }
                     )
+                    $scope.Refresh();
                     $scope.context.dataloaded = true;
                 });
             }
 
             $scope.Refresh = function () {
+                console.log('Inside dashboard PricesCtrl Refresh '+$scope.symbols);
                 quotes.update();
             }
 

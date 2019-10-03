@@ -48,29 +48,18 @@ angular.module('portal')
                         title: title,
                         hasData: true,
                         loaded: false,
-                        data: null,
-                        msg: 'Error message here'
+                        data: null
                     };
                     return this.get('/' + path + '/' + id + '/exposure', null,
                         $.extend(callbacks, {
                             internalok: function (response) {
-                                console.log("response="+response);
                                 scope.exposure.loaded = true;
                                 var data = response.data.payload[0];
                                 if (data.length > 0) {
                                     scope.exposure.data = data;
                                 }
-                                else {
-                                    scope.exposure.msg = 'There are no open positions'
-                                    scope.exposure.hasData = false;
-                                }
-                            }, error:
-                                function(error) {
-                                    scope.exposure.loaded = true;
-                                    scope.exposure.hasData = false;
-                                    scope.exposure.msg = error.data.message;
-                                }
-                            
+                                else scope.exposure.hasData = false;
+                            }
                         }
                         )
                     );
@@ -340,7 +329,6 @@ angular.module('portal')
             var busy = false;
             //var error = false;
             var loaded = false;
-            var list;
             var q = $q.defer();
 
             var symbols = {
@@ -388,6 +376,11 @@ angular.module('portal')
                 if (busy) return;
 
                 busy = true;
+                
+                var list = getStoredSymbols('rates').list;
+                if (list === undefined) {
+                    list = $rootScope.instruments.getList().slice(0,10);
+                }
 
                 $http.get(apiurl + '/quotes?symbols=' + list)
                     .success(function (data, status) {
@@ -480,7 +473,6 @@ angular.module('portal')
 
             return {
                 start: function () {
-                    list = $rootScope.instruments.getList();
                     getSymbols();
                     if ($rootScope.config.autoupdate)
                         interval = setInterval(getSymbols, rateInterval);

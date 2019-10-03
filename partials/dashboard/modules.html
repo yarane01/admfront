@@ -27,7 +27,6 @@
                     <modules-no-sign name="Trade server" if="tradeserverstatus=='STOPPED'"></modules-no-sign>
                     <modules-yes-sign name="Trade server" if="tradeserverstatus=='RUNNING'"></modules-yes-sign>
                 </div>
-                <!--
                 <div class="col-sm-7">
                     <button type="button"
                             class="btn btn-danger btn-sm"
@@ -36,9 +35,7 @@
                             >Restart
                     </button>
                 </div>
-                -->
             </div>
-            <!--
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-3">Feed bridge</div>
                 <div class="col-sm-2">
@@ -58,14 +55,12 @@
                     </div>
                 </div>
             </div>
-            -->
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-3">Beacon</div>
                 <div class="col-sm-2">
                     <modules-no-sign name="Beacon" if="beaconstatus=='STOPPED'"></modules-no-sign>
                     <modules-yes-sign name="Beacon" if="beaconstatus=='RUNNING'"></modules-yes-sign>
                 </div>
-                <!--
                 <div class="col-sm-7">
                     <div class="btn-group-justified">
                         <a href="Javascript:;"
@@ -76,10 +71,9 @@
                            ng-disabled="beaconstatus=='RUNNING'"
                            ng-click="startBeacon()"
                            class="btn btn-success btn-sm">Start</a>
-                        
+                        <!--<a href="Javascript:;" class="btn btn-default btn-sm">Restart</a>-->
                     </div>
                 </div>
-                -->
             </div>
 <!--
             <div class="row" style="margin-top: 5px">
@@ -108,7 +102,6 @@
                     <modules-no-sign name="STP" if="stpstatus=='STOPPED'"></modules-no-sign>
                     <modules-yes-sign name="STP" if="stpstatus=='RUNNING'"></modules-yes-sign>
                 </div>
-                <!--
                 <div class="col-sm-7">
                     <div class="btn-group-justified">
                         <a href="Javascript:;"
@@ -121,9 +114,7 @@
                            class="btn btn-success btn-sm">Start</a>
                     </div>
                 </div>
-                -->
             </div>
-            <!--
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-3">MT4Sync</div>
                 <div class="col-sm-2">
@@ -143,14 +134,12 @@
                     </div>
                 </div>
             </div>
-            -->
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-3">Reports</div>
                 <div class="col-sm-2">
                     <modules-no-sign name="Reports" if="reportStatus=='STOPPED'"></modules-no-sign>
                     <modules-yes-sign name="Reports" if="reportStatus=='RUNNING'"></modules-yes-sign>
                 </div>
-                <!--
                 <div class="col-sm-7">
                     <div class="btn-group-justified">
                         <a href="Javascript:;"
@@ -163,11 +152,9 @@
                            class="btn btn-success btn-sm">Start</a>
                     </div>
                 </div>
-                -->
             </div>
         </div>
     </div>
-    <!--
     <div class="panel-footer">
         <div class="row" style="padding: 0px 10px" ng-show="context.dataloaded&&(!context.dataerror)">
             <button type="button" class="btn btn-danger pull-right"
@@ -176,6 +163,5 @@
             </button>
         </div>
     </div>
-    -->
 </div>
 

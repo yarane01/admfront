@@ -516,7 +516,7 @@ accountsControllers.controller('AccountsCtrl',
                 //AccountStatement.jsp?accnames=trader
                 var account = $.extend({}, getItem(id));
                 // var url = reportsurl + '/AccountStatement.jsp?accnames=' + account.accountn;
-                var url = reportsurl + '/accountstatement?accountn=' + account.accountn;
+                var url = reportsurl + '/ClientReportServlet?action=displayForm&AccountID=' + id;
                 openInNewTab(url);
             };
 
