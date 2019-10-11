@@ -329,6 +329,7 @@ angular.module('portal')
             var busy = false;
             //var error = false;
             var loaded = false;
+            var list;
             var q = $q.defer();
 
             var symbols = {
@@ -376,11 +377,6 @@ angular.module('portal')
                 if (busy) return;
 
                 busy = true;
-                
-                var list = getStoredSymbols('rates').list;
-                if (list === undefined) {
-                    list = $rootScope.instruments.getList().slice(0,10);
-                }
 
                 $http.get(apiurl + '/quotes?symbols=' + list)
                     .success(function (data, status) {
@@ -473,6 +469,7 @@ angular.module('portal')
 
             return {
                 start: function () {
+                    list = $rootScope.instruments.getList();
                     getSymbols();
                     if ($rootScope.config.autoupdate)
                         interval = setInterval(getSymbols, rateInterval);
