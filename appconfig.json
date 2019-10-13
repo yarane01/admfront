@@ -1,4 +1,4 @@
 {
-  "reports": "https://ttdev.thinkmarkets.com:7443/reports",
+  "reports": "http://3.9.173.2/reports",
   "production": false
 }

@@ -29,9 +29,13 @@ instrumentsControllers.controller('InstrumentsCtrl',
                     "<'row'<'col-sm-5'i>>",
                     "scrollY": calcDataTableHeight(),
                     "scrollX": true,
-                    //"paging": false,
+                    "paging": true,
+                    "pageLength": 15,
+                    "dom": "<'row'<'col-sm-6'i>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                     //"scrollCollapse": true,
-                    // "scroller": true,
+                    //"scroller": true,
                     "processing": true,
                     "language": {
                         "processing": "Loading..."

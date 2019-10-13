@@ -95,28 +95,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="hidden-sm hidden-xs"
-                        ng-show="initialized"
-                        ng-if="access.riskmanagement.Page()">
-                        <a href="#/riskmanagement">Risk Management</a>
-                    </li>
-<!--
-                    <li class="hidden-md hidden-sm hidden-xs"
-                        ng-if="!config.production"
-                        ng-show="initialized">
-                        <a href="#/biinfo">BI Info</a>
-                    </li>
--->
-                    <li class="hidden-md hidden-sm hidden-xs"
-                        ng-show="initialized"
-                        ng-if="access.dashboard.Logs()">
-                        <a href="#/logs">Logs</a>
-                    </li>
-                    <!--
-                                            <li>
-                                                <a href="#/debug">Debug</a>
-                                            </li>
-                    -->
                 </ul>
             </nav>
 
@@ -138,9 +116,6 @@
                             </a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="{{changepasswordurl}}" target="_blank"><i class="fa fa-key"></i> Change
-                            password</a></li>
-                        <!--<li><a id="dropdown-hover-mode" href="Javascript:" onclick="enableDropdownHover()"></a></li>-->
                         <li><a href="Javascript:" ng-show="dropdownMouseOpen" ng-click="disableDropdownHover()"><i
                                 class="fa fa-check"></i> Auto open menus</a></li>
                         <li><a href="Javascript:" ng-show="!dropdownMouseOpen" ng-click="enableDropdownHover()"><i
