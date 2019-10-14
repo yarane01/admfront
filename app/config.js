@@ -1,11 +1,17 @@
-var appName = "VTAdminApp";
+var appName = "AdminApp";
 var minApiVersion = 2272;
+// assuming all services on a single host
+//var host = "3.9.173.2";
+var host = "localhost";
 
-var tradeserverurl = "http://localhost:8280";
-var apiurl = "http://localhost/portaladmin/rest";
-var stpurl = "http://localhost/stp";
+var tradeserverurl = "http://"+host+"/tradeserver";
+var apiurl = "http://"+host+"/portaladmin/rest";
+var stpurl = "http://"+host+"/stp";
+var reportsurl = "http://"+host+"/reports";
+var beaconurl = "http://"+host+"/beacon";
+
+
 var stpapiurl = stpurl + "/rest";
-var reportsurl = "http://localhost/reports";
 
 var changepasswordurl = tradeserverurl + "/portaladmin/changepassword.html";
 var forgotpasswordurl = tradeserverurl + "/portaladmin/forgotpassword.html";
