@@ -516,19 +516,19 @@ accountsControllers.controller('AccountsCtrl',
                 //AccountStatement.jsp?accnames=trader
                 var account = $.extend({}, getItem(id));
                 // var url = reportsurl + '/AccountStatement.jsp?accnames=' + account.accountn;
-                var url = reportsurl + '/ClientReportServlet?action=displayForm&AccountID=' + id;
+                var url = reportsurl + '/accountstatement?accountn=' + account.accountn;
                 openInNewTab(url);
             };
 
             $scope.goExReports = function (id) {
                 var account = $.extend({}, getItem(id));
-                var url = reportsurl + '/ExecutedOrdersForm.jsp?accountn=' + account.accountn;
+                var url = reportsurl + '/executedorders?accountn=' + account.accountn;
                 openInNewTab(url);
             };
 
             $scope.goDailyReports = function (id) {
                 var account = $.extend({}, getItem(id));
-                var url = reportsurl + '/DailyTradingVolume.jsp?accnames=' + account.accountn;
+                var url = reportsurl + '/dailytradingvolume?accountn=' + account.accountn;
                 openInNewTab(url);
             };
 

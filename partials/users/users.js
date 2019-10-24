@@ -637,9 +637,9 @@ usersControllers.controller('UsersCtrl',
 
 
             $scope.goReports = function (id) {
-                var url = reportsurl + '/TraderReportServlet?action=displayForm&StartUnitID=' + id;
+                //var url = reportsurl + '/traderreport?StartUnitID=' + id;
                 var item = getItem(id);
-                // var url = reportsurl + '/TraderReport.jsp?tradern=' + item.loginname;
+                var url = reportsurl + '/traderreport?tradern=' + item.loginname;
                 openInNewTab(url);
             }
 

@@ -281,11 +281,8 @@ ordersControllers.controller('OrdersCtrl',
                         $scope.deleteDialog(id);
                         break;
                     case 'DETAILS':
-                        var tradeN = $rootScope.orders.getById(id).ordern;
-                         var url = '/reports/TradeAuditServlet?action=displayReport&UnitID=100&TradeN=' + tradeN + '&OrderN=ORDER&SUBMIT=Request';
-                         openInNewTab(tradeserverurl + url);
-                        // var url = reportsurl + '/ReportingServlet?class=OrderAudit&orderid=' + tradeN;
-                        // openInNewTab(url);
+                        var url = reportsurl + '/orderaudit?orderid=' + id;
+                        openInNewTab(url);
                         break;
                 }
             };

@@ -1,13 +1,12 @@
 var appName = "AdminApp";
 var minApiVersion = 2272;
 // assuming all services on a single host
-//var host = "3.9.173.2";
 var host = "localhost";
 
 var tradeserverurl = "http://"+host+"/tradeserver";
-var apiurl = "http://"+host+"/portaladmin/rest";
+var apiurl = tradeserverurl+"/portaladmin/rest";
 var stpurl = "http://"+host+"/stp";
-var reportsurl = "http://"+host+"/reports";
+var reportsurl = "http://"+host+"/reportingservice2";
 var beaconurl = "http://"+host+"/beacon";
 
 
