@@ -407,11 +407,8 @@ tradesControllers.controller('TradesCtrl',
                         $scope.editDialog(id);
                         break;
                     case 'DETAILS':
-                        var tradeN = $rootScope.trades.getById(id).traden;
-                         var url = '/reports/TradeAuditServlet?action=displayReport&UnitID=100&TradeN=' + tradeN + '&OrderN=TICKET&SUBMIT=Request';
-                         openInNewTab(tradeserverurl + url);
-                        // var url = reportsurl + '/ReportingServlet?class=TradeAudit&traden=' + tradeN;
-                        // openInNewTab(url);
+                        var url = reportsurl + '/tradeaudit?tradeid=' + id;
+                        openInNewTab(url);
                         break;
                 }
             };

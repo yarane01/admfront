@@ -39,7 +39,7 @@ var app = angular.module("portal", [
     quotes) {
 
 
-    $rootScope.appVersion = appVersion + "." + appRevision;
+    $rootScope.appVersion = appRevision;
     $rootScope.integerType = "Positive integer";
     $rootScope.timezones = timezones;
     $rootScope.rootNodeName = "";
@@ -543,9 +543,9 @@ var app = angular.module("portal", [
 
     $rootScope.showAboutWin = function () {
         $('#aboutWin').modal();
-        $http.get(apiurl).then(
+        $http.get(apiurl.replace('/rest','/healthcheck')).then(
             function (response) {
-                $rootScope.apiVersion = response.data.payload[0].apiversion;
+                $rootScope.apiVersion = response.data.gitVersion;
             }, function (response) {
                 $rootScope.apiVersion = 'Error';
             }
@@ -586,9 +586,9 @@ var app = angular.module("portal", [
             }
         );
 
-        $http.get(reportsurl + '/ping').then(
+        $http.get(reportsurl + '/healthcheck').then(
             function (response) {
-                $rootScope.reportsVersion = response.data.revision;
+                $rootScope.reportsVersion = response.data.gitVersion;
 
             }, function (response) {
                 $rootScope.reportsVersion = 'Error';
@@ -873,17 +873,17 @@ var app = angular.module("portal", [
     $http.get("appconfig.json")
         .then(
             function (response) {
-                angular.extend($rootScope.config, response.data);
-                if (response.data.reports != "*") {
-                    reportsurl = response.data.reports;
-                    $rootScope.externalReports = true;
-                }
-                else
-                    reportsurl = tradeserverurl + "/reports";
-                console.log('reports at: ' + reportsurl)
+                //angular.extend($rootScope.config, response.data);
+                //if (response.data.reports != "*") {
+                //    reportsurl = response.data.reports;
+                //    $rootScope.externalReports = true;
+                //}
+                //else
+                //    reportsurl = tradeserverurl + "/reports";
+                //console.log('reports at: ' + reportsurl)
             },
             function (response) {
-                reportsurl = tradeserverurl + "/reports";
+                //reportsurl = tradeserverurl + "/reports";
             }
         )
 

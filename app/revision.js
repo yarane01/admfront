@@ -1,2 +1,2 @@
 var appVersion = 1;
-var appRevision = "594";
+var appRevision = 'f2001374d9';

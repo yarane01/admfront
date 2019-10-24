@@ -1,5 +1,3 @@
-//http://trd.vtdata.nyc:8280/reports/TradeAuditServlet?action=displayReport&UnitID=100&TradeN=7599059&OrderN=TICKET&SUBMIT=Request
-
 var unitsControllers = angular.module('unitsControllers', []);
 
 unitsControllers.controller('UnitsCtrl',
@@ -327,26 +325,26 @@ unitsControllers.controller('UnitsCtrl',
             };
 
             $scope.BusinessReport = function (id) {
-                var url = reportsurl + '/BusinessReportServlet?StartUnitID=' + id + '&action=displayForm';
                 var unit = getItem(id);
-                // var url = reportsurl + '/BusinessReport.jsp?unitn='+unit.name;
+                var url = reportsurl + '/businessreport?unitname='+unit.name;
                 openInNewTab(url);
             };
 
             $scope.VolumeReport = function (id) {
+                // not used ???
                 var url = reportsurl + '/TradingVolumesForm.jsp?unitsystemid=' + id;
                 openInNewTab(url);
             };
 
             $scope.DailyVolumeReport = function (id) {
                 var unit = getItem(id);
-                var url = reportsurl + '/DailyTradingVolumeUnit.jsp?unitname=' + unit.name;
+                var url = reportsurl + '/dailytradingvolumeunit?unitname=' + unit.name;
                 openInNewTab(url);
             };
 
             $scope.RateShiftReport = function (id) {
                 var unit = getItem(id);
-                var url = reportsurl + '/RateShift.jsp?unitname=' + unit.name;
+                var url = reportsurl + '/rateshift?unitname=' + unit.name;
                 openInNewTab(url);
             };
 
@@ -397,17 +395,8 @@ unitsControllers.controller('UnitsCtrl',
             };
 
             $scope.goAudit = function (id) {
-                /*
-                 var item = getItem(id);
-                 $rootScope.settingsInfoStack.clear();
-                 $rootScope.settingsInfoStack.push("unit",
-                 item.systemid, item.name);
-                 $('#settings').modal();
-                 angular.element($('#settings')).scope().init();
-                 */
-                //openInNewTab(tradeserverurl+'/reports/TradeAuditServlet?action=displayReport&UnitID=100&TradeN=17446330&OrderN=TICKET&SUBMIT=Request');
-                var url = '/reports/TradeAuditServlet?action=displayReport&UnitID=100&TradeN=6464159&OrderN=TICKET&SUBMIT=Request'
-                openInNewTab(tradeserverurl + url);
+                var url = '/tradeaudit?tradeid='+id
+                openInNewTab(reportsurl + url);
             };
 
             $scope.exposureDialog = function (id) {

@@ -216,16 +216,7 @@ dashboardControllers.controller('ModulesInfoCtrl',
 
                 var command = '{"command":"ps -ef|grep java"}';
 
-                $http.get(apiurl + '/mt4sync/status')
-                    .then(
-                        function (response) {
-                            if (response.data.status == 'OK') {
-                                $scope.mt4status = response.data.payload[0].toUpperCase();
-                            }
-                        }
-                    )
-
-                $http.get(reportsurl + '/ping')
+                    $http.get(reportsurl + '/ping')
                     .then(
                         function (response) {
                             $scope.reportStatus = 'RUNNING';
@@ -235,55 +226,41 @@ dashboardControllers.controller('ModulesInfoCtrl',
                         }
                     )
 
-                $http.post(apiurl + '/execonserver', command).success(function (data, status, headers, config) {
-                    busy = false;
-
-                    if (data.status == 'OK') {
-                        var s = data.payload[0]["output"];
-                        if (s.indexOf("vtstart") > 0) {
+                    $http.get(tradeserverurl + '/vtutils/interface')
+                    .then(
+                        function (response) {
+                            console.log("ping success  url "+tradeserverurl);
                             $scope.tradeserverstatus = "RUNNING";
-                        } else {
+                        },
+                        function (response) {
+                            console.log("ping failed url "+tradeserverurl);
                             $scope.tradeserverstatus = "STOPPED";
                         }
-                        if (s.indexOf("beacon") > 0) {
-                            $scope.beaconstatus = "RUNNING";
-                        } else {
-                            $scope.beaconstatus = "STOPPED";
-                        }
-                        if (s.indexOf("jfrs") > 0) {
-                            $scope.jfrsstatus = "RUNNING";
-                        } else {
-                            $scope.jfrsstatus = "STOPPED";
-                        }
-                        if (s.indexOf("STPE") > 0) {
+                    )
+
+                    $http.get(stpurl + '/ping')
+                    .then(
+                        function (response) {
                             $scope.stpstatus = "RUNNING";
-                        } else {
+                        },
+                        function (response) {
                             $scope.stpstatus = "STOPPED";
                         }
-                        $http.get(apiurl + '/feedbridge')
-                            .success(function (data1, status1, headers1, config1) {
-                                if (data1.status == 'OK') {
-                                    $scope.feedbridgestatus = data1.payload[0];
-                                    $scope.feedbridgestatus =
-                                        $scope.feedbridgestatus.substring($scope.feedbridgestatus.indexOf(":") + 1, $scope.feedbridgestatus.length).trim();
-                                }
-                            })
-                            .finally(function () {
-                                $scope.context.dataloaded = true;
-                            });
-
-                    } else {
-                        $scope.context.errorMessage = data.payload[0];
-                        $scope.context.dataerror = true;
-                        $scope.context.dataloaded = true;
-                    }
-                }).error(function (data, status, headers, config) {
-                    $scope.context.errorMessage = data.payload[0];
-                    $scope.context.dataerror = true;
-                    $scope.context.dataloaded = true;
-
-                    busy = false;
-                });
+                    )
+                    // TODO what is beacon ping?
+                    $http.get(beaconurl+'/')
+                    .then(
+                        function (response) {
+                            $scope.beaconstatus = "RUNNING";
+                            $scope.context.dataloaded = true;
+                            busy = false;
+                        },
+                        function (response) {
+                            $scope.beaconstatus = "STOPPED";
+                            $scope.context.dataloaded = true;
+                            busy = false;
+                        }
+                    )
             };
 
             $scope.startFeedBridge = function () {
