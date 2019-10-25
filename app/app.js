@@ -543,9 +543,9 @@ var app = angular.module("portal", [
 
     $rootScope.showAboutWin = function () {
         $('#aboutWin').modal();
-        $http.get(apiurl.replace('/rest','/healthcheck')).then(
+        $http.get(apiurl+'/version').then(
             function (response) {
-                $rootScope.apiVersion = response.data.gitVersion;
+                $rootScope.apiVersion = response.data.payload[0].apiversion;
             }, function (response) {
                 $rootScope.apiVersion = 'Error';
             }
