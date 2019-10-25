@@ -377,14 +377,14 @@ tradesControllers.controller('TradesCtrl',
                                     {
                                         id: data.tradeid,
                                         items: [
-/*
+
                                             {
                                                 title: "Edit",
                                                 action: "Edit",
                                                 access: access.Edit,
                                                 class: 'edit-link text-bold'
                                             },
-*/
+
                                             {
                                                 title: "Details",
                                                 action: "Details",

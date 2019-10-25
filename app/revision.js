@@ -1,2 +1,3 @@
 var appVersion = 1;
-var appRevision = '9ed8ff640a';
+// be substituted, don't change!
+var appRevision = 'appRevision'
