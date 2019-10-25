@@ -1,3 +1,3 @@
 var appVersion = 1;
-// be substituted, don't change!
+// be substituted from environment, don't change!
 var appRevision = 'appRevision'
