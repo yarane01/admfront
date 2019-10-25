@@ -7,11 +7,11 @@ var stpurl = 'stpurl';
 var beaconurl = 'beaconurl';
 var reportingserviceurl = 'reportingserviceurl';
 
-var apiurl = backendurl;
+var apiurl = backendurl+"/rest";
 var reportsurl = reportingserviceurl;
 var stpapiurl = stpurl + "/rest";
 
-var changepasswordurl = apirurl + "/portaladmin/changepassword.html";
+var changepasswordurl = apiurl + "/portaladmin/changepassword.html";
 var forgotpasswordurl = apiurl + "/portaladmin/forgotpassword.html";
 
 // next lines should be removed in future
