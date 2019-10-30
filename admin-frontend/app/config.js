@@ -1,4 +1,5 @@
 var appName = "AdminApp";
+// not used:
 var minApiVersion = 2272;
 // be obtained from os environment, don't change!
 var tradeserverurl = 'tradeserverurl'; 
