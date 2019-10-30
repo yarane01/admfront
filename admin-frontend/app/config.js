@@ -1,11 +1,11 @@
 var appName = "AdminApp";
 var minApiVersion = 2272;
 // be obtained from os environment, don't change!
-var tradeserverurl = 'tradeserverurl'; 
-var backendurl = 'backendurl';
-var stpurl = 'stpurl';
-var beaconurl = 'beaconurl';
-var reportingserviceurl = 'reportingserviceurl';
+var tradeserverurl = 'http://localhost/tradeserver'; 
+var backendurl = 'http://localhost/tradeserver/portaladmin';
+var stpurl = 'http://localhost/stp';
+var beaconurl = 'http://localhost/beacon';
+var reportingserviceurl = 'http://localhost/reportingservice2';
 
 var apiurl = backendurl+"/rest";
 var reportsurl = reportingserviceurl;
