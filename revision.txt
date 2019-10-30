@@ -1,2 +1,0 @@
-var appVersion = 1;
-var appRevision = "$WCREV$";
