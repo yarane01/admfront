@@ -86,8 +86,8 @@ miscControllers.controller('AppLogonCtrl',
                                     systemInfo.start();
                                     //console.log(JSON.stringify($rootScope.portalUser, null, 4));
                                     $rootScope.init();
-                                    if ($rootScope.externalReports)
-                                        $rootScope.logonToReports();
+                                    //if ($rootScope.externalReports)
+                                    $rootScope.logonToReports();
                                     $location.path("/");
                                 }
                                 else {

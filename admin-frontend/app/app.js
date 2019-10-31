@@ -869,25 +869,8 @@ var app = angular.module("portal", [
         return { 'Authorization': 'Basic ' + credentials };
     }
 
-
-    $http.get("appconfig.json")
-        .then(
-            function (response) {
-                //angular.extend($rootScope.config, response.data);
-                //if (response.data.reports != "*") {
-                //    reportsurl = response.data.reports;
-                //    $rootScope.externalReports = true;
-                //}
-                //else
-                //    reportsurl = tradeserverurl + "/reports";
-                //console.log('reports at: ' + reportsurl)
-            },
-            function (response) {
-                //reportsurl = tradeserverurl + "/reports";
-            }
-        )
-
-    $rootScope.logonToReports = function () {
+        $rootScope.logonToReports = function () {
+            console.log('logging to report url '+reportsurl+ ' as '+$rootScope.portalUser.username);
         $http.get(reportsurl + '/logon?login=' +
             $rootScope.portalUser.username + '&password=' +
             $rootScope.portalUser.password)
