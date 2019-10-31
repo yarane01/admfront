@@ -513,22 +513,41 @@ accountsControllers.controller('AccountsCtrl',
             }
 
             $scope.goReports = function (id) {
-                //AccountStatement.jsp?accnames=trader
                 var account = $.extend({}, getItem(id));
-                // var url = reportsurl + '/AccountStatement.jsp?accnames=' + account.accountn;
-                var url = reportsurl + '/accountstatement?accountn=' + account.accountn;
+                var url;
+                // basic authentication in url:
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = url + '/accountstatement?accountn=' + account.accountn;
                 openInNewTab(url);
             };
 
             $scope.goExReports = function (id) {
                 var account = $.extend({}, getItem(id));
-                var url = reportsurl + '/executedorders?accountn=' + account.accountn;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = url + '/executedorders?accountn=' + account.accountn;
                 openInNewTab(url);
             };
 
             $scope.goDailyReports = function (id) {
                 var account = $.extend({}, getItem(id));
-                var url = reportsurl + '/dailytradingvolume?accountn=' + account.accountn;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = url + '/dailytradingvolume?accountn=' + account.accountn;
                 openInNewTab(url);
             };
 

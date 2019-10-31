@@ -407,7 +407,14 @@ tradesControllers.controller('TradesCtrl',
                         $scope.editDialog(id);
                         break;
                     case 'DETAILS':
-                        var url = reportsurl + '/tradeaudit?tradeid=' + id;
+                        // basic authentication in url:
+                        var url;
+                        if (reportsurl.startsWith('https://')) {
+                            url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                        } else {
+                            url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                        }
+                        url = url + '/tradeaudit?tradeid=' + id;
                         openInNewTab(url);
                         break;
                 }

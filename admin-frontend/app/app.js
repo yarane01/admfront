@@ -875,7 +875,10 @@ var app = angular.module("portal", [
             $rootScope.portalUser.username + '&password=' +
             $rootScope.portalUser.password)
             .then(function (response) {
-                console.log('logged to reports OK')
+                console.log('logged to reports OK');
+                console.log('response '+JSON.stringify(response));
+                console.log('sessionid '+response.data.sessionid);
+                $rootScope.reportSessionID = response.data.sessionid;
             }, function (response) {
                 console.log('log to reports failed');
                 console.log('status:' + response.status + response.statusText);

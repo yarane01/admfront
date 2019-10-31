@@ -326,25 +326,53 @@ unitsControllers.controller('UnitsCtrl',
 
             $scope.BusinessReport = function (id) {
                 var unit = getItem(id);
-                var url = reportsurl + '/businessreport?unitname='+unit.name;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = surl + '/businessreport?unitname='+unit.name;
                 openInNewTab(url);
             };
 
             $scope.VolumeReport = function (id) {
                 // not used ???
-                var url = reportsurl + '/TradingVolumesForm.jsp?unitsystemid=' + id;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = url + '/TradingVolumesForm.jsp?unitsystemid=' + id;
                 openInNewTab(url);
             };
 
             $scope.DailyVolumeReport = function (id) {
                 var unit = getItem(id);
-                var url = reportsurl + '/dailytradingvolumeunit?unitname=' + unit.name;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = url + '/dailytradingvolumeunit?unitname=' + unit.name;
                 openInNewTab(url);
             };
 
             $scope.RateShiftReport = function (id) {
                 var unit = getItem(id);
-                var url = reportsurl + '/rateshift?unitname=' + unit.name;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = url + '/rateshift?unitname=' + unit.name;
                 openInNewTab(url);
             };
 

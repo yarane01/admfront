@@ -639,7 +639,14 @@ usersControllers.controller('UsersCtrl',
             $scope.goReports = function (id) {
                 //var url = reportsurl + '/traderreport?StartUnitID=' + id;
                 var item = getItem(id);
-                var url = reportsurl + '/traderreport?tradern=' + item.loginname;
+                // basic authentication in url:
+                var url;
+                if (reportsurl.startsWith('https://')) {
+                    url = 'https://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(8);
+                } else {
+                    url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
+                }
+                url = reportsurl + '/traderreport?tradern=' + item.loginname;
                 openInNewTab(url);
             }
 
