@@ -1,8 +1,8 @@
 FROM httpd:2.4
 COPY ./Dockerfile /usr/local/apache2/htdocs/
 COPY ./entrypoint.sh /usr/local/apache2/htdocs/
-RUN mkdir -p /usr/local/apache2/htdocs/admin-frontend
-COPY ./admin-frontend /usr/local/apache2/htdocs/admin-frontend
+RUN mkdir -p /usr/local/apache2/htdocs/admin
+COPY ./admin /usr/local/apache2/htdocs/admin
 RUN mkdir -p /usr/local/apache2/htdocs/.git
 COPY .git /usr/local/apache2/htdocs/.git
 ARG TRADESERVER_URL
