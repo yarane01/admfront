@@ -326,10 +326,11 @@ angular.module('portal')
     .service('quotes', ['$q', '$rootScope', '$timeout', '$http',
         function ($q, $rootScope, $timeout, $http) {
             var interval = 0;
+            var rateInterval = 1;
             var busy = false;
             //var error = false;
             var loaded = false;
-            var list;
+            var list = [];
             var q = $q.defer();
 
             var symbols = {
@@ -467,19 +468,25 @@ angular.module('portal')
 
             }
 
+            const updateList = () => {
+                var symbols = getStoredSymbols('rates');
+                list = symbols.list;
+                rateInterval = symbols.interval;
+            }
+
             return {
                 start: function () {
-                    list = $rootScope.instruments.getList();
+                    updateList();
                     getSymbols();
                     if ($rootScope.config.autoupdate)
-                        interval = setInterval(getSymbols, rateInterval);
+                        interval = setInterval(getSymbols, rateInterval * 1000);
                 },
                 stop: function () {
                     if (interval > 0)
                         clearInterval(interval);
                 },
                 update: function () {
-                    getSymbols();
+                    updateList();
                 },
                 loaded: function () {
                     return loaded;
