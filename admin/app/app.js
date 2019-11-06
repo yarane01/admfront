@@ -5,7 +5,6 @@ var valuetypes;
 var pingInterval = 0;
 var OSInfoInterval = 20000;
 var DiskInfoInterval = 10 * 60 * 1000;
-var rateInterval = 20000;
 var OSInfoLength = 500;
 var chartLength = 100;
 var $appControllers;
@@ -543,7 +542,7 @@ var app = angular.module("portal", [
 
     $rootScope.showAboutWin = function () {
         $('#aboutWin').modal();
-        $http.get(apiurl+'/version').then(
+        $http.get(apiurl + '/version').then(
             function (response) {
                 $rootScope.apiVersion = response.data.payload[0].apiversion;
             }, function (response) {
@@ -869,15 +868,15 @@ var app = angular.module("portal", [
         return { 'Authorization': 'Basic ' + credentials };
     }
 
-        $rootScope.logonToReports = function () {
-            console.log('logging to report url '+reportsurl+ ' as '+$rootScope.portalUser.username);
+    $rootScope.logonToReports = function () {
+        console.log('logging to report url ' + reportsurl + ' as ' + $rootScope.portalUser.username);
         $http.get(reportsurl + '/logon?login=' +
             $rootScope.portalUser.username + '&password=' +
             $rootScope.portalUser.password)
             .then(function (response) {
                 console.log('logged to reports OK');
-                console.log('response '+JSON.stringify(response));
-                console.log('sessionid '+response.data.sessionid);
+                console.log('response ' + JSON.stringify(response));
+                console.log('sessionid ' + response.data.sessionid);
                 $rootScope.reportSessionID = response.data.sessionid;
             }, function (response) {
                 console.log('log to reports failed');

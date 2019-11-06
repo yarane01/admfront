@@ -2,13 +2,14 @@ var appName = "AdminApp";
 // not used:
 var minApiVersion = 2272;
 // be obtained from os environment, don't change!
-var tradeserverurl = 'tradeserverurl'; 
+var tradeserverurl = 'tradeserverurl';
 var backendurl = 'backendurl';
 var stpurl = 'stpurl';
 var beaconurl = 'beaconurl';
 var reportingserviceurl = 'reportingserviceurl';
 
-var apiurl = backendurl+"/rest";
+var apiurl = backendurl + "/rest";
+// var apiurl = "https://uat2tt.thinkmarkets.com/portaladmin/rest";
 var reportsurl = reportingserviceurl;
 var stpapiurl = stpurl + "/rest";
 
