@@ -61,7 +61,7 @@ miscControllers.controller('AppLogonCtrl',
                 $http.post(apiurl + '/logon', 'username=' +
                     $rootScope.portalUser.username + '&password=' +
                     $rootScope.portalUser.password, {
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 })
 
                     .success(function (data, status, headers, config) {
@@ -258,12 +258,12 @@ var Pager = function (options) {
                     var result = false;
                     options.filterFields.forEach(function (field) {
                         var value = item[field];
-                        if (typeof(value) != "string")
+                        if (typeof (value) != "string")
                             value = value.toString();
                         result = result || value.toUpperCase().includes(filterValue.toUpperCase());
                     })
                     return result;
-//                        return item[options.filterField].includes(value);
+                    //                        return item[options.filterField].includes(value);
                 })
             }
             currentPage = 0;
@@ -292,7 +292,7 @@ var Pager = function (options) {
 function getStoredSymbols(storage) {
     var stored = {
         list: ['EURUSD'],
-        interval: 1
+        interval: 15
     }
     if (localStorage[storage])
         stored = JSON.parse(localStorage[storage]);
@@ -304,8 +304,8 @@ function objectToArray(obj) {
         var value = obj[key];
         //console.log(value);
         return angular.isObject(value) ?
-            Object.defineProperty(value, '$key', {enumerable: false, value: key}) :
-            {$key: key, $value: value};
+            Object.defineProperty(value, '$key', { enumerable: false, value: key }) :
+            { $key: key, $value: value };
     })
 }
 
@@ -320,7 +320,7 @@ function isAdmin(user) {
 }
 
 function savePanels(id, storageName) {
-    var dashboard = {ver: "1", panels: []}
+    var dashboard = { ver: "1", panels: [] }
     var columns = $(id + " .column");
     columns.map(function () {
         dashboard.panels.push([]);
