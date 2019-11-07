@@ -450,9 +450,9 @@ angular.module('portal')
                                 //p.askchange = Math.random() > 0.5 ? 'Up' : 'Down';
                                 //p.bidchange = Math.random() > 0.5 ? 'Up' : 'Down';
 
-                                q.resolve();
                                 $rootScope.$emit('symbolchanged', quote);
                             }
+                            q.resolve();
                             busy = false;
                             $rootScope.$emit('quotesupdated');
                         }
@@ -495,6 +495,9 @@ angular.module('portal')
                     return updatetime;
                 },
                 init: function () {
+                    this.stop();
+                    q = $q.defer();
+                    this.start();
                     return q.promise;
                 }
             }

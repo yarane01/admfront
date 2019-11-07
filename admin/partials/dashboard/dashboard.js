@@ -150,7 +150,7 @@ dashboardControllers.controller('OnlineUsersCtrl',
             var interval = 0;
             var busy = false;
             var getUsers = function () {
-                if (busy)return;
+                if (busy) return;
                 busy = true;
                 api.getOnlineUsers(angular.extend(errorHandler($scope),
                     //api.getUsers(angular.extend(errorHandler($scope),
@@ -211,12 +211,12 @@ dashboardControllers.controller('ModulesInfoCtrl',
             var busy = false;
 
             var getInfo = function () {
-                if (busy)return;
+                if (busy) return;
                 busy = true;
 
                 var command = '{"command":"ps -ef|grep java"}';
 
-                    $http.get(reportsurl + '/ping')
+                $http.get(reportsurl + '/ping')
                     .then(
                         function (response) {
                             $scope.reportStatus = 'RUNNING';
@@ -226,19 +226,19 @@ dashboardControllers.controller('ModulesInfoCtrl',
                         }
                     )
 
-                    $http.get(tradeserverurl + '/vtutils/interface')
+                $http.get(tradeserverurl + '/vtutils/interface')
                     .then(
                         function (response) {
-                            console.log("ping success  url "+tradeserverurl);
+                            console.log("ping success  url " + tradeserverurl);
                             $scope.tradeserverstatus = "RUNNING";
                         },
                         function (response) {
-                            console.log("ping failed url "+tradeserverurl);
+                            console.log("ping failed url " + tradeserverurl);
                             $scope.tradeserverstatus = "STOPPED";
                         }
                     )
 
-                    $http.get(stpurl + '/ping')
+                $http.get(stpurl + '/ping')
                     .then(
                         function (response) {
                             $scope.stpstatus = "RUNNING";
@@ -247,8 +247,8 @@ dashboardControllers.controller('ModulesInfoCtrl',
                             $scope.stpstatus = "STOPPED";
                         }
                     )
-                    // TODO what is beacon ping?
-                    $http.get(beaconurl+'/')
+                // TODO what is beacon ping?
+                $http.get(beaconurl + '/')
                     .then(
                         function (response) {
                             $scope.beaconstatus = "RUNNING";
@@ -313,29 +313,29 @@ dashboardControllers.controller('ModulesInfoCtrl',
 
             $scope.restartTradeserver = function () {
                 $http.post(apiurl + '/execonserver', '{"command":"' + cmdrestarttradeserver + '"}')
-                //$http.get(apiurl + '/logout')
+                    //$http.get(apiurl + '/logout')
                     .then(function () {
-                            var restartInfo = {
-                                module: "Trade Server",
-                                wait: 30
-                            }
-                            localStorage.setItem("portal.restart", JSON.stringify(restartInfo));
-                            $window.location.reload();
+                        var restartInfo = {
+                            module: "Trade Server",
+                            wait: 30
                         }
+                        localStorage.setItem("portal.restart", JSON.stringify(restartInfo));
+                        $window.location.reload();
+                    }
                     )
             }
 
             $scope.restartall = function () {
                 $http.post(apiurl + '/execonserver', '{"command":"' + cmdrestartall + '"}')
-                //$http.get(apiurl + '/logout')
+                    //$http.get(apiurl + '/logout')
                     .then(function () {
-                            var restartInfo = {
-                                module: "All",
-                                wait: 60
-                            }
-                            localStorage.setItem("portal.restart", JSON.stringify(restartInfo));
-                            $window.location.reload();
+                        var restartInfo = {
+                            module: "All",
+                            wait: 60
                         }
+                        localStorage.setItem("portal.restart", JSON.stringify(restartInfo));
+                        $window.location.reload();
+                    }
                     )
             }
 
@@ -369,19 +369,19 @@ function FeedProvidersCtrl($rootScope, $scope, $http, $timeout, feedproviders) {
     };
 
     $scope.ConnectFeed = function (bank) {
-        $scope.putToServer([{bank: bank, connectFeed: true}]);
+        $scope.putToServer([{ bank: bank, connectFeed: true }]);
     };
 
     $scope.DisconnectFeed = function (bank) {
-        $scope.putToServer([{bank: bank, connectFeed: false}]);
+        $scope.putToServer([{ bank: bank, connectFeed: false }]);
     };
 
     $scope.ConnectTrading = function (bank) {
-        $scope.putToServer([{bank: bank, connectTrading: true}]);
+        $scope.putToServer([{ bank: bank, connectTrading: true }]);
     };
 
     $scope.DisconnectTrading = function (bank) {
-        $scope.putToServer([{bank: bank, connectTrading: false}]);
+        $scope.putToServer([{ bank: bank, connectTrading: false }]);
     };
 
     $scope.Refresh = function () {
@@ -391,18 +391,18 @@ function FeedProvidersCtrl($rootScope, $scope, $http, $timeout, feedproviders) {
         $scope.context.error = false;
         feedproviders.refresh()
             .then(function () {
-                    if (!feedproviders.error())
-                        fill(feedproviders.getProviders());
-                    else {
-                        $scope.context.errorMessage = feedproviders.error();
-                        $scope.context.dataerror = true;
-                        $scope.context.dataloaded = true;
-                    }
-                }, function () {
+                if (!feedproviders.error())
+                    fill(feedproviders.getProviders());
+                else {
                     $scope.context.errorMessage = feedproviders.error();
                     $scope.context.dataerror = true;
                     $scope.context.dataloaded = true;
                 }
+            }, function () {
+                $scope.context.errorMessage = feedproviders.error();
+                $scope.context.dataerror = true;
+                $scope.context.dataloaded = true;
+            }
             )
     };
 
@@ -451,7 +451,7 @@ dashboardControllers.controller('OSInfoCtrl',
 
         $scope.config = angular.extend($rootScope.config);
 
-        $scope.context = {dataloaded: false}
+        $scope.context = { dataloaded: false }
 
         var cpuChart = undefined;
         var memChart = undefined;
@@ -497,7 +497,7 @@ dashboardControllers.controller('OSInfoCtrl',
                             //bar: {groupWidth: "5"},
                             height: '100',
                             initWithZero: true,
-                            hAxis: {textPosition: 'none'},
+                            hAxis: { textPosition: 'none' },
                             maxLength: chartLength
                         });
                         var last = systemInfo.getLast(chartLength);
@@ -516,7 +516,7 @@ dashboardControllers.controller('OSInfoCtrl',
                             title: 'Trade Server free memory, Mb',
                             height: '100',
                             initWithZero: true,
-                            hAxis: {textPosition: 'none'},
+                            hAxis: { textPosition: 'none' },
                             maxLength: chartLength
                         });
                         var last = systemInfo.getLast(chartLength);
@@ -568,13 +568,13 @@ dashboardControllers.controller('PricesCtrl',
                 $scope.context.dataloaded = false;
                 var symbols = getStoredSymbols('rates');
                 console.log('Inside PricesCtrl');
-                console.log('symbols '+symbols.list);
-                quotes.update();
+                console.log('symbols ' + symbols.list);
                 quotes.init().then(function () {
+                    // quotes.update();
                     $scope.symbols = {};
                     symbols.list.forEach(function (s) {
-                            $scope.symbols[s] = $rootScope.symbols.getFirstProvider(s);
-                        }
+                        $scope.symbols[s] = $rootScope.symbols.getFirstProvider(s);
+                    }
                     )
                     $scope.Refresh();
                     $scope.context.dataloaded = true;
@@ -582,11 +582,11 @@ dashboardControllers.controller('PricesCtrl',
             }
 
             $scope.Refresh = function () {
-                console.log('Inside dashboard PricesCtrl Refresh '+$scope.symbols);
+                console.log('Inside dashboard PricesCtrl Refresh ' + $scope.symbols);
                 quotes.update();
             }
 
-//------------------ settings
+            //------------------ settings
 
             $scope.settingsDialog = function () {
                 $scope.context.showSettings = true;
@@ -600,7 +600,7 @@ dashboardControllers.controller('PricesCtrl',
                 }, 0);
             }
 
-//------------------ settings
+            //------------------ settings
 
             $scope.init();
         }
@@ -724,8 +724,8 @@ dashboardControllers.controller('TreeCtrl',
                 $scope.context.inprogress = true;
                 api.createUnit($scope.unit,
                     modal.makeUnitCreateCallback($scope, function () {
-                            update();
-                        }
+                        update();
+                    }
                     )
                 );
             }
@@ -734,8 +734,8 @@ dashboardControllers.controller('TreeCtrl',
                 $scope.context.inprogress = true;
                 api.createGroup($scope.group,
                     modal.makeGroupCreateCallback($scope, function () {
-                            update();
-                        }
+                        update();
+                    }
                     )
                 )
             }
@@ -744,7 +744,7 @@ dashboardControllers.controller('TreeCtrl',
                 $scope.context.inprogress = true;
                 api.createAccount($scope.account,
                     modal.makeAccountCreateCallback($scope, function () {
-                        }
+                    }
                     )
                 )
             };
@@ -754,7 +754,7 @@ dashboardControllers.controller('TreeCtrl',
                 $scope.user.cleanup();
                 api.createUser($scope.user,
                     modal.makeUserCreateCallback($scope, function () {
-                        }
+                    }
                     )
                 )
             };
@@ -806,7 +806,7 @@ dashboardControllers.controller('TreeCtrl',
                                 function (item) {
                                     return item.type == 1;
                                 }
-                                )
+                            )
                             );
                         $scope.context.parents = userParents;
                         $scope.context.dataloaded = true;
