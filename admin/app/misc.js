@@ -376,3 +376,9 @@ function floorFigure(figure, decimals) {
     var d = Math.pow(10, decimals);
     return (parseInt(figure * d) / d).toFixed(decimals);
 };
+
+angular.module('portal')
+    .controller('HealtcheckCtrl',
+        ['$scope', '$rootScope', function ($scope, $rootScope) {
+        }
+        ]);
