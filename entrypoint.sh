@@ -10,3 +10,4 @@ sed -i -e "s!'reportingserviceurl'!'$REPORTINGSERVICE_URL'!" admin/app/config.js
 hash=`cat .git/refs/heads/master`
 hash=`echo $hash | cut -c1-10`
 sed -i -e "s!'appRevision'!'$hash'!" admin/app/revision.js
+sed -i -e "s!appRevision!$hash!" admin/healthcheck
