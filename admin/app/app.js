@@ -112,7 +112,8 @@ var app = angular.module("portal", [
         //systemInfo.start();
     }
     //else $location.path("/logon");
-    $location.path("/logon");
+    if ($location.path() !== '/healthcheck')
+        $location.path("/logon");
 
     local = localStorage.getItem("portal.dropdownmouseopen");
     $rootScope.dropdownMouseOpen = false;
@@ -1197,6 +1198,7 @@ app.config(['$locationProvider', '$controllerProvider', '$routeProvider', '$anim
             .when('/biinfo', { templateUrl: 'partials/biinfo/biinfo.html' })
             .when('/logs', { templateUrl: 'partials/logs/logs.html' })
             .when('/debug', { templateUrl: 'partials/settings/settingnodes.html' })
+            .when('/healthcheck', { templateUrl: 'partials/healthcheck.html' })
             .otherwise({ redirectTo: '/' });
     }
 ]);
