@@ -247,8 +247,7 @@ dashboardControllers.controller('ModulesInfoCtrl',
                             $scope.stpstatus = "STOPPED";
                         }
                     )
-                // TODO what is beacon ping?
-                $http.get(beaconurl + '/')
+                $http.get(beaconurl + '/healthInfo')
                     .then(
                         function (response) {
                             $scope.beaconstatus = "RUNNING";
