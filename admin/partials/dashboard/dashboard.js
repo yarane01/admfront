@@ -247,7 +247,7 @@ dashboardControllers.controller('ModulesInfoCtrl',
                             $scope.stpstatus = "STOPPED";
                         }
                     )
-                $http.get(beaconurl + '/messaging/healthInfo')
+                $http.get(beaconurl + '/healthInfo')
                     .then(
                         function (response) {
                             $scope.beaconstatus = "RUNNING";
