@@ -247,6 +247,7 @@ dashboardControllers.controller('ModulesInfoCtrl',
                             $scope.stpstatus = "STOPPED";
                         }
                     )
+
                 $http.get(beaconurl + '/healthInfo')
                     .then(
                         function (response) {
@@ -260,6 +261,37 @@ dashboardControllers.controller('ModulesInfoCtrl',
                             busy = false;
                         }
                     )
+
+                $http.get(tradeserverurl + '/reportingmailer/healthcheck')
+                    .then(
+                        function (response) {
+                            $scope.reportingmailerstatus = "RUNNING";
+                        },
+                        function (response) {
+                            $scope.reportingmailerstatus = "STOPPED";
+                        }
+                    )
+
+                $http.get(tradeserverurl + '/closedayinvoker/healthcheck')
+                    .then(
+                        function (response) {
+                            $scope.closedayinvokerstatus = "RUNNING";
+                        },
+                        function (response) {
+                            $scope.closedayinvokerstatus = "STOPPED";
+                        }
+                    )
+
+                $http.get(tradeserverurl + '/dataservice/healthcheck')
+                    .then(
+                        function (response) {
+                            $scope.dataservicestatus = "RUNNING";
+                        },
+                        function (response) {
+                            $scope.dataservicestatus = "STOPPED";
+                        }
+                    )
+
             };
 
             $scope.startFeedBridge = function () {
