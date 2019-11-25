@@ -49,6 +49,27 @@
                     <modules-yes-sign name="Reports" if="reportStatus=='RUNNING'"></modules-yes-sign>
                 </div>
             </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Reports Mailer</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="reportingmailer" if="reportingmailer=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="reportingmailer" if="reportingmailer=='RUNNING'"></modules-yes-sign>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Close Day Invoker</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="closedayinvoker" if="closedayinvoker=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="closedayinvoker" if="closedayinvoker=='RUNNING'"></modules-yes-sign>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Data Service</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="dataservice" if="dataservicetatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="dataservice" if="dataservicetatus=='RUNNING'"></modules-yes-sign>
+                </div>
+            </div>
         </div>
     </div>
 </div>
