@@ -166,13 +166,14 @@ settingsControllers.controller('SettingsCtrl',
                                 systemsettingid: setting.id,
                                 value: context.value,
                                 maptype: setting.mapType,
-                                valuetype: context.valueType
+                                valuetype: context.valueType,
+                                conditions: selids
                             };
                             var json = JSON.stringify(data);
                             var id = $rootScope.settingsInfoStack.id();
                             //var id = setting.nodeid
                             var url = '/hierarchy/' + id + '/settings/' +
-                                setting.id + '/conditions/' + selids;
+                                setting.id + '/bulkupdate';
                             api.do('POST', url, json,
                                 {
                                     ok: function (response) {
