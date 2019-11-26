@@ -154,10 +154,14 @@ settingsControllers.controller('SettingsCtrl',
                     var selected = context.getSelected();
                     if (selected.length == 0) return;
                     $scope.context.inprogress = true;
+                    // collect ids for bulk update
+                    var selids = "";
+                    for (var i = 0; i < selected.length; i++) {
+                        selids += ","+selected[i].id;
+                    }
+                    selids = selids.substring(1);
                     var submitItem = function () {
-                        var sel = selected.pop();
-                        if (sel) {
-                            $scope.currentItem = sel.name;
+                            $scope.currentItem = "";
                             var data = {
                                 systemsettingid: setting.id,
                                 value: context.value,
@@ -168,11 +172,15 @@ settingsControllers.controller('SettingsCtrl',
                             var id = $rootScope.settingsInfoStack.id();
                             //var id = setting.nodeid
                             var url = '/hierarchy/' + id + '/settings/' +
-                                setting.id + '/conditions/' + sel.id;
+                                setting.id + '/conditions/' + selids;
                             api.do('POST', url, json,
                                 {
                                     ok: function (response) {
-                                        submitItem();
+                                        $scope.context.inprogress = false;
+                                        showMainForm();
+                                        //$route.reload();
+                                        $('#instrumentsEdit').modal('hide');
+                                        $scope.init();
                                     },
                                     error: function (response) {
                                         $scope.context.inprogress = false;
@@ -182,14 +190,6 @@ settingsControllers.controller('SettingsCtrl',
                                     }
                                 }
                             );
-                        }
-                        else {
-                            $scope.context.inprogress = false;
-                            showMainForm();
-                            //$route.reload();
-                            $('#instrumentsEdit').modal('hide');
-                            $scope.init();
-                        }
                     };
                     submitItem();
                 };
