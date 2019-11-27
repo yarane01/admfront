@@ -232,10 +232,14 @@ settingsControllers.controller('SettingsCtrl',
                             return i.id;
                         }
                     ).join(',');
+                    var data = {
+                        conditions: ids
+                    };
+                    var json = JSON.stringify(data);
                     var id = $rootScope.settingsInfoStack.id();
                     var url = '/hierarchy/' + id + '/settings/' +
-                        setting.id + '/conditions/' + ids;
-                    api.do('DELETE', url, null,
+                        setting.id + '/bulkdelete';
+                    api.do('DELETE', url, json,
                         {
                             ok: function (response) {
                                 $scope.context.inprogress = false;
