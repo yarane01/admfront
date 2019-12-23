@@ -333,7 +333,7 @@ unitsControllers.controller('UnitsCtrl',
                 } else {
                     url = 'http://'+$rootScope.portalUser.username+':'+$rootScope.portalUser.password+'@'+reportsurl.substring(7);
                 }
-                url = surl + '/businessreport?unitname='+unit.name;
+                url = url + '/businessreport?unitname='+unit.name;
                 openInNewTab(url);
             };
 
