@@ -154,34 +154,25 @@ settingsControllers.controller('SettingsCtrl',
                     var selected = context.getSelected();
                     if (selected.length == 0) return;
                     $scope.context.inprogress = true;
-                    // collect ids for bulk update
-                    var selids = "";
-                    for (var i = 0; i < selected.length; i++) {
-                        selids += ","+selected[i].id;
-                    }
-                    selids = selids.substring(1);
                     var submitItem = function () {
-                            $scope.currentItem = "";
+                        var sel = selected.pop();
+                        if (sel) {
+                            $scope.currentItem = sel.name;
                             var data = {
                                 systemsettingid: setting.id,
                                 value: context.value,
                                 maptype: setting.mapType,
-                                valuetype: context.valueType,
-                                conditions: selids
+                                valuetype: context.valueType
                             };
                             var json = JSON.stringify(data);
                             var id = $rootScope.settingsInfoStack.id();
                             //var id = setting.nodeid
                             var url = '/hierarchy/' + id + '/settings/' +
-                                setting.id + '/bulkupdate';
+                                setting.id + '/conditions/' + sel.id;
                             api.do('POST', url, json,
                                 {
                                     ok: function (response) {
-                                        $scope.context.inprogress = false;
-                                        showMainForm();
-                                        //$route.reload();
-                                        $('#instrumentsEdit').modal('hide');
-                                        $scope.init();
+                                        submitItem();
                                     },
                                     error: function (response) {
                                         $scope.context.inprogress = false;
@@ -191,6 +182,14 @@ settingsControllers.controller('SettingsCtrl',
                                     }
                                 }
                             );
+                        }
+                        else {
+                            $scope.context.inprogress = false;
+                            showMainForm();
+                            //$route.reload();
+                            $('#instrumentsEdit').modal('hide');
+                            $scope.init();
+                        }
                     };
                     submitItem();
                 };
@@ -232,14 +231,10 @@ settingsControllers.controller('SettingsCtrl',
                             return i.id;
                         }
                     ).join(',');
-                    var data = {
-                        conditions: ids
-                    };
-                    var json = JSON.stringify(data);
                     var id = $rootScope.settingsInfoStack.id();
                     var url = '/hierarchy/' + id + '/settings/' +
-                        setting.id + '/bulkdelete';
-                    api.do('DELETE', url, json,
+                        setting.id + '/conditions/' + ids;
+                    api.do('DELETE', url, null,
                         {
                             ok: function (response) {
                                 $scope.context.inprogress = false;
