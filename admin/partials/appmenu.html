@@ -95,6 +95,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="dropdown dropdown-hover"
+                        ng-show="initialized">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Reports
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="https://{{portalUser.username}}:{{portalUser.password}}@{{reportsurl.substring(8)}}/accountsummary">AccountSummury CSV</a>
+                            </li>
+                            <li>
+                                <a href="https://{{portalUser.username}}:{{portalUser.password}}@{{reportsurl.substring(8)}}/depositwithdraw">Deposit/Withdraw CSV</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 

@@ -802,6 +802,8 @@ var app = angular.module("portal", [
             });
     };
 
+    $rootScope.reportsurl = reportsurl;
+    
     $rootScope.getPortalUserRolesList = function () {
         var result = '';
         if ($rootScope.portalUser.isaccessadmin) result += '<p>Access&nbsp;administrator</p>';
