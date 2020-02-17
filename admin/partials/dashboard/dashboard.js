@@ -282,13 +282,23 @@ dashboardControllers.controller('ModulesInfoCtrl',
                         }
                     )
 
-                $http.get(tradeserverurl + '/dataservice/healthcheck')
+                    $http.get(tradeserverurl + '/dataservice/healthcheck')
                     .then(
                         function (response) {
                             $scope.dataservicestatus = "RUNNING";
                         },
                         function (response) {
                             $scope.dataservicestatus = "STOPPED";
+                        }
+                    )
+
+                    $http.get(adminbackendurl + '/adminbackend/healthcheck')
+                    .then(
+                        function (response) {
+                            $scope.adminbackendstatus = "RUNNING";
+                        },
+                        function (response) {
+                            $scope.adminbackendstatus = "STOPPED";
                         }
                     )
 
