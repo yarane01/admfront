@@ -602,7 +602,7 @@ var app = angular.module("portal", [
             $rootScope.loaded = $q.defer();
             $q.all([
                 $http.get(apiurl + '/groups'),
-                $http.get(apiurl + '/instruments'),
+                $http.get(adminbackendurl + '/instruments'),
                 $http.get(apiurl + '/units'),
                 $http.get(apiurl + '/valuetypes')
                 //$http.get(apiurl)
@@ -764,7 +764,7 @@ var app = angular.module("portal", [
     $rootScope.updateInstruments = function () {
         var q = $q.defer();
         if (!$rootScope.instruments.upToDate)
-            $http.get(apiurl + '/instruments')
+            $http.get(adminbackendurl + '/instruments')
                 .then(function (response) {
                     $rootScope.instruments.data = response.data.payload[0];
                     $rootScope.instruments.upToDate = true;

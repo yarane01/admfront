@@ -7,6 +7,7 @@ var balancerurl = tradeserverurl;
 //var balancerurl = 'http:/localhost';
 //var tradeserverurl = balancerurl + '/tradeserver';
 var backendurl = tradeserverurl + '/portaladmin';
+var adminbackendurl = balancerurl + '/adminbackend';
 var stpurl = balancerurl + '/stp';
 var beaconurl = balancerurl + '/messaging';
 var reportingserviceurl = balancerurl + '/reportingservice2';

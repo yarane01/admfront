@@ -158,6 +158,11 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             name: "interestsell"
                         },
                         {
+                            "data": "comment",
+                            save: true,
+                            name: "comment"
+                        },
+                        {
                             "data": null,
                             "sortable": false,
                             save: false,
