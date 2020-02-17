@@ -468,8 +468,8 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             if (response.data.status == 'OK') {
                                 updateInstrument(instrument);
                                 SubscriptionService.refresh(true);
-                                json = JSON.stringify(instrument.comment)
-                                $http.put(adminbackendurl + '/instruments/' + instrument.instrumentid + '/comment', json)
+                                var json2 = '{"comment":'+'"'+instrument.comment+'"}';
+                                $http.put(adminbackendurl + '/instruments/' + instrument.instrumentid + '/comment', json2)
                                 .then(
                                     function (response) {
                                         if (response.data.status == 'OK') {
