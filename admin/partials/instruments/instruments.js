@@ -469,7 +469,7 @@ instrumentsControllers.controller('InstrumentsCtrl',
                                 updateInstrument(instrument);
                                 SubscriptionService.refresh(true);
                                 json = JSON.stringify(instrument.comment)
-                                $http.put(adminbackendurl + '/instruments/' + instrument.instrumentid, json)
+                                $http.put(adminbackendurl + '/instruments/' + instrument.instrumentid + '/comment', json)
                                 .then(
                                     function (response) {
                                         if (response.data.status == 'OK') {
