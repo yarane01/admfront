@@ -292,7 +292,7 @@ dashboardControllers.controller('ModulesInfoCtrl',
                         }
                     )
 
-                    $http.get(adminbackendurl + '/adminbackend/healthcheck')
+                    $http.get(adminbackendurl + '/healthcheck')
                     .then(
                         function (response) {
                             $scope.adminbackendstatus = "RUNNING";
