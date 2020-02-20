@@ -1216,6 +1216,10 @@ app.factory('responseInterceptor', ['$rootScope', '$location',
                     var credentials = btoa($rootScope.portalUser.username + ':' + $rootScope.portalUser.password);
                     req.headers.Authorization = 'Basic ' + credentials;
                 }
+                if (req.url.indexOf(adminbackendurl) != -1) {
+                    var credentials = btoa($rootScope.portalUser.username + ':' + $rootScope.portalUser.password);
+                    req.headers.Authorization = 'Basic ' + credentials;
+                }
                 return req;
             },
             response: function (response) {
