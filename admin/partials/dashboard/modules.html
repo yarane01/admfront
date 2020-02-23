@@ -70,6 +70,13 @@
                     <modules-yes-sign name="dataservice" if="dataservicestatus=='RUNNING'"></modules-yes-sign>
                 </div>
             </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-sm-3">Admin Backend</div>
+                <div class="col-sm-2">
+                    <modules-no-sign name="adminbackend" if="adminbackendstatus=='STOPPED'"></modules-no-sign>
+                    <modules-yes-sign name="adminbackend" if="adminbackendstatus=='RUNNING'"></modules-yes-sign>
+                </div>
+            </div>
         </div>
     </div>
 </div>

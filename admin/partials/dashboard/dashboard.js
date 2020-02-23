@@ -292,6 +292,16 @@ dashboardControllers.controller('ModulesInfoCtrl',
                         }
                     )
 
+                $http.get(adminbackendurl + '/healthcheck')
+                    .then(
+                        function (response) {
+                            $scope.adminbackendstatus = "RUNNING";
+                        },
+                        function (response) {
+                            $scope.adminbackendstatus = "STOPPED";
+                        }
+                    )
+
             };
 
             $scope.startFeedBridge = function () {

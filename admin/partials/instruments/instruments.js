@@ -52,7 +52,7 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             title: 'Instruments',
                             exportOptions: {
                                 //orthogonal: 'export',
-                                columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+                                columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
                             }
                         }
                     ],
@@ -156,6 +156,11 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             "data": "interestsell",
                             save: true,
                             name: "interestsell"
+                        },
+                        {
+                            "data": "comment",
+                            save: true,
+                            name: "comment"
                         },
                         {
                             "data": null,
@@ -463,7 +468,25 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             if (response.data.status == 'OK') {
                                 updateInstrument(instrument);
                                 SubscriptionService.refresh(true);
-                                q.resolve();
+                                var json2 = '{"comment":'+'"'+instrument.comment+'"}';
+                                $http.put(adminbackendurl + '/instruments/' + instrument.instrumentid + '/comment', json2)
+                                .then(
+                                    function (response) {
+                                        if (response.data.status == 'OK') {
+                                            updateInstrument(instrument);
+                                            SubscriptionService.refresh(true);
+                                            q.resolve();
+                                        }
+                                        else {
+                                            //highlightError($('#' + instrument.instrumentid + ' td'));
+                                            q.reject(response.data.payload[0]);
+                                        }
+                                    },
+                                    function (response) {
+                                        //highlightError($('#' + instrument.instrumentid + ' td'));
+                                        q.reject('Request failed');
+                                    }
+                                );
                             }
                             else {
                                 //highlightError($('#' + instrument.instrumentid + ' td'));
