@@ -222,8 +222,8 @@ tradesControllers.controller('TradesCtrl',
 
                         $scope.error = false;
                         $q.all([
-                            $http.get(apiurl + '/trades2' + requestQuery),
-                            $http.get(apiurl + '/trades2count' + countQuery)
+                            $http.get(adminbackendurl + '/trades2' + requestQuery),
+                            $http.get(adminbackendurl + '/trades2count' + countQuery)
                             //$http.get(apiurl + '/trades2', {params: reqParams}),
                             //$http.get(apiurl + '/trades2count', {params: countFilter})
                         ])
