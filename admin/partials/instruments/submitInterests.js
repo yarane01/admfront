@@ -72,8 +72,8 @@ var dailyRates = {
                     dailyRate.instrumentName = lineData[0]; //.replace(new RegExp('/', 'g'), '');
                     //dailyRate.instrumentName = dailyRate.instrumentName.replace(new RegExp(' ', 'g'), '');
 
-                    dailyRate.bid = parseFloat(lineData[1]);
-                    dailyRate.offer = parseFloat(lineData[2]);
+                    dailyRate.offer = parseFloat(lineData[1]);
+                    dailyRate.bid = parseFloat(lineData[2]);
                     
                     if (isNaN(dailyRate.bid) || isNaN(dailyRate.offer))
                         continue;
