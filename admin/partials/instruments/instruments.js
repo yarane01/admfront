@@ -301,7 +301,7 @@ instrumentsControllers.controller('InstrumentsCtrl',
             window.actionClick = function (link) {
                 var action = $(link).data('action');
                 var id = $(link).data('id');
-                this.console.log('action clicked '+action)
+                //this.console.log('action clicked '+action)
                 switch (action.toUpperCase()) {
                     case 'EDIT':
                         $scope.editDialog(id);
@@ -317,7 +317,7 @@ instrumentsControllers.controller('InstrumentsCtrl',
                         break;
                     case "DELETEINSTRUMENT":
                         $scope.deleteInstrument(id, true);
-                        this.console.log("delete "+id);
+                        //this.console.log("delete "+id);
                         break;
     
                 }

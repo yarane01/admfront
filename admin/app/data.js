@@ -149,7 +149,8 @@ var instrumenttypemap =
     "5": 'Indices',
     "6": 'Equities',
     "7": 'Bonds',
-    "8": 'Crypto'
+    "8": 'Crypto',
+    "9": 'CashEquities'
 };
 
 //from table rangetype
