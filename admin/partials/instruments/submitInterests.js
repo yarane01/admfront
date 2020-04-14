@@ -41,6 +41,7 @@ var dailyRates = {
         return false;
     },
     loadFromCSV: function(file, successCallBack, errorCallBack) {
+        
         if (!file) {
             successCallBack();
             return;
@@ -55,27 +56,30 @@ var dailyRates = {
 
             try {
                 var allTextLines = fileContent.split(/\r\n|\n/);
-
+                
                 for (var i = 0; i < allTextLines.length; i++) {
-
+                    if (i == 0) {
+                        continue; // skip first line
+                    }
                     var lineData = allTextLines[i].split(',');
 
-                    if (lineData.length < 5)
-                        continue;
+                    if (lineData.length < 3) {
+                        continue; // skip empty lines
+                    }
 
                     var dailyRate = {};
 
-                    dailyRate.instrumentName = lineData[0].replace(new RegExp('/', 'g'), '');
-                    dailyRate.instrumentName = dailyRate.instrumentName.replace(new RegExp(' ', 'g'), '');
+                    dailyRate.instrumentName = lineData[0]; //.replace(new RegExp('/', 'g'), '');
+                    //dailyRate.instrumentName = dailyRate.instrumentName.replace(new RegExp(' ', 'g'), '');
 
-                    dailyRate.bid = parseFloat(lineData[3].replace(new RegExp(',', 'g'), '.'));
-                    dailyRate.offer = -1 * parseFloat(lineData[4].replace(new RegExp(',', 'g'), '.'));
-
+                    dailyRate.bid = parseFloat(lineData[1]);
+                    dailyRate.offer = parseFloat(lineData[2]);
+                    
                     if (isNaN(dailyRate.bid) || isNaN(dailyRate.offer))
                         continue;
 
-                    if (!target.contains(dailyRate.instrumentName))
-                        target.data.push(dailyRate);
+                    target.data.push(dailyRate);
+                    
                 }
 
                 successCallBack();
@@ -88,8 +92,9 @@ var dailyRates = {
         fileReader.onerror = function () {
             errorCallBack('Error reading file "' + file.name + '"');
         };
-
+        
         fileReader.readAsText(file);
+        
     },
     loadFromXLS: function(file, successCallBack, errorCallBack) {
         if (!file) {
@@ -195,6 +200,10 @@ var instruments = {
         // return false;
     },
     loadFromCSV: function(file, successCallBack, errorCallBack) {
+        if (!file) {
+            successCallBack();
+            return;
+        }
         var target = this;
 
         var fileReader = new FileReader();
@@ -245,26 +254,19 @@ var xmlFile;
 
 function processData(successCallBack, errorCallBack) {
     function formatFloat(value, precision){
-        return value.toFixed(precision).replace(/\.?0*$/,'').replace(/,/,'.');
+        return value.toFixed(precision);
     }
 
     try {
         xmlFile = document.implementation.createDocument('', 'change-price-preset', null);
-
         for (var i = 0; i < dailyRates.data.length; i++) {
             var dailyRate = dailyRates.data[i];
-
-            var instrument = instruments.getByName(dailyRate.instrumentName);
-
-            if (instrument == undefined) continue;
-
             var node = xmlFile.createElement("item");
-            node.setAttribute("instrument", instrument.internalName);
-            node.setAttribute("sell-interest", formatFloat(dailyRate.bid * instrument.multiplier, 6));
-            node.setAttribute("buy-interest", formatFloat(dailyRate.offer * instrument.multiplier, 6));
+            node.setAttribute("instrument", dailyRate.instrumentName.replace(/"/g,''));
+            node.setAttribute("sell-interest", dailyRate.bid);
+            node.setAttribute("buy-interest", dailyRate.offer);
             xmlFile.documentElement.appendChild(node);
         }
-
         successCallBack();
     }
     catch(e) {
@@ -275,7 +277,7 @@ function processData(successCallBack, errorCallBack) {
 function uploadInterests($http, successCallBack, errorCallBack) {
     var serializer = new XMLSerializer();
     var output = formatXml(serializer.serializeToString(xmlFile));
-
+    
     var req = {
         method: 'PUT',
         url: apiurl + '/updateinterests',
@@ -326,6 +328,7 @@ function updateInterests($scope, instruments) {
     $scope.table.clear().rows.add(instruments.data).draw(false);
 }
 
+
 function doSubmitInterests($scope, $http) {
     $('#submitInterestsDialog').data('bs.modal').options.backdrop = 'static';
 
@@ -340,12 +343,12 @@ function doSubmitInterests($scope, $http) {
 
     dailyRates.clear();
     instruments.clear();
-
+    
     dailyRates.loadFromCSV($scope.dailyRatesCSVFile,
         function() {
-            dailyRates.loadFromXLS($scope.dailyRatesXLSFile,
+            dailyRates.loadFromXLS(null,
                 function() {
-                    instruments.loadFromCSV($scope.configFile,
+                    instruments.loadFromCSV(null,
                         function() {
                             processData(
                                 function(){
