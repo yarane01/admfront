@@ -106,7 +106,7 @@ var dailyRates = {
 
         var fileReader = new FileReader();
 
-        fileReader.onload = function (event) {
+        fileReader.onloadend = function (event) {
             var fileContent = event.target.result;
             var i;
 
@@ -208,7 +208,7 @@ var instruments = {
 
         var fileReader = new FileReader();
 
-        fileReader.onload = function (event) {
+        fileReader.onloadend = function (event) {
             var fileContent = event.target.result;
 
             try {
