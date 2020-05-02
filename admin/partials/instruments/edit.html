@@ -128,6 +128,21 @@
                                        float required>
                             </div>
                         </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Trading State</label>
+
+                            <div class="col-sm-2">
+                                <select ng-model="instrument.istraded"
+                                       name="istraded"
+                                       type="text" class="form-control"
+                                       required>
+                                       <option value="Traded">Traded</option>
+                                       <option value="Disabled">Disabled</option>
+                                       <option value="CloseOnly">CloseOnly</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
