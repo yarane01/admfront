@@ -238,7 +238,7 @@ accountsControllers.controller('AccountsCtrl',
                             save: true,
                             name: "balance",
                             "render": function (data, type, full, meta) {
-                                return data.balance.toFixed(2);
+                                return data.balance;
                             }
                         },
                         {
@@ -247,7 +247,7 @@ accountsControllers.controller('AccountsCtrl',
                             save: true,
                             name: "usedmargin",
                             "render": function (data, type, full, meta) {
-                                return data.usedmargin ? data.usedmargin.toFixed(2) : 0;
+                                return data.usedmargin ? data.usedmargin : 0;
                             }
                         },
                         {
@@ -257,7 +257,7 @@ accountsControllers.controller('AccountsCtrl',
                             name: "usablemargin",
                             "sortable": false,
                             "render": function (data, type, full, meta) {
-                                return data.usablemargin ? data.usablemargin.toFixed(2) : 0;
+                                return data.usablemargin ? data.usablemargin : 0;
                             }
                         },
                         {
