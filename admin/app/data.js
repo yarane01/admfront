@@ -499,7 +499,7 @@ var currencies = {
     'DKK': "Danish krone",
     'BTC': "Bitcoin",
     'ETH': "Ethereum",
-    'TCO': "TCO",
+    'TCO': "ThinkCoin",
     'UST': "Tether"
 };
 
