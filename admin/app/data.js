@@ -498,7 +498,9 @@ var currencies = {
     'MXN': "Mexican Peso",
     'DKK': "Danish krone",
     'BTC': "Bitcoin",
-    'ETH': "Ethereum"
+    'ETH': "Ethereum",
+    'TCO': "TCO",
+    'UST': "Tether"
 };
 
 var timezones = {
