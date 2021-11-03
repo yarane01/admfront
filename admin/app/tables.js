@@ -622,7 +622,10 @@ function getDefaultTableProperties() {
                 basebuyshift: false,
                 basesellshift: false,
                 interestbuy: true,
-                interestsell: true
+                interestsell: true,
+                exchangeCountryCode: true,
+                sector: true,
+                exchangeTicker: true
             },
             trades: {
                 accountn: true,

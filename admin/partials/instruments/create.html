@@ -40,6 +40,18 @@
                                        required>
                             </div>
                         </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Exchange Ticker
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.exchangeTicker"
+                                       name="exchangeTicker"
+                                       type="text" class="form-control"
+                                       >
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div mark-errors>
@@ -183,7 +195,19 @@ else format must be '10:00-12:00 14:00-24:00 [Sunday 18:00, Friday 16:00]'"
                     </div>
                     <div class="form-group">
                         <div mark-errors>
-                            <label class="col-sm-4 control-label">
+                            <label class="col-sm-2 control-label">
+                                Exchange Country Code
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.exchangeCountryCode"
+                                       name="exchangeCountryCode"
+                                       type="text" class="form-control"
+                                       >
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
                                 Round
                             </label>
 
@@ -201,7 +225,7 @@ else format must be '10:00-12:00 14:00-24:00 [Sunday 18:00, Friday 16:00]'"
                                 Lot size
                             </label>
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <input ng-model="instrument.lotsize"
                                        name="lotsize"
                                        type="number" class="form-control"
@@ -213,7 +237,19 @@ else format must be '10:00-12:00 14:00-24:00 [Sunday 18:00, Friday 16:00]'"
                     </div>
                     <div class="form-group">
                         <div mark-errors>
-                            <label class="col-sm-4 control-label">
+                            <label class="col-sm-2 control-label">
+                                Sector
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.sector"
+                                       name="sector"
+                                       type="text" class="form-control"
+                                       >
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
                                 Buy rate
                             </label>
 
