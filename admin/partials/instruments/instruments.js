@@ -546,9 +546,15 @@ instrumentsControllers.controller('InstrumentsCtrl',
                 submitInstrument($scope.instrument)
                     .then(
                         function () {
+                            //$scope.clearAllFilters();
+                            $rootScope.instruments.state.externalFilter.applied = false;
+                            $rootScope.instruments.state.externalFilter.name = undefined;
+                            
                             $scope.context.inprogress = false;
                             $('#editInstrument').modal('hide');
                             //ProcessSpiner.hide();
+                            $route.reload();
+                            SubscriptionService.refresh(true);
                         },
                         function (msg) {
                             $scope.context.inprogress = false;
