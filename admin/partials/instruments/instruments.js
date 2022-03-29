@@ -745,8 +745,44 @@ instrumentsControllers.controller('InstrumentsCtrl',
                 $('#submitInterestsDialog').modal();
             };
 
+            $scope.showBulkInstrumentsDialog = function() {
+                $scope.processing = false;
+                $scope.errorMessage = null;
+
+                $scope.instrumentsCSVFile = null;
+                $scope.configFile = null;
+
+                $("#csvfile").val("");
+                $("#xlsfile").val("");
+                $("#configfile").val("");
+
+                $('#submitInstrumentsDialog').modal();
+            };
+
+            $scope.showBulkTradingTimesDialog = function() {
+                $scope.processing = false;
+                $scope.errorMessage = null;
+
+                $scope.tradingPeriodsCSVFile = null;
+                $scope.configFile = null;
+
+                $("#csvfile").val("");
+                $("#xlsfile").val("");
+                $("#configfile").val("");
+
+                $('#updateTradingPeriodsDialog').modal();
+            };
+
             $scope.processSubmitInterestsDialog = function() {
                 doSubmitInterests($scope, $http);
+            };
+
+            $scope.processSubmitInstrumentsDialog = function() {
+                doInsertInstruments($scope, $http);
+            };
+
+            $scope.processSubmitTradingPeriodsDialog = function() {
+                doUpdateTradePeriods($scope, $http);
             };
 
             $rootScope.updateInstruments()

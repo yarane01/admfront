@@ -4,6 +4,8 @@
     <div ng-include="'partials/instruments/create.html'"></div>
     <div ng-include="'partials/instruments/history.html'"></div>
     <div ng-include="'partials/instruments/submitInterests.html'"></div>
+    <div ng-include="'partials/instruments/insertInstruments.html'"></div>
+    <div ng-include="'partials/instruments/updateTradePeriods.html'"></div>
     <div ng-include="'partials/bulkEdit.html'"></div>
     <div ng-include="'partials/modalProgress.html'"></div>
 
@@ -53,6 +55,12 @@
 
             <a class="btn btn-default" role="button"
                ng-click="showSubmitInterestsDialog()">Upload Swaps</a>
+
+            <a class="btn btn-default" role="button"
+                ng-click="showBulkInstrumentsDialog()">Bulk Create Instruments</a>
+
+            <a class="btn btn-default" role="button"
+                ng-click="showBulkTradingTimesDialog()">Upload Trading Periods</a>
 
             <a class="export-placeholder"></a>
             <!--<filter-box></filter-box>-->

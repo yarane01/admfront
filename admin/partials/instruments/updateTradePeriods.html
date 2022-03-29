@@ -1,0 +1,53 @@
+<div id="updateTradingPeriodsDialog" class="modal fade" data-keyboard="false" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <button type="button" ng-disabled="processing" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">
+                    <i class="fa fa-cubes fa-2x"></i>
+                    <strong>Upload Trading Periods</strong>
+                </h5>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" novalidate enctype="multipart/form-data">
+                    <label for="csvfile">
+                        Trading Periods Update CSV File
+                        <br/>Example:
+                        <br/>
+                        <br/>instrumentid,tradingperiod
+                        <br/>1,"09:31-16:00 [Monday 09:31, Friday 16:00]"
+                        <br/>2,"09:31-16:00 [Monday 09:31, Friday 16:00]"
+                        <br/>3,"09:31-16:00 [Monday 09:31, Friday 16:00]"
+                        <br/>
+                        <br/>First line needs to be the headers (in any order), all fields are required
+                        <br/>
+                        <br/>
+                    </label>
+
+                    <input id="csvfile" class="form-control" ng-disabled="processing" file-select file="tradingPeriodsCSVFile" type="file">
+
+                    <i class="fa fa-spinner fa-spin" ng-if="processing"></i>
+
+                    <div class="redtextcolor" ng-if="errorMessage">
+                        {{errorMessage}}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"
+                                ng-disabled="processing || !tradingPeriodsCSVFile"
+                                ng-click="processSubmitTradingPeriodsDialog()">
+                            Upload
+                        </button>
+        
+                        <button type="button" ng-disabled="processing" class="btn btn-default" data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
