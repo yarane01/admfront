@@ -18,12 +18,13 @@
                         Format for Bulk Instrument Upload CSV File
                         <br/>Example:
                         <br/>
-                        <br/>instrument,buy-interest,sell-interest
-                        <br/>EURUSD,0.6,-0.8
-                        <br/>AUDUSD,53.315,-70.78075
-                        <br/>AUDCHF,3.315,-9.78075
+                        <br/>instrumentid,basesymbol,derivedsymbol,symbol,lotsize,pipposition,round,instrument_type,
+                        <br/>buyrate,sellrate,spread,maxpipsupdate,marginrequirement,trading_period
+                        <br/>110,MICROSOFT,USD,MICROSOFT,1,2,2,6,0,0,0,100000000,20,"09:31-16:00 [Monday 09:31, Friday 16:00]"
+                        <br/>111,NETFLIX,USD,NETFLIX,1,2,2,6,0,0,0,100000000,20,"09:31-16:00 [Monday 09:31, Friday 16:00]"
+                        <br/>112,NIKE,USD,NIKE,1,2,2,6,0,0,0,100000000,20,"09:31-16:00 [Monday 09:31, Friday 16:00]"
                         <br/>
-                        <br/>First line needs to be the header fields (in any order), all fields are required
+                        <br/>First line needs to be the header fields (in any order), all fields listed are required
                         <br/>
                         <br/>
                     </label>
@@ -37,9 +38,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"
-                                ng-disabled="processing || !instrumentsCSVFile"
-                                ng-click="processSubmitInstrumentsDialog()">
+                        <button type="submit" class="btn btn-primary" ng-disabled="processing || !instrumentsCSVFile" ng-click="processSubmitInstrumentsDialog()">
                             Upload
                         </button>
         
