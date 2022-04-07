@@ -116,7 +116,7 @@ function doUpdateTradePeriods($scope, $http) {
             for (var i = 0; i < items.length ;i++) {
                 var item = items[i];
 
-                var instrument = $scope.$root.instruments.getById(item.instrumentid);
+                var instrument = $scope.$root.instruments.getByName(item.instrumentid);
 
                 if (instrument) {
                     instrument.tradingperiod = item.tradingperiod;

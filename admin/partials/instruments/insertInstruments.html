@@ -15,16 +15,19 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form" novalidate enctype="multipart/form-data">
                     <label for="csvfile">
-                        Format for Bulk Instrument Upload CSV File
-                        <br/>Example:
+                        <h2>Fields Required for Bulk Instrument Upload CSV File</h2>
+                        <h3> MUST BE A CSV FILE</h3>
                         <br/>
-                        <br/>instrumentid,basesymbol,derivedsymbol,symbol,lotsize,pipposition,round,instrument_type,
-                        <br/>buyrate,sellrate,spread,maxpipsupdate,marginrequirement,trading_period
-                        <br/>110,MICROSOFT,USD,MICROSOFT,1,2,2,6,0,0,0,100000000,20,"09:31-16:00 [Monday 09:31, Friday 16:00]"
-                        <br/>111,NETFLIX,USD,NETFLIX,1,2,2,6,0,0,0,100000000,20,"09:31-16:00 [Monday 09:31, Friday 16:00]"
-                        <br/>112,NIKE,USD,NIKE,1,2,2,6,0,0,0,100000000,20,"09:31-16:00 [Monday 09:31, Friday 16:00]"
+                        <br/>basesymbol,derivedsymbol,symbol,lotsize,pipposition,round,
+                        <br/>instrument_type,buyrate,sellrate,spread,maxpipsupdate,marginrequirement,
+                        <br/>trading_period,interestbuy,interestsell,comment,exchangecountrycode,
+                        <br/>sector,exchangeticker,orderminamount,orderminincrement,ordermaxamount,
+                        <br/>stpminamount,stpmaxamount,accountopencommission,positionlimits,
+                        <br/>unit_marginrequirement_list
                         <br/>
-                        <br/>First line needs to be the header fields (in any order), all fields listed are required
+                        <br/>The format for the unit_marginrequirement_list must be (quotes are necessary) -> "unit_name:margin,unit_name:margin", this designates the margin requirement for each unit by name
+                        <br/>
+                        <br/>First line of csv needs to be the header fields (in any order), all fields listed are required
                         <br/>
                         <br/>
                     </label>

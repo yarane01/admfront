@@ -26,10 +26,6 @@ var instrumentList = {
                     } else {
                         target.fileContent = target.fileContent + "\\n" + allTextLines[i].replaceAll('"', '\\"');
                     }
-
-                    if(i == 0) {
-                        continue; //ignore headers
-                    }
                 }
 
                 successCallBack();
