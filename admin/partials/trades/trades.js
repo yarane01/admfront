@@ -386,6 +386,13 @@ tradesControllers.controller('TradesCtrl',
                                             },
 
                                             {
+                                                title: "Close",
+                                                action: "Close",
+                                                access: access.Close,
+                                                class: 'close-link text-bold'
+                                            },
+
+                                            {
                                                 title: "Details",
                                                 action: "Details",
                                                 access: access.Details
@@ -393,18 +400,20 @@ tradesControllers.controller('TradesCtrl',
                                         ]
                                     }).html();
                             }
-
                         }
                     ]
-
                 }
             }
+
             window.actionClick = function (link) {
                 var action = $(link).data('action');
                 var id = $(link).data('id');
                 switch (action.toUpperCase()) {
                     case 'EDIT':
                         $scope.editDialog(id);
+                        break;
+                    case 'CLOSE':
+                        $scope.closeTrade(id);
                         break;
                     case 'DETAILS':
                         // basic authentication in url:
@@ -419,6 +428,22 @@ tradesControllers.controller('TradesCtrl',
                         break;
                 }
             };
+
+            $scope.closeTrade = function(id) {
+                var trade = $rootScope.trades.getById(id);
+
+                $scope.processing = false;
+                $scope.errorMessage = null;
+
+                $scope.orderrequestid = trade.openorderid;
+
+                $('#closeTradeDialog').modal();
+                document.getElementById("orderrequestid").value = trade.openorderid;
+            }
+
+            $scope.doClosePosition = function() {
+                processClosePosition($scope, $rootScope, $http);
+            }
 
             $scope.afterTableCreated = function () {
                 var table = $('#table').DataTable();
@@ -467,10 +492,11 @@ tradesControllers.controller('TradesCtrl',
             $scope.updateTrade = function () {
                 $scope.context.inprogress = true;
                 var trade = {
-                    "tradeid": $scope.trade.tradeid,
+                    "tradeid": $scope.trade.openorderid,
                     "openrate": $scope.trade.openrate,
                     "openamount": $scope.trade.openamount,
                 }
+
                 if ($scope.trade.closerate)
                     trade.closerate = $scope.trade.closerate;
                 if ($scope.trade.closeamount)
@@ -479,6 +505,7 @@ tradesControllers.controller('TradesCtrl',
                     trade.opendate = $scope.trade.opendate;
                 if ($scope.trade.closedate)
                     trade.closedate = $scope.trade.closedate;
+
                 api.updateTrade(trade, angular.extend(errorHandler($scope),
                     {
                         ok: function (response) {
@@ -492,7 +519,6 @@ tradesControllers.controller('TradesCtrl',
                     }
                 ));
             }
-
 
             $scope.Refresh = function () {
                 $('#table').DataTable().ajax.reload();
@@ -558,24 +584,6 @@ tradesControllers.controller('TradeCreateCtrl',
 
             var proxy = new tradeProxy($scope, $rootScope, api);
 
-            var pager;
-
-            $scope.accountFirst = function () {
-                $scope.accounts = pager.first();
-            }
-
-            $scope.accountLast = function () {
-                $scope.accounts = pager.last();
-            }
-
-            $scope.accountNext = function () {
-                $scope.accounts = pager.next();
-            }
-
-            $scope.accountPrev = function () {
-                $scope.accounts = pager.prev();
-            }
-
             $scope.$watch("context.filter", function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         pager.filter(newValue);
@@ -601,12 +609,7 @@ tradesControllers.controller('TradeCreateCtrl',
             }
 
             $scope.accountsList = $rootScope.accountslist.data;
-            pager = new Pager({
-                items: $scope.accountsList,
-                filterFields: ['accountn', 'systemid']
-            });
-            pager.filter('');
-            $scope.accounts = pager.first();
+            $scope.accounts = $scope.accountsList;
         }
-    ])
-
+    ]
+)

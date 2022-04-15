@@ -39,13 +39,16 @@ function tradeProxy(scope, rootScope, api) {
     return {
         createTrade: function (callback) {
             var trade = {
-                type: 'Market',
-                accountid: scope.order.account.systemid,
-                amount: scope.order.lots * scope.order.instrument.lotsize,
+                account: scope.order.accountn,
+                price: scope.order.price,
+                username: rootScope.portalUser.username,
+                side: scope.order.bs,
+                quantity: scope.order.lots * scope.order.instrument.lotsize,
                 symbol: scope.order.instrument.symbol
             }
-            if (scope.order.bs == 'S') trade.amount = -trade.amount;
-            if (!Number.isInteger(trade.amount)) {
+            if (scope.order.bs == 'S') 
+                trade.quantity = -trade.quantity;
+            if (!Number.isInteger(trade.quantity)) {
                 scope.context.errorMessage = 'Invalid lots value';
                 scope.context.error = true;
                 return;

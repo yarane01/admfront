@@ -2,6 +2,7 @@
     <div ng-include src="'partials/trades/edit.html'"/>
     <div ng-include src="'partials/trades/create.html'"/>
     <div ng-include src="'partials/trades/setDateFilters.html'"/>
+    <div ng-include src="'partials/trades/closeTrade.html'"/>
     <div class="alert alert-danger" ng-show="error">
         <strong>Error!</strong> {{errorMessage}}
     </div>
@@ -11,8 +12,7 @@
             <a href="javascript:"
                ng-if="access.trades.Create()"
                ng-click="createDialog()"
-               class='btn btn-primary' role='button'>Create
-            </a>
+               class='btn btn-primary' role='button'>Create Position</a>
         </div>
         <div id="rigth-group" class="pull-right">
         </div>
@@ -21,7 +21,7 @@
     <div class="panel panel-default table-wrapper">
         <div class="panel-heading">
             <div class="panel-title">
-                Trades under {{rootNodeName}}
+                Positions under {{rootNodeName}}
                 <a href='Javascript:;'
                    class="pull-right"
                    ng-click="Refresh()">

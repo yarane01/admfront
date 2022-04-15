@@ -10,7 +10,7 @@
                   role="form" novalidate>
                 <div class="modal-header">
                     <h4 class="modal-title"><i class="fa fa-edit fa-2x"></i>
-                        <strong>Edit trade {{trade.tradeid}}</strong>
+                        <strong>Edit trade {{trade.openorderid}}</strong>
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -114,6 +114,7 @@
                                    ng-model="trade.openamount"
                                    name="openamount"
                                    integer
+                                   disabled
                                    class="form-control">
                         </div>
                     </div>

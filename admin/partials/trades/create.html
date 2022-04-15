@@ -68,6 +68,22 @@
                                    class="form-control">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="price"
+                               class="col-lg-3 control-label">
+                            Price (Optional)</label>
+
+                        <div class="col-lg-2">
+                            <input type="text" id="price"
+                                   ng-model="order.price"
+                                   name="price"
+                                   float
+                                   optional
+                                   class="form-control">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
                             <label class="btn btn-default btn-sm bs-button"
@@ -89,78 +105,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-1 col-sm-10 border"
-                             style="padding: 20px">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Account</label>
-
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control"
-                                           ng-model="order.account.accountn"
-                                           name="account"
-                                           required
-                                           disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    Filter</label>
-
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control"
-                                           ng-model="context.filter">
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="btn-group btn-group-justified">
-                                        <a href="Javascript:;" class="btn btn-custom"
-                                           ng-click="accountFirst()">
-                                            &lt;&lt;</a>
-                                        <a href="Javascript:;" class="btn btn-custom"
-                                           ng-click="accountPrev()">
-                                            &lt;</a>
-                                        <a href="Javascript:;" class="btn btn-custom"
-                                           ng-click="accountNext()">
-                                            &gt;</a>
-                                        <a href="Javascript:;" class="btn btn-custom"
-                                           ng-click="accountLast()">&gt;&gt;</a>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-1 col-sm-10">
-                                        <div class="border" style="margin-top: 20px; padding: 10px">
-                                            <div style="height: 200px; overflow-y: scroll;">
-                                                <dl class="dl-horizontal-wide">
-                                                    <a href=""
-                                                       ng-repeat="a in accounts">
-                                                        <dt ng-click="accountSelected(a)">
-                                                            {{a.accountn}}
-                                                        </dt>
-                                                        <dd ng-click="accountSelected(a)">
-                                                            {{a.systemid}}
-                                                        </dd>
-                                                    </a>
-                                                </dl>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <label class="col-sm-3 control-label">Account Number</label>
+                        <input type="text" id="accountn"
+                            ng-model="order.accountn"
+                            name="accountn"
+                            long
+                            required
+                            class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div style="float: left">
-                        {{hint}}
-                    </div>
-                    <button type="submit"
-                            ng-disabled="form.$invalid"
-                            class="btn btn-primary">OK
-                    </button>
-                    <button type="button" class="btn btn-warning"
-                            data-dismiss="modal">Cancel
-                    </button>
+                    <div style="float: left">{{hint}}</div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>
