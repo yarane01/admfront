@@ -609,6 +609,10 @@ function getDefaultTableProperties() {
                 opendate: false,
                 accountclosed: false
             },
+            tradeSubscriptions: {
+                id: true,
+                monthlyOpenOrders: true
+            },
             instruments: {
                 maxpipsupdate: true,
                 spread: true,

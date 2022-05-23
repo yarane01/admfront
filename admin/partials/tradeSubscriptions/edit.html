@@ -1,0 +1,34 @@
+<div id="editTradeSubscription" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal" ng-submit="updateTradeSubscription()" role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-pencil-square-o fa-2x"></i>
+                        <strong>Edit Subscription Level {{tradeSubscription.level}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">Level</label>
+                            <div class="col-sm-2">
+                                <input ng-model="tradeSubscription.level" name="level" value="{{tradeSubscription.level}}" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">Monthly Open Order Limit</label>
+                            <div class="col-sm-2">
+                                <input ng-model="tradeSubscription.monthlyOpenOrders" name="monthlyOpenOrders" type="number" class="form-control" float required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Submit</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

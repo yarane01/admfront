@@ -82,6 +82,9 @@ accountsControllers.controller('AccountsCtrl',
                             case "accountclosed":
                                 orderCol = 'accountclosed';
                                 break;
+                            case "tradeSubLevel":
+                                orderCol = 'tradeSubLevel';
+                                break;
                         }
 
                         var reqFilters = [];
@@ -272,6 +275,11 @@ accountsControllers.controller('AccountsCtrl',
                             name: "accountclosed"
                         },
                         {
+                            "data": "tradeSubLevel",
+                            save: true,
+                            name: "tradeSubLevel"
+                        },
+                        {
                             "data": null,
                             "sortable": false,
                             "class": "actions",
@@ -294,6 +302,15 @@ accountsControllers.controller('AccountsCtrl',
                                                 action: "Settings",
                                                 access: access.Settings,
                                                 class: 'settings-link'
+                                            },
+                                            {
+                                                type: "divider"
+                                            },
+                                            {
+                                                title: "Change Subscription",
+                                                action: "changesubscription",
+                                                access: access.Edit,
+                                                class: 'edit-link text-bold'
                                             },
                                             {
                                                 type: "divider"
@@ -391,7 +408,6 @@ accountsControllers.controller('AccountsCtrl',
                 return ($rootScope.accounts.state.externalFilter.name &&
                 (!$rootScope.accounts.state.externalFilter.applied));
             }
-
 
             $scope.afterTableCreated = function () {
                 var table = $('#table').DataTable();
@@ -497,6 +513,9 @@ accountsControllers.controller('AccountsCtrl',
                         break;
                     case "TRADE":
                         $scope.createTradeDialog(id);
+                        break;
+                    case "CHANGESUBSCRIPTION":
+                        $scope.updateAccountSubscriptionTier(id);
                         break;
                     case "ORDER":
                         $scope.createOrderDialog(id);
@@ -732,7 +751,6 @@ accountsControllers.controller('AccountsCtrl',
                     )
             }
 
-
             $scope.adjustAccount = function () {
                 $scope.context.inprogress = true;
                 api.adjustAccount($scope.adjust, angular.extend(errorHandler($scope),
@@ -821,6 +839,34 @@ accountsControllers.controller('AccountsCtrl',
                         }
                     )
             }
+
+            $scope.updateAccountSubscriptionTier = function(id) {
+                $scope.account = $.extend({}, $rootScope.accounts.getById(id));
+
+                beforeDialog($scope);
+                setFocusOnModalWindow('editAccountSubscription', 'accountSubscription-edit');
+
+                $scope.$apply();
+                $('#editAccountSubscription').modal();
+            };
+
+            $scope.setAccountSubscriptionTier = function() {
+                $.ajax(apiurl + '/tradeSubscriptions/account/' + $scope.account.systemid, {
+                    data: "{\"tier\":\"" + $scope.account.tradeSubLevel + "\"}",
+                    contentType: 'application/json',
+                    type: 'PUT'
+                }).done(function () {
+                    $rootScope.updateTradeSubscriptions().then(function () {
+                        $("#editAccountSubscription").modal('hide').on('hidden.bs.modal',
+                            function () {
+                                $scope.Refresh();
+                            }
+                        );
+                    });
+                }).error(function () {
+                    alert("Received error while updating account trading subscription.");
+                });
+            };
 
             $scope.$on("$destroy", function () {
                 saveState('#table', $rootScope.accounts.state);

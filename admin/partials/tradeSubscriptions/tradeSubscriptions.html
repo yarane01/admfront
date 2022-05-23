@@ -1,0 +1,41 @@
+<div ng-controller="TradeSubscriptionsCtrl">
+    <div ng-include="'partials/tradeSubscriptions/edit.html'"></div>
+    <div ng-include="'partials/tradeSubscriptions/create.html'"></div>
+
+    <div class="top-buttons" ng-show="context.dataloaded">
+        <div class="btn-group">
+            <a href="javascript:;" ng-click="createDialog()" class='btn btn-primary' role='button'>Create</a>
+        </div>
+        <div id="rigth-group" class="pull-right">
+            <a class="export-placeholder"></a>
+        </div>
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">Trade Subscriptions
+                <a href='Javascript:;' class="pull-right" ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-include="'partials/loading.html'"></div>
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="tradesubscriptionstable" class="table table-hover tradeSubscriptions" width="100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Monthly Open Orders</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

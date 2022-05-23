@@ -11,6 +11,7 @@
     <div ng-include src="'partials/accounts/history.html'"/>
     <div ng-include src="'partials/accounts/createTrade.html'"/>
     <div ng-include src="'partials/accounts/createOrder.html'"/>
+    <div ng-include src="'partials/accounts/editSubscription.html'"/>
     <div class="alert alert-danger" ng-show="error">
         <strong>Error!</strong> {{errorMessage}}
     </div>
@@ -80,6 +81,7 @@
                             <th title="Usable margin">Usable</th>
                             <th>Open</th>
                             <th title="Closed">Cls</th>
+                            <th title="tradeSubLevel">Subscription Tier</th>
                             <th></th>
                         </tr>
                         </thead>

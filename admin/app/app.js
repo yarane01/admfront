@@ -19,6 +19,7 @@ var app = angular.module("portal", [
     'groupsControllers',
     'usersControllers',
     'accountsControllers',
+    'tradeSubscriptionsControllers',
     'settingsControllers',
     'instrumentsControllers',
     'dashboardControllers',
@@ -401,6 +402,34 @@ var app = angular.module("portal", [
             }
         }
     };
+    $rootScope.tradeSubscriptions = {
+        data: [],
+        valid: true,
+        upToDate: false,
+        state: createTableState(),
+        init: function(list) {
+            $rootScope.tradeSubscriptions.data = [];
+            list.forEach(function(s, i) {    
+                $rootScope.tradeSubscriptions.data.push(s);
+            })
+        },
+        getById: function (id) {
+            for (var i = 0; i < this.data.length; i++) {
+                var tradeSubscription = this.data[i];
+
+                if (tradeSubscription.level == id)
+                    return tradeSubscription;
+            }
+
+            return undefined;
+        },
+        getEmpty: function() {
+            return {
+                level: -1,
+                monthlyOpenOrders: -1
+            }
+        }
+    };
     $rootScope.instruments = {
         data: [],
         valid: true,
@@ -604,7 +633,8 @@ var app = angular.module("portal", [
                 $http.get(apiurl + '/groups'),
                 $http.get(adminbackendurl + '/instruments'),
                 $http.get(apiurl + '/units'),
-                $http.get(apiurl + '/valuetypes')
+                $http.get(apiurl + '/valuetypes'),
+                $http.get(apiurl + '/tradeSubscriptions')
                 //$http.get(apiurl)
                 //$http.get(apiurl + '/patches'),
             ]).then(
@@ -624,9 +654,13 @@ var app = angular.module("portal", [
                     var r = responses[3].data;
                     valuetypes = r.payload[0];
 
+                    r = responses[4].data;
+                    $rootScope.tradeSubscriptions.data = r.payload[0];
+
                     $rootScope.groups.upToDate = true;
                     $rootScope.instruments.upToDate = true;
                     $rootScope.units.upToDate = true;
+                    $rootScope.tradeSubscriptions.upToDate = true;
                     $rootScope.units.fillParents();
                     $rootScope.groups.fillParents();
 
@@ -799,6 +833,13 @@ var app = angular.module("portal", [
         return $http.get(apiurl + '/orders/pending/count')
             .then(function (response) {
                 $rootScope.orders.total = response.data.payload[0].count;
+            });
+    };
+
+    $rootScope.updateTradeSubscriptions = function () {
+        return $http.get(apiurl + '/tradeSubscriptions')
+            .then(function (response) {
+                $rootScope.tradeSubscriptions.data = response.data.payload[0];
             });
     };
 
@@ -1022,6 +1063,39 @@ var app = angular.module("portal", [
                     return true;
                 }
             },
+            tradeSubscriptions: {
+                Page: function () {
+                    return (!user.isaccessadmin)
+                },
+                Create: function () {
+                    return user.issystemmanager ||
+                        user.isaccessadmin ||
+                        user.ismanager;
+                },
+                Edit: function () {
+                    return user.issystemmanager ||
+                        user.isaccessadmin ||
+                        user.ismanager;
+                },
+                Delete: function () {
+                    return user.issystemmanager ||
+                        user.isaccessadmin ||
+                        user.ismanager;
+                },
+                Settings: function () {
+                    return user.issystemmanager ||
+                        user.issettingmanager;
+                },
+                Exposure: function () {
+                    return true;
+                },
+                Money: function () {
+                    return true;
+                },
+                Reports: function () {
+                    return true;
+                }
+            },
             trades: {
                 Create: function () {
                     return user.isdealer;
@@ -1192,6 +1266,7 @@ app.config(['$locationProvider', '$controllerProvider', '$routeProvider', '$anim
             .when('/orders', { templateUrl: 'partials/orders/orders.html' })
             .when('/stp', { templateUrl: 'partials/stp/stp.html' })
             .when('/accounts', { templateUrl: 'partials/accounts/accounts.html' })
+            .when('/tradeSubscriptions', { templateUrl: 'partials/tradeSubscriptions/tradeSubscriptions.html' })
             .when('/instruments', { templateUrl: 'partials/instruments/instruments.html' })
             .when('/feed', { templateUrl: 'partials/feed/panels.html' })
             .when('/feedsubscription', { templateUrl: 'partials/feed/subscription.html' })

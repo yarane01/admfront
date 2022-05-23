@@ -1,0 +1,28 @@
+<div id="editAccountSubscription" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal" ng-submit="setAccountSubscriptionTier()" role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fa fa-pencil-square-o fa-2x"></i>
+                        <strong>Change Account Subscription Tier</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">Subscription Tier</label>
+                            <div class="col-sm-2">
+                                <input ng-model="account.tradeSubLevel" name="tradeSubLevel" type="number" class="form-control" float required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Submit</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
