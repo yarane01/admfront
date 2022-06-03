@@ -86,30 +86,6 @@ tradesControllers.controller('TradesCtrl',
                             case "openclientorderid":
                                 orderCol = "openclientorderid";
                                 break;
-                            case "openbankorderid":
-                                orderCol = "openbankorderid";
-                                break;
-                            case "closeorderid":
-                                orderCol = "closeorderid";
-                                break;
-                            case "closeclientorderid":
-                                orderCol = "closeclientorderid";
-                                break;
-                            case "closebankorderid":
-                                orderCol = "closebankorderid";
-                                break;
-                            case "closebank":
-                                orderCol = "closebank";
-                                break;
-                            case "openbank":
-                                orderCol = "openbank";
-                                break;
-                            case "openbanktradeid":
-                                orderCol = "openbanktradeid";
-                                break;
-                            case "closebanktradeid":
-                                orderCol = "closebanktradeid";
-                                break;
                         }
 
                         var reqFilters = [];
@@ -165,30 +141,6 @@ tradesControllers.controller('TradesCtrl',
                                         break;
                                     case "openclientorderid":
                                         reqFilters.push("openclientorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "openbankorderid":
-                                        reqFilters.push("openbankorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "closeorderid":
-                                        reqFilters.push("closeorderid='" + search + "'");
-                                        break;
-                                    case "closeclientorderid":
-                                        reqFilters.push("closeclientorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "closebankorderid":
-                                        reqFilters.push("closebankorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "openbank":
-                                        reqFilters.push("openbank LIKE '%" + search + "%'");
-                                        break;
-                                    case "closebank":
-                                        reqFilters.push("closebank LIKE '%" + search + "%'");
-                                        break;
-                                    case "openbanktradeid":
-                                        reqFilters.push("openbanktradeid LIKE '%" + search + "%'");
-                                        break;
-                                    case "closebanktradeid":
-                                        reqFilters.push("closebanktradeid LIKE '%" + search + "%'");
                                         break;
                                 }
                             }
@@ -326,46 +278,6 @@ tradesControllers.controller('TradesCtrl',
                             name: "openclientorderid"
                         },
                         {
-                            "data": "openbankorderid",
-                            save: true,
-                            name: "openbankorderid"
-                        },
-                        {
-                            "data": "closeorderid",
-                            save: true,
-                            name: "closeorderid"
-                        },
-                        {
-                            "data": "closeclientorderid",
-                            save: true,
-                            name: "closeclientorderid"
-                        },
-                        {
-                            "data": "closebankorderid",
-                            save: true,
-                            name: "closebankorderid"
-                        },
-                        {
-                            "data": "openbank",
-                            save: true,
-                            name: "openbank"
-                        },
-                        {
-                            "data": "closebank",
-                            save: true,
-                            name: "closebank"
-                        },
-                        {
-                            "data": "openbanktradeid",
-                            save: true,
-                            name: "openbanktradeid"
-                        },
-                        {
-                            "data": "closebanktradeid",
-                            save: true,
-                            name: "closebanktradeid"
-                        },
-                        {
                             "data": null,
                             "sortable": false,
                             //"class": "actions",
@@ -377,22 +289,27 @@ tradesControllers.controller('TradesCtrl',
                                     {
                                         id: data.tradeid,
                                         items: [
-
                                             {
                                                 title: "Edit",
                                                 action: "Edit",
                                                 access: access.Edit,
                                                 class: 'edit-link text-bold'
-                                            },
-
-                                            {
+                                            },{
                                                 title: "Close",
                                                 action: "Close",
                                                 access: access.Close,
                                                 class: 'close-link text-bold'
-                                            },
-
-                                            {
+                                            },{
+                                                title: "Add Take Profit",
+                                                action: "addtp",
+                                                access: access.Close,
+                                                class: 'tp-link text-bold'
+                                            },{
+                                                title: "Add Stop Loss",
+                                                action: "addsl",
+                                                access: access.Close,
+                                                class: 'sl-link text-bold'
+                                            },{
                                                 title: "Details",
                                                 action: "Details",
                                                 access: access.Details
@@ -425,6 +342,10 @@ tradesControllers.controller('TradesCtrl',
                         }
                         url = url + '/tradeaudit?tradeid=' + id;
                         openInNewTab(url);
+                        break;
+                    case 'ADDTP':
+                        break;
+                    case 'ADDSL':
                         break;
                 }
             };
