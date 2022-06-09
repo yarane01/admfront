@@ -145,20 +145,11 @@ tradesControllers.controller('TradesCtrl',
                                 }
                             }
                         }
-                        if (dateFilter != "") reqFilters.push(dateFilter);
 
-                        /*
-                         var reqParams = {
-                         n1: data.start + 1,
-                         n2: data.start + data.length,
-                         sortcolumn: orderCol + ' ' + data.order[0].dir
-                         };
-                         var countFilter = {filter: ''};
-                         if (reqFilters.length > 0) {
-                         reqParams.filter = reqFilters.join(' AND ');
-                         countFilter.filter = reqParams.filter;
-                         }
-                         */
+                        if (dateFilter != "") {
+                            reqFilters.push(dateFilter);
+                        }
+
                         var start = data.start + 1;
                         var end = data.start + data.length;
                         var request = 'n1=' + start + '&n2=' + end + '&sortcolumn=' +
@@ -344,11 +335,88 @@ tradesControllers.controller('TradesCtrl',
                         openInNewTab(url);
                         break;
                     case 'ADDTP':
+                        $scope.addTP(id);
                         break;
                     case 'ADDSL':
+                        $scope.addSL(id);
                         break;
                 }
             };
+
+            $scope.addTP = function(id) {
+                beforeDialog($scope);
+                $scope.trade = angular.extend({}, $rootScope.trades.getById(id));
+                $scope.trade.conditionaltype = "TP";
+                $scope.conditionaltype = "Take Profit";
+                $scope.tradeNotClosed = $scope.trade.closerate == null;
+                $scope.$apply(function () {
+                        $('#conditionalOrder').modal().on('shown.bs.modal',
+                            function () {
+                                
+                            }
+                        );
+                    }
+                );
+            }
+
+            $scope.addSL = function(id) {
+                beforeDialog($scope);
+                $scope.trade = angular.extend({}, $rootScope.trades.getById(id));
+                $scope.trade.conditionaltype = "SL";
+                $scope.conditionaltype = "Stop Loss";
+                $scope.tradeNotClosed = $scope.trade.closerate == null;
+                $scope.$apply(function () {
+                        $('#conditionalOrder').modal().on('shown.bs.modal',
+                            function () {
+                                
+                            }
+                        );
+                    }
+                );
+            }
+
+            $scope.processConditional = function() {
+                if($scope.trade.conditionaltype == "TP" || $scope.trade.conditionaltype == "SL") {
+                    var req = {
+                        method: 'POST',
+                        url: apiurl + '/position/conditionalorder',
+                        data: {
+                            conditionaltype: $scope.trade.conditionaltype,
+                            price: $scope.trade.conditionalRate,
+                            orderRequestId: $scope.trade.openorderid
+                        }
+                    };
+                
+                    $http(req)
+                    .then(
+                        function (successResponse) {
+                            if (successResponse.data.status == 'OK') {
+                                $('#conditionalOrder').modal('hide');
+                                confirm("Successfully created conditional order " + successResponse.data.payload[0]);
+                            } else {
+                                confirm('Error uploading data: ' + successResponse.data.payload[0]);
+                            }
+                        },
+                        function (errorResponse) {
+                            var errorMessage = null;
+                
+                            if (errorResponse.data.payload && (errorResponse.data.payload.length > 0)) {
+                                errorMessage = 'Error uploading data: ' + errorResponse.data.payload[0];
+                            } else {
+                                errorMessage = 'Error uploading data';
+                            }
+                
+                            confirm(errorMessage);
+                        }
+                    )
+                    .catch(function (response) {
+                        confirm('Error uploading data');
+                    });
+                } else {
+                    $('#conditionalOrder').modal('hide');
+                    confirm("Invalid conditional type provided");
+                }
+            }
 
             $scope.closeTrade = function(id) {
                 var trade = $rootScope.trades.getById(id);

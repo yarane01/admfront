@@ -1,0 +1,27 @@
+<div id="conditionalOrder" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <form name="form" class="form-horizontal" ng-submit="processConditional()" role="form" novalidate>
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="fa fa-edit fa-2x"></i>
+                        <strong>Add {{conditionaltype}} to {{trade.openorderid}}</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-include src="'partials/processing.html'"/>
+                    <div class="form-group">
+                        <label for="conditionalRate" class="col-lg-3 control-label">Close Price</label>
+                        <div class="col-lg-7">
+                            <input type="text" id="conditionalRate" ng-model="trade.conditionalRate" name="conditionalRate" float class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">OK</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
