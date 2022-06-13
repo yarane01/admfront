@@ -3,13 +3,6 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <!--
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#appMenu">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-            -->
             <span style="cursor: pointer"
                   ng-click="showAboutWin()"
                   class="brand"><img src='images/logo.png'/>
@@ -43,11 +36,6 @@
                                 ng-if="access.riskmanagement.Page()">
                                 <a href="#/riskmanagement">Risk Management</a>
                             </li>
-<!--
-                            <li class="hidden-lg" ng-if="!config.production">
-                                <a href="#/biinfo">BI Info</a>
-                            </li>
--->
                             <li class="hidden-lg"
                                 ng-if="access.dashboard.Logs()">
                                 <a href="#/logs">Logs</a>
@@ -62,24 +50,23 @@
                     </li>
                     <li class="dropdown dropdown-hover"
                         ng-show="initialized">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Tickets
-                            <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">Market<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li ng-if="access.trades.Page()">
                                 <a href="#/trades">Positions</a>
                             </li>
                             <li ng-if="access.orders.Page()">
-                                <a href="#/orders">Orders</a>
+                                <a href="#/orders">Pending Orders</a>
                             </li>
-<!--
                             <li ng-if="access.orders.Page()">
-                                <a ng-click="OpenStpTransactionMonitor()"
-                                   href="Javascript:;">STP Transaction monitor</a>
+                                <a href="#/corpActions">Historical Positions</a>
                             </li>
--->
-                            <!--<li ng-if="access.orders.Page()">
-                                <a href="#/stp">STP Transactions</a>
-                            </li>-->
+                            <li ng-if="access.orders.Page()">
+                                <a href="#/corpActions">Historical Orders</a>
+                            </li>
+                            <li ng-if="access.orders.Page()">
+                                <a href="#/corpActions">Corporate Actions</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown dropdown-hover"
@@ -88,10 +75,10 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li ng-if="access.feed.Page()">
-                                <a href="#/feed">Live feed</a>
+                                <a href="#/feed">Live Feed</a>
                             </li>
                             <li ng-if="access.feed.Subscription()">
-                                <a href="#/feedsubscription">Instrument subscription</a>
+                                <a href="#/feedsubscription">Instrument Subscription</a>
                             </li>
                         </ul>
                     </li>
@@ -119,20 +106,13 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href=""
-                               data-toggle="popover"
-                               data-trigger="hover"
-                               data-html="true"
-                               data-placement="left"
-                               data-content="{{getPortalUserRolesList()}}">
-                                Roles
-                            </a>
+                            <a href="" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="left" data-content="{{getPortalUserRolesList()}}">Roles</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="Javascript:" ng-show="dropdownMouseOpen" ng-click="disableDropdownHover()"><i
-                                class="fa fa-check"></i> Auto open menus</a></li>
+                                class="fa fa-check"></i> Auto Open Menus</a></li>
                         <li><a href="Javascript:" ng-show="!dropdownMouseOpen" ng-click="enableDropdownHover()"><i
-                                class="fa fa-ban"></i> Auto open menus</a></li>
+                                class="fa fa-ban"></i> Auto Open Menus</a></li>
                         <li><a href="#/logout"><i class="fa fa-sign-out"></i> Logout </a></li>
                     </ul>
                 </li>
