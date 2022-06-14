@@ -40,7 +40,6 @@ tradesControllers.controller('TradesCtrl',
                         $(row).attr("id", data.tradeid);
                     },
                     "ajax": function (data, callback, settings) {
-
                         var orderCol;
                         var index = data.order[0].column;
                         switch (settings.aoColumns[index].name) {
@@ -85,6 +84,18 @@ tradesControllers.controller('TradesCtrl',
                                 break;
                             case "openclientorderid":
                                 orderCol = "openclientorderid";
+                                break;
+                            case "slId":
+                                orderCol = 'sl_id';
+                                break;
+                            case "slPrice":
+                                orderCol = 'sl_price';
+                                break;
+                            case "tpId":
+                                orderCol = "tp_id";
+                                break;
+                            case "tpPrice":
+                                orderCol = "tp_price";
                                 break;
                         }
 
@@ -176,6 +187,8 @@ tradesControllers.controller('TradesCtrl',
                                     $rootScope.trades.data = response[0].data.payload[0];
                                     var filtered = response[1].data.payload[0].count;
 
+                                    console.log("Got here");
+
                                     callback({
                                             "recordsTotal": $rootScope.trades.total,
                                             "recordsFiltered": filtered,
@@ -185,6 +198,8 @@ tradesControllers.controller('TradesCtrl',
                                     setTableActionsPosHandler('table');
                                     if ($rootScope.trades.state.selected.length > 0)
                                         selectRow('#table', $rootScope.trades.state.selected[0]);
+
+                                    console.log("Finished");
                                 }
                                 else {
                                     $scope.errorMessage = response[0].data.payload[0];
@@ -267,6 +282,26 @@ tradesControllers.controller('TradesCtrl',
                             "data": "openclientorderid",
                             save: true,
                             name: "openclientorderid"
+                        },
+                        {
+                            "data": "slId",
+                            save: true,
+                            name: "slId"
+                        },
+                        {
+                            "data": "slPrice",
+                            save: true,
+                            name: "slPrice"
+                        },
+                        {
+                            "data": "tpId",
+                            save: true,
+                            name: "tpId"
+                        },
+                        {
+                            "data": "tpPrice",
+                            save: true,
+                            name: "tpPrice"
                         },
                         {
                             "data": null,

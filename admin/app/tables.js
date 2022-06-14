@@ -641,14 +641,12 @@ function getDefaultTableProperties() {
                 closedate: true,
                 openorderid: true,
                 openclientorderid: true,
-                openbankorderid: true,
                 closeorderid: true,
                 closeclientorderid: true,
-                closebankorderid: true,
-                openbank: true,
-                closebank: true,
-                openbanktradeid: true,
-                closebanktradeid: true
+                slId: true,
+                slPrice: true,
+                tpId: true,
+                tpPrice: true
             },
             orders: {
                 orderid: true,
