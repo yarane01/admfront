@@ -25,6 +25,7 @@ var app = angular.module("portal", [
     'hierarchyControllers',
     'tradesControllers',
     'ordersControllers',
+    'corporateActionsControllers',
     'stpControllers',
     'miscControllers'
 ]).run(function ($rootScope,
@@ -1201,6 +1202,7 @@ app.config(['$locationProvider', '$controllerProvider', '$routeProvider', '$anim
             .when('/logs', { templateUrl: 'partials/logs/logs.html' })
             .when('/debug', { templateUrl: 'partials/settings/settingnodes.html' })
             .when('/healthcheck', { templateUrl: 'partials/healthcheck.html' })
+            .when('/corpActions', { templateUrl: 'partials/corpactions/corpactions.html' })
             .otherwise({ redirectTo: '/' });
     }
 ]);
