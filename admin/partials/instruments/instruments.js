@@ -178,6 +178,11 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             name: "exchangeTicker"
                         },
                         {
+                            "data": "minTier",
+                            save: true,
+                            name: "minTier"
+                        },
+                        {
                             "data": null,
                             "sortable": false,
                             save: false,
@@ -210,31 +215,6 @@ instrumentsControllers.controller('InstrumentsCtrl',
                                         }).html();
                                 }
                                 else return ""
-
-                                /*
-                                 var a = $('<a>', {
-                                 href: "Javascript:;",
-                                 text: "Edit",
-                                 class: "btn btn-default btn-sm edit-link"
-                                 //'data-id': data.instrumentid,
-                                 //'onclick': 'editClick(this)'
-                                 });
-                                 if (access.Edit()) {
-                                 a.attr('data-id', data.instrumentid);
-                                 a.attr('onclick', 'editClick(this)');
-
-                                 }
-                                 else {
-                                 a.addClass('not-active');
-                                 }
-
-                                 var i = $('<i class="fa fa-edit" style="font-size: large; width: 24px">');
-
-                                 i.prependTo(a);
-                                 var div = $('<div>');
-                                 a.appendTo(div);
-                                 return div.html();
-                                 */
                             }
                         }
                     ]
@@ -458,8 +438,7 @@ instrumentsControllers.controller('InstrumentsCtrl',
             };
 
             $scope.editDialog = function (id) {
-                $scope.instrument = $.extend({},
-                    $rootScope.instruments.getById(id));
+                $scope.instrument = $.extend({}, $rootScope.instruments.getById(id));
                 beforeDialog($scope);
                 setFocusOnModalWindow('editInstrument', 'instrument-edit');
                 $scope.$apply();
@@ -540,21 +519,24 @@ instrumentsControllers.controller('InstrumentsCtrl',
             };
 
             $scope.submitInstrument = function () {
-                //ProcessSpiner.showSpiner();
-                //$scope.currentItem = $scope.instrument.symbol;
                 $scope.context.inprogress = true;
                 submitInstrument($scope.instrument)
                     .then(
                         function () {
                             //$scope.clearAllFilters();
-                            $rootScope.instruments.state.externalFilter.applied = false;
-                            $rootScope.instruments.state.externalFilter.name = undefined;
+                            //$rootScope.instruments.state.externalFilter.applied = false;
+                            //$rootScope.instruments.state.externalFilter.name = undefined;
                             
                             $scope.context.inprogress = false;
-                            $('#editInstrument').modal('hide');
-                            //ProcessSpiner.hide();
-                            $route.reload();
-                            SubscriptionService.refresh(true);
+                            $('#editInstrument').modal('hide').on('hidden.bs.modal', function() {
+                                $rootScope.instruments.upToDate = false;
+                                    $rootScope.updateInstruments()
+                                        .then(function () {
+                                                $route.reload();
+                                                SubscriptionService.refresh(true);
+                                            }
+                                        )
+                            });
                         },
                         function (msg) {
                             $scope.context.inprogress = false;
@@ -706,22 +688,6 @@ instrumentsControllers.controller('InstrumentsCtrl',
             };
 
             $scope.Refresh = function () {
-                /*
-                 $('#table_processing').css('display', 'block');
-                 $rootScope.instruments.upToDate = false;
-                 $rootScope.updateInstruments()
-                 .then(function () {
-                 if ($rootScope.access.instruments.Edit()) {
-                 getRootSettings()
-                 .then(function () {
-                 $('#table_processing').css('display', 'none');
-                 })
-                 }
-                 else {
-                 $('#table_processing').css('display', 'none');
-                 }
-                 })
-                 */
                 $rootScope.instruments.upToDate = false;
                 $rootScope.updateInstruments()
                     .then(function () {

@@ -1,13 +1,7 @@
-<div id="editInstrument"
-     class="modal fade"
-     role="dialog"
-     data-backdrop="static"
-     aria-hidden="true">
+<div id="editInstrument" class="modal fade" role="dialog" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="padding: 10px">
-            <form name="form" class="form-horizontal"
-                  ng-submit="submitInstrument()"
-                  role="form" novalidate>
+            <form name="form" class="form-horizontal" ng-submit="submitInstrument()" role="form" novalidate>
                 <div class="modal-header">
                     <h4 class="modal-title"><i class="fa fa-pencil-square-o fa-2x"></i>
                         <strong>{{instrument.symbol}}</strong>
@@ -15,27 +9,6 @@
                 </div>
                 <div class="modal-body">
                     <div ng-include src="'partials/processing.html'"/>
-                    <!--
-                                        <div class="alert alert-danger"
-                                             ng-show="form.maxpipsupdate.$error.integer ||
-                                                      form.spread.$error.integer"
-                                                >
-                                            {{invalidInteger}}
-                                        </div>
-                                        <div class="alert alert-danger"
-                                             ng-show="form.maxpipsupdate.$error.min ||
-                                             form.spread.$error.integer"
-                                                >
-                                            {{positive}}
-                                        </div>
-                                        <div class="alert alert-danger"
-                                             ng-show="form.maxpipsupdate.$error.required ||
-                                                      form.spread.$error.required"
-                                                >
-                                            {{required}}
-                                        </div>
-                    -->
-
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                             Base symbol</label>
@@ -284,19 +257,33 @@ else format must be '10:00-12:00 14:00-24:00 [Sunday 18:00, Friday 16:00]'"
                         </div>
                     </div>
                     <div class="form-group">
-                            <div mark-errors>
-                                    <label class="col-sm-2 control-label">
-                                        Comment
-                                    </label>
-        
-                                    <div class="col-sm-10">
-                                        <input ng-model="instrument.comment"
-                                               title="instrument comment "
-                                               name="comment"
-                                               type="text" class="form-control"
-                                                >
-                                    </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Min Tier Required
+                            </label>
+
+                            <div class="col-sm-2">
+                                <input ng-model="instrument.minTier"
+                                       title="instrument tier"
+                                       name="tier"
+                                       type="number" class="form-control" required>
                             </div>
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <div mark-errors>
+                                <label class="col-sm-2 control-label">
+                                    Comment
+                                </label>
+    
+                                <div class="col-sm-10">
+                                    <input ng-model="instrument.comment"
+                                            title="instrument comment "
+                                            name="comment"
+                                            type="text" class="form-control"
+                                            >
+                                </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit"
