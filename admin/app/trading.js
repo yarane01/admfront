@@ -114,11 +114,7 @@ function orderProxy(scope, rootScope, api) {
                 rate: scope.order.rate
             }
             if (scope.order.bs == 'S') trade.amount = -trade.amount;
-            if (!Number.isInteger(trade.amount)) {
-                scope.context.errorMessage = 'Invalid lots value';
-                scope.context.error = true;
-                return;
-            }
+            
             scope.context.inprogress = true;
             api.createTrade(trade, angular.extend(errorHandler(scope),
                 {
