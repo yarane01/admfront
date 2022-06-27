@@ -417,7 +417,7 @@ var app = angular.module("portal", [
             for (var i = 0; i < this.data.length; i++) {
                 var tradeSubscription = this.data[i];
 
-                if (tradeSubscription.level == id)
+                if (tradeSubscription.tier == id)
                     return tradeSubscription;
             }
 
@@ -425,7 +425,7 @@ var app = angular.module("portal", [
         },
         getEmpty: function() {
             return {
-                level: -1,
+                tier: -1,
                 monthlyOpenOrders: -1
             }
         }

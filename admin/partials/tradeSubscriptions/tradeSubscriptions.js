@@ -51,7 +51,7 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
                         }
                     },
                     createdRow: function (row, data, dataIndex) {
-                        $(row).attr("level", data.level);
+                        $(row).attr("tier", data.tier);
                         var tpCell = $('td:nth-child(5)', row);
                         tpCell.attr("monthlyOpenOrders", data.monthlyOpenOrders);
                         tpCell.tooltip({placement: "right", container: "#tradesubscriptionstable"});
@@ -62,8 +62,8 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
                     },
                     "columns": [
                         {
-                            "data": "level",
-                            "name":"level",
+                            "data": "tier",
+                            "name":"tier",
                             save: false
                         },
                         {
@@ -81,7 +81,7 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
 
                                 if (access.Edit()) {
                                     return $.fn.actionList({
-                                            id: data.level,
+                                            id: data.tier,
                                             items: [{
                                                 title: "Edit",
                                                 action: "edittradesubscription",
@@ -209,7 +209,20 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
             };
 
             $scope.editDialog = function (id) {
-                $scope.tradeSubscription = $.extend({}, $rootScope.tradeSubscriptions.getById(id));
+                $scope.tradeSubscription = undefined;
+
+                for (var i = 0; i < $rootScope.tradeSubscriptions.data.length; i++) {
+                    var tradeSubscription = $rootScope.tradeSubscriptions.data[i];
+    
+                    if (tradeSubscription.tier == id) {
+                        $scope.tradeSubscription = tradeSubscription;
+                        break;
+                    }
+                }
+
+                console.log($scope.tradeSubscription);
+
+                //$scope.tradeSubscription = $.extend({}, $rootScope.tradeSubscriptions.getById(id));
 
                 beforeDialog($scope);
                 setFocusOnModalWindow('editTradeSubscription', 'tradeSubscription-edit');
@@ -220,7 +233,7 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
 
             $scope.createTradeSubscription = function () {
                 $.ajax(apiurl + '/tradeSubscriptions', {
-                    data: "{\"monthlyOpenOrders\":\"" + $scope.tradeSubscription.monthlyOpenOrders + "\",\"subscriptionId\":\"" + $scope.tradeSubscription.level + "\"}",
+                    data: "{\"monthlyOpenOrders\":\"" + $scope.tradeSubscription.monthlyOpenOrders + "\",\"subscriptionId\":\"" + $scope.tradeSubscription.tier + "\"}",
                     contentType: 'application/json',
                     type: 'POST'
                 }).done(function () {
@@ -232,12 +245,12 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
                         );
                     });
                 }).error(function () {
-                    alert("Received error while creating trading subscription level.");
+                    alert("Received error while creating trading subscription tier.");
                 });
             };
 
             $scope.updateTradeSubscription = function () {
-                $.ajax(apiurl + '/tradeSubscriptions/' + $scope.tradeSubscription.level, {
+                $.ajax(apiurl + '/tradeSubscriptions/' + $scope.tradeSubscription.tier, {
                     data: "{\"monthlyOpenOrders\":\"" + $scope.tradeSubscription.monthlyOpenOrders + "\"}",
                     contentType: 'application/json',
                     type: 'PUT'
@@ -250,7 +263,7 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
                         );
                     });
                 }).error(function () {
-                    alert("Received error while updating trading subscription level.");
+                    alert("Received error while updating trading subscription tier.");
                 });
             };
 
@@ -264,7 +277,7 @@ tradeSubscriptionsControllers.controller('TradeSubscriptionsCtrl',
                         $scope.Refresh();
                     });
                 }).error(function () {
-                    alert("Received error while removing trading subscription level.");
+                    alert("Received error while removing trading subscription tier.");
                 });
             };
 

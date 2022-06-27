@@ -612,7 +612,7 @@ function getDefaultTableProperties() {
                 accountclosed: false
             },
             tradeSubscriptions: {
-                id: true,
+                tier: true,
                 monthlyOpenOrders: true
             },
             instruments: {

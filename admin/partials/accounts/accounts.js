@@ -313,6 +313,12 @@ accountsControllers.controller('AccountsCtrl',
                                                 class: 'edit-link text-bold'
                                             },
                                             {
+                                                title: "Liquidate Account",
+                                                action: "liquidateaccount",
+                                                access: access.Edit,
+                                                class: 'edit-link text-bold'
+                                            },
+                                            {
                                                 type: "divider"
                                             },
                                             {
@@ -517,6 +523,9 @@ accountsControllers.controller('AccountsCtrl',
                     case "CHANGESUBSCRIPTION":
                         $scope.updateAccountSubscriptionTier(id);
                         break;
+                    case "LIQUIDATEACCOUNT":
+                        $scope.liquidateAccount(id);
+                        break;
                     case "ORDER":
                         $scope.createOrderDialog(id);
                         break;
@@ -530,6 +539,18 @@ accountsControllers.controller('AccountsCtrl',
                 saveState('#table', $rootScope.accounts.state);
                 $('#table').DataTable().ajax.reload(null, resetPaging);
             }
+
+            $scope.liquidateAccount = function(id) {
+                $.ajax(apiurl + '/closeAllPositions', {
+                    data: "{\"accountId\":\"" + id + "\"}",
+                    contentType: 'application/json',
+                    type: 'POST'
+                }).done(function () {
+                    alert("Account successfully liquidated.")
+                }).error(function () {
+                    alert("Unable to liquidate account.");
+                });
+            };
 
             $scope.goReports = function (id) {
                 var account = $.extend({}, getItem(id));
