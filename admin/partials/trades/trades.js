@@ -187,8 +187,6 @@ tradesControllers.controller('TradesCtrl',
                                     $rootScope.trades.data = response[0].data.payload[0];
                                     var filtered = response[1].data.payload[0].count;
 
-                                    console.log("Got here");
-
                                     callback({
                                             "recordsTotal": $rootScope.trades.total,
                                             "recordsFiltered": filtered,

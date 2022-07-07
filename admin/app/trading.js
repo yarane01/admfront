@@ -46,13 +46,6 @@ function tradeProxy(scope, rootScope, api) {
                 quantity: scope.order.lots * scope.order.instrument.lotsize,
                 symbol: scope.order.instrument.symbol
             }
-            if (scope.order.bs == 'S') 
-                trade.quantity = -trade.quantity;
-            if (!Number.isInteger(trade.quantity)) {
-                scope.context.errorMessage = 'Invalid lots value';
-                scope.context.error = true;
-                return;
-            }
             scope.context.inprogress = true;
             api.createTrade(trade, angular.extend(errorHandler(scope),
                 {
@@ -115,12 +108,6 @@ function orderProxy(scope, rootScope, api) {
                 symbol: scope.order.instrument.symbol,
                 duration: scope.order.duration,
                 rate: scope.order.rate
-            }
-            if (scope.order.bs == 'S') trade.amount = -trade.amount;
-            if (!Number.isInteger(trade.amount)) {
-                scope.context.errorMessage = 'Invalid lots value';
-                scope.context.error = true;
-                return;
             }
             scope.context.inprogress = true;
             api.createTrade(trade, angular.extend(errorHandler(scope),
