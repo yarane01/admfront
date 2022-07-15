@@ -4,13 +4,16 @@ corporateActionsControllers.controller('CorporateActionsCtrl',
     ['$q', '$rootScope', '$scope', '$http', '$route', 'api', '$timeout', 'SubscriptionService',
         function ($q, $rootScope, $scope, $http, $route, api, $timeout, SubscriptionService) {
             $scope.createCorporateAction = function() {
+                document.getElementById('loadingspinner').removeAttribute('hidden');
+                document.getElementById('corpaction_submit').setAttribute('disabled', true);
+
                 var req = {
                     method: 'POST',
-                    url: apiurl + '/position/conditionalorder',
+                    url: apiurl + '/corporateAction',
                     data: {
-                        conditionaltype: $scope.trade.conditionaltype,
-                        price: $scope.trade.conditionalRate,
-                        orderRequestId: $scope.trade.openorderid
+                        symbol:$scope.corpaction.symbol.symbol,
+                        dividend:$scope.corpaction.dividend,
+                        divisor:$scope.corpaction.divisor
                     }
                 };
             
@@ -18,11 +21,12 @@ corporateActionsControllers.controller('CorporateActionsCtrl',
                 .then(
                     function (successResponse) {
                         if (successResponse.data.status == 'OK') {
-                            $('#conditionalOrder').modal('hide');
-                            confirm("Successfully created conditional order " + successResponse.data.payload[0]);
+                            alert("Successfully processed corporate action.");
                         } else {
-                            confirm('Error uploading data: ' + successResponse.data.payload[0]);
+                            alert("Received error while creating corporate action.");
                         }
+
+                        $scope.clearAllFields();
                     },
                     function (errorResponse) {
                         var errorMessage = null;
@@ -34,31 +38,17 @@ corporateActionsControllers.controller('CorporateActionsCtrl',
                         }
             
                         confirm(errorMessage);
+                        $scope.clearAllFields();
                     }
                 )
                 .catch(function (response) {
                     confirm('Error uploading data');
                 });
-
-
-                $.ajax(apiurl + '/corporateAction', {
-                    data: {
-                        "symbol":$scope.corpaction.symbol,
-                        "dividend":$scope.corpaction.dividend,
-                        "divisor":$scope.corpaction.divisor
-                    },
-                    contentType: 'application/json',
-                    type: 'POST'
-                }).done(function () {
-                    alert("successfully processed corporate action.");
-                    $scope.clearAllFields();
-                }).error(function () {
-                    alert("Received error while creating corporate action.");
-                    $scope.clearAllFields();
-                });
             };
 
             $scope.clearAllFields = function() {
+                document.getElementById('loadingspinner').setAttribute('hidden', true);
+                document.getElementById('corpaction_submit').removeAttribute('disabled');
                 document.getElementById('corpaction_symbol').value = "";
                 document.getElementById('corpaction_dividend').value = "";
                 document.getElementById('corpaction_divisor').value = "";

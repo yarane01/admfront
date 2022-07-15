@@ -1,5 +1,7 @@
 <div ng-controller="CorporateActionsCtrl">
-    <div ng-include src="'partials/processing.html'"/>
+    <div id="loadingspinner" class="overlay" hidden="true">
+        <h4><i class="fa fa-spinner fa-spin"></i> Processing {{currentItem}} ...</h4>
+    </div>
     <div>
         <h4>
             <i class="fa fa-pencil-square-o fa-2x"></i>
@@ -9,7 +11,11 @@
     <div>
         <label class="col-sm-2 control-label">Symbol</label>
         <div class="col-sm-2">
-            <input id="corpaction_symbol" ng-model="corpaction.symbol" name="symbol" class="form-control" text required>
+            <select class='form-control'
+                    id="corpaction_symbol"
+                    ng-options="i as i.symbol for i in ::instruments.data | orderBy: 'symbol'"
+                    ng-model="corpaction.symbol">
+            </select>
         </div>
         <label class="col-sm-2 control-label">Split Amount</label>
         <div class="col-sm-5">
