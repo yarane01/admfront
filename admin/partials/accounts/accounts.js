@@ -541,15 +541,17 @@ accountsControllers.controller('AccountsCtrl',
             }
 
             $scope.liquidateAccount = function(id) {
-                $.ajax(apiurl + '/closeAllPositions', {
-                    data: "{\"accountId\":\"" + id + "\"}",
-                    contentType: 'application/json',
-                    type: 'POST'
-                }).done(function () {
-                    alert("Account successfully liquidated.")
-                }).error(function () {
-                    alert("Unable to liquidate account.");
-                });
+                if(confirm("Are you sure you want to liquidate account " + id)) {
+                    $.ajax(apiurl + '/closeAllPositions', {
+                        data: "{\"accountId\":\"" + id + "\"}",
+                        contentType: 'application/json',
+                        type: 'POST'
+                    }).done(function () {
+                        alert("Account successfully liquidated.")
+                    }).error(function () {
+                        alert("Unable to liquidate account.");
+                    });
+                }
             };
 
             $scope.goReports = function (id) {

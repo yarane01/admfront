@@ -183,6 +183,11 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             name: "minTier"
                         },
                         {
+                            "data": "wlRank",
+                            save: true,
+                            name: "wlRank"
+                        },
+                        {
                             "data": null,
                             "sortable": false,
                             save: false,
