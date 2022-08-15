@@ -196,8 +196,6 @@ tradesControllers.controller('TradesCtrl',
                                     setTableActionsPosHandler('table');
                                     if ($rootScope.trades.state.selected.length > 0)
                                         selectRow('#table', $rootScope.trades.state.selected[0]);
-
-                                    console.log("Finished");
                                 }
                                 else {
                                     $scope.errorMessage = response[0].data.payload[0];
