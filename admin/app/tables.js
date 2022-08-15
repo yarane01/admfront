@@ -423,14 +423,16 @@ function assignFilters(tableselector) {
     table.columns().every(function () {
         var that = this;
         var inputs = $('input', this.footer());
-        inputs.on('keyup change', function () {
-            if (that.search() !== this.value) {
-                that.search(this.value).draw();
-            }
-        });
-        if (inputs.length > 0)
-            if (inputs[0].value != "")
-                this.search(inputs[0].value).draw();
+        if(this.footer() != null) {
+            inputs.on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that.search(this.value).draw();
+                }
+            });
+            if (inputs.length > 0)
+                if (inputs[0].value != "")
+                    this.search(inputs[0].value).draw();
+        }
     });
 }
 
@@ -660,6 +662,18 @@ function getDefaultTableProperties() {
                 opendate: true,
                 clientorderid: true,
                 bankorderid: true
+            },
+            positionInterest: {
+                accountId: true,
+                referencenn: true,
+                description: true,
+                amount: true,
+                transDate: true,
+                linkId: true,
+                userId: true,
+                userFrom: true,
+                clientRefId: true,
+                tradeDate: true
             },
             livefeed: {
                 spread: true,
