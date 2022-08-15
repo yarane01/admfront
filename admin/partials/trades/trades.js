@@ -302,6 +302,16 @@ tradesControllers.controller('TradesCtrl',
                             name: "tpPrice"
                         },
                         {
+                            "data": "swapCharged",
+                            save: true,
+                            name: "swapCharged"
+                        },
+                        {
+                            "data": "swapTotal",
+                            save: true,
+                            name: "swapTotal"
+                        },
+                        {
                             "data": null,
                             "sortable": false,
                             //"class": "actions",
