@@ -344,6 +344,11 @@ tradesControllers.controller('TradesCtrl',
                                                 access: access.Close,
                                                 class: 'sl-link text-bold'
                                             },{
+                                                title: "Adjust Swap Total",
+                                                action: "adjustSwap",
+                                                access: access.Close,
+                                                class: 'sl-link text-bold'
+                                            },{
                                                 title: "Details",
                                                 action: "Details",
                                                 access: access.Details
@@ -383,6 +388,9 @@ tradesControllers.controller('TradesCtrl',
                     case 'ADDSL':
                         $scope.addSL(id);
                         break;
+                    case 'ADJUSTSWAP':
+                        $scope.adjustSwap(id);
+                        break;
                 }
             };
 
@@ -410,6 +418,19 @@ tradesControllers.controller('TradesCtrl',
                 $scope.tradeNotClosed = $scope.trade.closerate == null;
                 $scope.$apply(function () {
                         $('#conditionalOrder').modal().on('shown.bs.modal',
+                            function () {
+                                
+                            }
+                        );
+                    }
+                );
+            }
+
+            $scope.adjustSwap = function(id) {
+                beforeDialog($scope);
+                $scope.trade = angular.extend({}, $rootScope.trades.getById(id));
+                $scope.$apply(function () {
+                        $('#swapAdjustment').modal().on('shown.bs.modal',
                             function () {
                                 
                             }
@@ -459,6 +480,43 @@ tradesControllers.controller('TradesCtrl',
                     $('#conditionalOrder').modal('hide');
                     confirm("Invalid conditional type provided");
                 }
+            }
+
+            $scope.processSwapAdjustment = function() {
+                var req = {
+                    method: 'POST',
+                    url: apiurl + '/position/adjustSwap',
+                    data: {
+                        amount: $scope.trade.swapCharge,
+                        orderRequestId: $scope.trade.openorderid
+                    }
+                };
+
+                $http(req)
+                .then(
+                    function (successResponse) {
+                        if (successResponse.data.status == 'OK') {
+                            $('#swapAdjustment').modal('hide');
+                            confirm("Successfully adjusted swap total on position " + successResponse.data.payload[0]);
+                        } else {
+                            confirm('Error uploading data: ' + successResponse.data.payload[0]);
+                        }
+                    },
+                    function (errorResponse) {
+                        var errorMessage = null;
+            
+                        if (errorResponse.data.payload && (errorResponse.data.payload.length > 0)) {
+                            errorMessage = 'Error uploading data: ' + errorResponse.data.payload[0];
+                        } else {
+                            errorMessage = 'Error uploading data';
+                        }
+            
+                        confirm(errorMessage);
+                    }
+                )
+                .catch(function (response) {
+                    confirm('Error uploading data');
+                });
             }
 
             $scope.closeTrade = function(id) {
