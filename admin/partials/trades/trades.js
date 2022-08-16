@@ -495,7 +495,7 @@ tradesControllers.controller('TradesCtrl',
                     function (successResponse) {
                         if (successResponse.data.status == 'OK') {
                             $('#swapAdjustment').modal('hide');
-                            confirm("Successfully adjusted swap total on position " + successResponse.data.payload[0]);
+                            confirm("Successfully adjusted swap total on position " + $scope.trade.openorderid);
                         } else {
                             confirm('Error uploading data: ' + successResponse.data.payload[0]);
                         }
