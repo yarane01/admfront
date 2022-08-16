@@ -1,0 +1,45 @@
+<div ng-controller="liquidationCtrl">
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Swap History
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table" class="table table-hover liquidation" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Liquidation Date</th>
+                            <th>Used Margin</th>
+                            <th>Usable Margin</th>
+                            <th>Margin Percent</th>
+                            <th>Balance</th>
+                            <th>Total PL</th>
+                            <th>Position Count</th>
+                            <th>Comment</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <table-search name="accountId" size="5" placeholder="Acct. ID"></table-search>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

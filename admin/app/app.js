@@ -25,6 +25,7 @@ var app = angular.module("portal", [
     'tradesControllers',
     'ordersControllers',
     'positionInterestControllers',
+    'liquidationControllers',
     'corporateActionsControllers',
     'stpControllers',
     'miscControllers'
@@ -512,6 +513,20 @@ var app = angular.module("portal", [
             for (var i = 0; i < this.data.length; i++) {
                 var t = this.data[i];
                 if (t.referencen == id)
+                    return t;
+            }
+            return undefined;
+        }
+    }
+
+    $rootScope.liquidation = {
+        data: [],
+        state: createTableState(),
+        total: 0,
+        getById: function (id) {
+            for (var i = 0; i < this.data.length; i++) {
+                var t = this.data[i];
+                if (t.id == id)
                     return t;
             }
             return undefined;
@@ -1218,6 +1233,7 @@ app.config(['$locationProvider', '$controllerProvider', '$routeProvider', '$anim
             .when('/healthcheck', { templateUrl: 'partials/healthcheck.html' })
             .when('/corpActions', { templateUrl: 'partials/corpactions/corpactions.html' })
             .when('/positionInterest', {templateUrl: 'partials/positionInterest/positionInterest.html'})
+            .when('/liquidation', {templateUrl: 'partials/liquidation/liquidation.html'})
             .otherwise({ redirectTo: '/' });
     }
 ]);

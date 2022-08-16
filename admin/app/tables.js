@@ -663,6 +663,17 @@ function getDefaultTableProperties() {
                 clientorderid: true,
                 bankorderid: true
             },
+            liquidation: {
+                accountId: true,
+                liquidationDate: true,
+                usedMargin: true,
+                usableMargin: true,
+                marginPercent: true,
+                balance: true,
+                totalPl: true,
+                positionCount: true,
+                comment: true
+            },
             positionInterest: {
                 accountId: true,
                 referencenn: true,
