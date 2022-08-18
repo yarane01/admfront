@@ -178,6 +178,11 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             name: "exchangeTicker"
                         },
                         {
+                            "data": "threeDaySwap",
+                            save: true,
+                            name: "threeDaySwap"
+                        },
+                        {
                             "data": null,
                             "sortable": false,
                             save: false,
