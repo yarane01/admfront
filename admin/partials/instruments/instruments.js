@@ -183,16 +183,6 @@ instrumentsControllers.controller('InstrumentsCtrl',
                             name: "threeDaySwap"
                         },
                         {
-                            "data": "swapType",
-                            save: true,
-                            name: "swapType"
-                        },
-                        {
-                            "data": "swapPercent",
-                            save: true,
-                            name: "swapPercent"
-                        },
-                        {
                             "data": null,
                             "sortable": false,
                             save: false,
