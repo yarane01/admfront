@@ -40,35 +40,10 @@ historicalOrdersControllers.controller('histOrdCtrl',
                         var orderCol;
                         var index = data.order[0].column;
                         orderCol = settings.aoColumns[index].name;
-                        /*switch (settings.aoColumns[index].name) {
-                            case "accountId":
-                                orderCol = 'account_id';
-                                break;
-                            case "historicalPositionsDate":
-                                orderCol = 'lq_time';
-                                break;
-                            case "usedMargin":
-                                orderCol = 'used_margin';
-                                break;
-                            case "usableMargin":
-                                orderCol = 'usable_margin';
-                                break;
-                            case "marginPercent":
-                                orderCol = 'margin_percent';
-                                break;
-                            case "balance":
-                                orderCol = 'balance';
-                                break;
-                            case "totalPl":
-                                orderCol = 'total_pl';
-                                break;
-                            case "positionCount":
-                                orderCol = 'position_count';
-                                break;
-                            case "comment":
-                                orderCol = 'comment_text';
-                                break;
-                        }*/
+
+                        if(orderCol == 'orderRequestId' || orderCol == 'orderrequestid') {
+                            orderCol = 'id';
+                        }
 
                         var reqFilters = [];
                         for (var i = 0; i < data.columns.length; i++) {
@@ -76,8 +51,21 @@ historicalOrdersControllers.controller('histOrdCtrl',
                             
                             if (search != '') {
                                 switch (settings.aoColumns[i].name) {
+                                    case "orderRequestId":
+                                        reqFilters.push("id = " + search.trim().toUpperCase() + "");
+                                        break;
                                     case "accountId":
                                         reqFilters.push("account_id LIKE '%" + search.trim().toUpperCase() + "%'");
+                                        break;
+                                    case "symbol":
+                                        reqFilters.push("symbol LIKE '%" + search.trim().toUpperCase() + "%'");
+                                        break;
+                                    case "amount":
+                                        reqFilters.push("amount = " + search.trim().toUpperCase() + "");
+                                        break;
+                                    case "clientOrderId":
+                                    case "parentClientOrderId":
+                                        reqFilters.push("(clientorderid LIKE '%" + search.trim().toUpperCase() + "%' OR parentclientorderid LIKE '%" + search.trim().toUpperCase() + "%')");
                                         break;
                                 }
                             }
@@ -104,13 +92,13 @@ historicalOrdersControllers.controller('histOrdCtrl',
                             .then(function (response) {
                                 if (response[0].data.status == "OK") {
                                     $scope.error = false;
-                                    $rootScope.historicalOrders.data = response[0].data.payload[0];
-                                    var filtered = response[1].data.payload[0].count;
+                                    $rootScope.historicalOrder.data = response[0].data.payload[0];
+                                    var filtered = response[1].data.payload[0];
 
                                     callback({
-                                            "recordsTotal": $rootScope.historicalOrders.total,
+                                            "recordsTotal": $rootScope.historicalOrder.total,
                                             "recordsFiltered": filtered,
-                                            data: $rootScope.historicalOrders.data
+                                            data: $rootScope.historicalOrder.data
                                         }
                                     );
                                     setTableActionsPosHandler('table');
@@ -155,6 +143,11 @@ historicalOrdersControllers.controller('histOrdCtrl',
                         {
                             "data": "duration",
                             "name":"duration",
+                            save: false
+                        },
+                        {
+                            "data": "execution",
+                            "name":"execution",
                             save: false
                         },
                         {
@@ -226,15 +219,6 @@ historicalOrdersControllers.controller('histOrdCtrl',
                             "data": "orderSource",
                             "name":"orderSource",
                             save: false
-                        },
-                        {
-                            "data": null,
-                            "sortable": false,
-                            save: false,
-                            "class": "actions",
-                            "render": function (data, type, full, meta) {
-                                return ""
-                            }
                         }
                     ]
                 }

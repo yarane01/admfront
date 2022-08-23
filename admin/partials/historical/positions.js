@@ -40,35 +40,6 @@ historicalPositionControllers.controller('histPosCtrl',
                         var orderCol;
                         var index = data.order[0].column;
                         orderCol = settings.aoColumns[index].name;
-                        /*switch (settings.aoColumns[index].name) {
-                            case "accountId":
-                                orderCol = 'account_id';
-                                break;
-                            case "historicalPositionsDate":
-                                orderCol = 'lq_time';
-                                break;
-                            case "usedMargin":
-                                orderCol = 'used_margin';
-                                break;
-                            case "usableMargin":
-                                orderCol = 'usable_margin';
-                                break;
-                            case "marginPercent":
-                                orderCol = 'margin_percent';
-                                break;
-                            case "balance":
-                                orderCol = 'balance';
-                                break;
-                            case "totalPl":
-                                orderCol = 'total_pl';
-                                break;
-                            case "positionCount":
-                                orderCol = 'position_count';
-                                break;
-                            case "comment":
-                                orderCol = 'comment_text';
-                                break;
-                        }*/
 
                         var reqFilters = [];
                         for (var i = 0; i < data.columns.length; i++) {
@@ -117,13 +88,13 @@ historicalPositionControllers.controller('histPosCtrl',
                                 if (response[0].data.status == "OK") {
                                     $scope.error = false;
 
-                                    $rootScope.historicalPositions.data = response[0].data.payload[0];
-                                    var filtered = response[1].data.payload[0].count;
+                                    $rootScope.historicalPosition.data = response[0].data.payload[0];
+                                    var filtered = response[1].data.payload[0];
 
                                     callback({
-                                            "recordsTotal": $rootScope.historicalPositions.total,
+                                            "recordsTotal": $rootScope.historicalPosition.total,
                                             "recordsFiltered": filtered,
-                                            data: $rootScope.historicalPositions.data
+                                            data: $rootScope.historicalPosition.data
                                         }
                                     );
                                     setTableActionsPosHandler('table');
