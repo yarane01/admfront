@@ -24,6 +24,8 @@ var app = angular.module("portal", [
     'hierarchyControllers',
     'tradesControllers',
     'ordersControllers',
+    'historicalPositionControllers',
+    'historicalOrdersControllers',
     'positionInterestControllers',
     'liquidationControllers',
     'corporateActionsControllers',
@@ -527,6 +529,34 @@ var app = angular.module("portal", [
             for (var i = 0; i < this.data.length; i++) {
                 var t = this.data[i];
                 if (t.id == id)
+                    return t;
+            }
+            return undefined;
+        }
+    }
+
+    $rootScope.historicalOrder = {
+        data: [],
+        state: createTableState(),
+        total: 0,
+        getById: function (id) {
+            for (var i = 0; i < this.data.length; i++) {
+                var t = this.data[i];
+                if (t.orderrequestid == id)
+                    return t;
+            }
+            return undefined;
+        }
+    }
+
+    $rootScope.historicalPosition = {
+        data: [],
+        state: createTableState(),
+        total: 0,
+        getById: function (id) {
+            for (var i = 0; i < this.data.length; i++) {
+                var t = this.data[i];
+                if (t.orderrequestid == id)
                     return t;
             }
             return undefined;
@@ -1232,6 +1262,8 @@ app.config(['$locationProvider', '$controllerProvider', '$routeProvider', '$anim
             .when('/debug', { templateUrl: 'partials/settings/settingnodes.html' })
             .when('/healthcheck', { templateUrl: 'partials/healthcheck.html' })
             .when('/corpActions', { templateUrl: 'partials/corpactions/corpactions.html' })
+            .when('/historicalPositions', { templateUrl: 'partials/historical/positions.html' })
+            .when('/historicalOrders', { templateUrl: 'partials/historical/orders.html' })
             .when('/positionInterest', {templateUrl: 'partials/positionInterest/positionInterest.html'})
             .when('/liquidation', {templateUrl: 'partials/liquidation/liquidation.html'})
             .otherwise({ redirectTo: '/' });

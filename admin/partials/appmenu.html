@@ -58,6 +58,12 @@
                             <li ng-if="access.orders.Page()">
                                 <a href="#/orders">Pending Orders</a>
                             </li>
+                            <li ng-if="access.trades.Page()">
+                                <a href="#/historicalPositions">Historical Positions</a>
+                            </li>
+                            <li ng-if="access.orders.Page()">
+                                <a href="#/historicalOrders">Historical Orders</a>
+                            </li>
                             <li ng-if="access.orders.Page()">
                                 <a href="#/corpActions">Corporate Actions</a>
                             </li>
