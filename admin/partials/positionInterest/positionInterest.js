@@ -134,7 +134,7 @@ positionInterestControllers.controller('posIntCtrl',
                                 if (response[0].data.status == "OK") {
                                     $scope.error = false;
                                     $rootScope.positionInterest.data = response[0].data.payload[0];
-                                    var filtered = response[1].data.payload[0].count;
+                                    var filtered = response[1].data.payload[0];
 
                                     callback({
                                             "recordsTotal": $rootScope.positionInterest.total,
