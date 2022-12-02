@@ -116,6 +116,26 @@
                                 </select>
                             </div>
                         </div>
+                        <div mark-errors>
+                            <label class="col-sm-2 control-label">
+                                Day of Triple Rollover</label>
+
+                            <div class="col-sm-2">
+                                <select ng-model="instrument.threeDaySwap"
+                                       name="threeDaySwap"
+                                       type="text" class="form-control"
+                                       required>
+                                       <option value="Traded">None</option>
+                                       <option value="Sunday">Sunday</option>
+                                       <option value="Monday">Monday</option>
+                                       <option value="Tuesday">Tuesday</option>
+                                       <option value="Wednesday">Wednesday</option>
+                                       <option value="Thursday">Thursday</option>
+                                       <option value="Friday">Friday</option>
+                                       <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
