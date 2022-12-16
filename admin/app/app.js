@@ -11,7 +11,6 @@ var $appControllers;
 
 
 var app = angular.module("portal", [
-    //'ngAnimate',
     'ngRoute',
     'tableSort',
     'treeControl',
@@ -26,6 +25,9 @@ var app = angular.module("portal", [
     'hierarchyControllers',
     'tradesControllers',
     'ordersControllers',
+    'positionInterestControllers',
+    'liquidationControllers',
+    'corporateActionsControllers',
     'stpControllers',
     'miscControllers'
 ]).run(function ($rootScope,
@@ -531,6 +533,34 @@ var app = angular.module("portal", [
             }
         }
     };
+
+    $rootScope.positionInterest = {
+        data: [],
+        state: createTableState(),
+        total: 0,
+        getById: function (id) {
+            for (var i = 0; i < this.data.length; i++) {
+                var t = this.data[i];
+                if (t.referencen == id)
+                    return t;
+            }
+            return undefined;
+        }
+    }
+
+    $rootScope.liquidation = {
+        data: [],
+        state: createTableState(),
+        total: 0,
+        getById: function (id) {
+            for (var i = 0; i < this.data.length; i++) {
+                var t = this.data[i];
+                if (t.id == id)
+                    return t;
+            }
+            return undefined;
+        }
+    }
 
     $rootScope.trades = {
         data: [],
@@ -1276,6 +1306,9 @@ app.config(['$locationProvider', '$controllerProvider', '$routeProvider', '$anim
             .when('/logs', { templateUrl: 'partials/logs/logs.html' })
             .when('/debug', { templateUrl: 'partials/settings/settingnodes.html' })
             .when('/healthcheck', { templateUrl: 'partials/healthcheck.html' })
+            .when('/corpActions', { templateUrl: 'partials/corpactions/corpactions.html' })
+            .when('/positionInterest', {templateUrl: 'partials/positionInterest/positionInterest.html'})
+            .when('/liquidation', {templateUrl: 'partials/liquidation/liquidation.html'})
             .otherwise({ redirectTo: '/' });
     }
 ]);

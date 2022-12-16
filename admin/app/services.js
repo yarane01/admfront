@@ -190,7 +190,7 @@ angular.module('portal')
 
                 //Trading
                 createTrade: function (data, callbacks) {
-                    return this.post('/orders', JSON.stringify(data), callbacks);
+                    return this.post('/openposition', JSON.stringify(data), callbacks);
                 },
                 deleteOrder: function (id, callbacks) {
                     return this.delete('/orders/' + id, null, callbacks);

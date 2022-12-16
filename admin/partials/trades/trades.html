@@ -2,6 +2,9 @@
     <div ng-include src="'partials/trades/edit.html'"/>
     <div ng-include src="'partials/trades/create.html'"/>
     <div ng-include src="'partials/trades/setDateFilters.html'"/>
+    <div ng-include src="'partials/trades/closeTrade.html'"/>
+    <div ng-include src="'partials/trades/conditionalOrder.html'"/>
+    <div ng-include src="'partials/trades/swapAdjustment.html'"/>
     <div class="alert alert-danger" ng-show="error">
         <strong>Error!</strong> {{errorMessage}}
     </div>
@@ -11,8 +14,7 @@
             <a href="javascript:"
                ng-if="access.trades.Create()"
                ng-click="createDialog()"
-               class='btn btn-primary' role='button'>Create
-            </a>
+               class='btn btn-primary' role='button'>Create Position</a>
         </div>
         <div id="rigth-group" class="pull-right">
         </div>
@@ -21,7 +23,7 @@
     <div class="panel panel-default table-wrapper">
         <div class="panel-heading">
             <div class="panel-title">
-                Trades under {{rootNodeName}}
+                Positions under {{rootNodeName}}
                 <a href='Javascript:;'
                    class="pull-right"
                    ng-click="Refresh()">
@@ -50,14 +52,12 @@
                         <th>Close<br>date</th>
                         <th>Open<br>order</th>
                         <th>Open<br>client order</th>
-                        <th>Open<br>bank order</th>
-                        <th>Close<br>order</th>
-                        <th>Close<br>client order</th>
-                        <th>Close<br>bank order</th>
-                        <th>Open<br>bank</th>
-                        <th>Close<br>bank</th>
-                        <th>Open<br>bank trade ID</th>
-                        <th>Close<br>bank trade ID</th>
+                        <th>Stop Loss ID</th>
+                        <th>Stop Loss Price</th>
+                        <th>Take Profit ID</th>
+                        <th>Take Profit Price</th>
+                        <th>Swap Charged</th>
+                        <th>Swap Total</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -117,38 +117,6 @@
                         </td>
                         <td>
                             <table-search name="openclientorderid" size="5"
-                                          placeholder="ID"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="openbankorderid" size="5"
-                                          placeholder="ID"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="closeorderid" size="5"
-                                          placeholder="ID"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="closeclientorderid" size="5"
-                                          placeholder="ID"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="closebankorderid" size="5"
-                                          placeholder="ID"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="openbank" size="5"
-                                          placeholder="Bank"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="closebank" size="5"
-                                          placeholder="Bank"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="openbanktradeid" size="5"
-                                          placeholder="ID"></table-search>
-                        </td>
-                        <td>
-                            <table-search name="closebanktradeid" size="5"
                                           placeholder="ID"></table-search>
                         </td>
                         <td>

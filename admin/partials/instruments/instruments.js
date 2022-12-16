@@ -230,7 +230,7 @@ instrumentsControllers.controller('InstrumentsCtrl',
                     ]
                 }
             }
-                
+
 
             $scope.deleteInstrument = function (id, showProgress) {
                 var instrument = $rootScope.instruments.getById(id)

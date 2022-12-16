@@ -1,0 +1,36 @@
+<div ng-controller="CorporateActionsCtrl">
+    <div id="loadingspinner" class="overlay" hidden="true">
+        <h4><i class="fa fa-spinner fa-spin"></i> Processing {{currentItem}} ...</h4>
+    </div>
+    <div>
+        <h4>
+            <i class="fa fa-pencil-square-o fa-2x"></i>
+            <strong>Create Corporate Action</strong>
+        </h4>
+    </div>
+    <div>
+        <label class="col-sm-2 control-label">Symbol</label>
+        <div class="col-sm-2">
+            <select class='form-control'
+                    id="corpaction_symbol"
+                    ng-options="i as i.symbol for i in ::instruments.data | orderBy: 'symbol'"
+                    ng-model="corpaction.symbol">
+            </select>
+        </div>
+        <label class="col-sm-2 control-label">Split Amount</label>
+        <div class="col-sm-5">
+            <div class="col-sm-2">
+                <input id="corpaction_dividend" ng-model="corpaction.dividend" name="dividend" type="number" class="form-control" float required>
+            </div>
+            <div class="col-sm-1">
+                :
+            </div>
+            <div class="col-sm-2">
+                <input id="corpaction_divisor" ng-model="corpaction.divisor" name="divisor" type="number" class="form-control" float required>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button id="corpaction_submit" type="submit" class="btn btn-primary" ng-click="createCorporateAction()">Submit</button>
+    </div>
+</div>

@@ -647,14 +647,12 @@ function getDefaultTableProperties() {
                 closedate: true,
                 openorderid: true,
                 openclientorderid: true,
-                openbankorderid: true,
                 closeorderid: true,
                 closeclientorderid: true,
-                closebankorderid: true,
-                openbank: true,
-                closebank: true,
-                openbanktradeid: true,
-                closebanktradeid: true
+                slId: true,
+                slPrice: true,
+                tpId: true,
+                tpPrice: true
             },
             orders: {
                 orderid: true,
@@ -668,6 +666,29 @@ function getDefaultTableProperties() {
                 opendate: true,
                 clientorderid: true,
                 bankorderid: true
+            },
+            liquidation: {
+                accountId: true,
+                liquidationDate: true,
+                usedMargin: true,
+                usableMargin: true,
+                marginPercent: true,
+                balance: true,
+                totalPl: true,
+                positionCount: true,
+                comment: true
+            },
+            positionInterest: {
+                accountId: true,
+                referencenn: true,
+                description: true,
+                amount: true,
+                transDate: true,
+                linkId: true,
+                userId: true,
+                userFrom: true,
+                clientRefId: true,
+                tradeDate: true
             },
             livefeed: {
                 spread: true,

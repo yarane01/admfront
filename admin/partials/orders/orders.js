@@ -74,9 +74,6 @@ ordersControllers.controller('OrdersCtrl',
                             case "clientorderid":
                                 orderCol = 'clientorderid';
                                 break;
-                            case "bankorderid":
-                                orderCol = 'bankorderid';
-                                break;
                         }
 
                         var reqFilters = [];
@@ -111,13 +108,11 @@ ordersControllers.controller('OrdersCtrl',
                                     case "clientorderid":
                                         reqFilters.push("clientorderid LIKE '%" + search.trim() + "%'");
                                         break;
-                                    case "bankorderid":
-                                        reqFilters.push("bankorderid LIKE '%" + search.trim() + "%'");
-                                        break;
                                 }
                             }
                         }
-                        if (dateFilter != "") reqFilters.push(dateFilter);
+                        if (dateFilter != "") 
+                            reqFilters.push(dateFilter);
 
                         var start = data.start + 1;
                         var end = data.start + data.length;
@@ -215,11 +210,6 @@ ordersControllers.controller('OrdersCtrl',
                             name: "clientorderid"
                         },
                         {
-                            "data": "bankorderid",
-                            save: true,
-                            name: "bankorderid"
-                        },
-                        {
                             "data": null,
                             "sortable": false,
                             //"class": "actions",
@@ -250,12 +240,9 @@ ordersControllers.controller('OrdersCtrl',
                                             }
                                         ]
                                     }).html();
-
                             }
-
                         }
                     ]
-
                 }
             }
 
@@ -347,8 +334,8 @@ ordersControllers.controller('OrdersCtrl',
                 beforeDialog($scope);
                 $scope.order = $.extend({}, $rootScope.orders.getById(id));
                 $scope.delete = {
-                    systemid: $scope.order.ordern,
-                    title: 'order ' + $scope.order.ordern
+                    systemid: $scope.order.orderid,
+                    title: 'order ' + $scope.order.orderid
                 };
                 $scope.$apply();
                 $('#delete').modal();
@@ -356,7 +343,7 @@ ordersControllers.controller('OrdersCtrl',
 
             $scope.deleteItem = function () {
                 $scope.context.inprogress = true;
-                api.deleteOrder($scope.order.ordern, angular.extend(errorHandler($scope),
+                api.deleteOrder($scope.order.orderid, angular.extend(errorHandler($scope),
                     {
                         ok: function (response) {
                             $scope.context.inprogress = false;
@@ -440,14 +427,39 @@ ordersControllers.controller('OrderCreateCtrl',
             }
 
             $scope.createTrade = function () {
-                proxy.createTrade(function () {
-                    $("#createOrder").modal('hide').on('hidden.bs.modal', function () {
-                        $("#createOrder").off();
-                        $scope.context.createOrder = false;
-                        saveState('#table', $rootScope.orders.state);
-                        $('#table').DataTable().ajax.reload();
-                    })
-                })
+                var req = {
+                    method: 'POST',
+                    url: apiurl + '/orders',
+                    data: {
+                        accountId: $scope.order.accountid, 
+                           symbol: $scope.order.instrumentid.instrumentid,
+                           amount: $scope.order.lots * ($scope.order.bs == 'B' ? 1 : -1),
+                           rate: $scope.order.rate,
+                           duration: $scope.order.duration,
+                           entryType: $scope.order.entryType
+                    }
+                };
+            
+                $http(req)
+                .then(
+                    function (successResponse) {
+                        if(successResponse.data.status == 'Fail') {
+                            confirm("Error creating pending order");
+                        } else {
+                            $("#createOrder").modal('hide').on('hidden.bs.modal', function () {
+                                $("#createOrder").off();
+                                $scope.context.createOrder = false;
+                                $scope.Refresh();
+                            })
+                        }
+                    },
+                    function (errorResponse) {
+                        confirm("Error creating pending order");
+                    }
+                )
+                .catch(function (response) {
+                    errorCallBack('Error uploading data');
+                });
             }
 
             $scope.accountsList = $rootScope.accountslist.data;

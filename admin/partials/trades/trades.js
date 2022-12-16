@@ -40,7 +40,6 @@ tradesControllers.controller('TradesCtrl',
                         $(row).attr("id", data.tradeid);
                     },
                     "ajax": function (data, callback, settings) {
-
                         var orderCol;
                         var index = data.order[0].column;
                         switch (settings.aoColumns[index].name) {
@@ -86,29 +85,17 @@ tradesControllers.controller('TradesCtrl',
                             case "openclientorderid":
                                 orderCol = "openclientorderid";
                                 break;
-                            case "openbankorderid":
-                                orderCol = "openbankorderid";
+                            case "slId":
+                                orderCol = 'sl_id';
                                 break;
-                            case "closeorderid":
-                                orderCol = "closeorderid";
+                            case "slPrice":
+                                orderCol = 'sl_price';
                                 break;
-                            case "closeclientorderid":
-                                orderCol = "closeclientorderid";
+                            case "tpId":
+                                orderCol = "tp_id";
                                 break;
-                            case "closebankorderid":
-                                orderCol = "closebankorderid";
-                                break;
-                            case "closebank":
-                                orderCol = "closebank";
-                                break;
-                            case "openbank":
-                                orderCol = "openbank";
-                                break;
-                            case "openbanktradeid":
-                                orderCol = "openbanktradeid";
-                                break;
-                            case "closebanktradeid":
-                                orderCol = "closebanktradeid";
+                            case "tpPrice":
+                                orderCol = "tp_price";
                                 break;
                         }
 
@@ -166,47 +153,14 @@ tradesControllers.controller('TradesCtrl',
                                     case "openclientorderid":
                                         reqFilters.push("openclientorderid LIKE '%" + search.trim() + "%'");
                                         break;
-                                    case "openbankorderid":
-                                        reqFilters.push("openbankorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "closeorderid":
-                                        reqFilters.push("closeorderid='" + search + "'");
-                                        break;
-                                    case "closeclientorderid":
-                                        reqFilters.push("closeclientorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "closebankorderid":
-                                        reqFilters.push("closebankorderid LIKE '%" + search.trim() + "%'");
-                                        break;
-                                    case "openbank":
-                                        reqFilters.push("openbank LIKE '%" + search + "%'");
-                                        break;
-                                    case "closebank":
-                                        reqFilters.push("closebank LIKE '%" + search + "%'");
-                                        break;
-                                    case "openbanktradeid":
-                                        reqFilters.push("openbanktradeid LIKE '%" + search + "%'");
-                                        break;
-                                    case "closebanktradeid":
-                                        reqFilters.push("closebanktradeid LIKE '%" + search + "%'");
-                                        break;
                                 }
                             }
                         }
-                        if (dateFilter != "") reqFilters.push(dateFilter);
 
-                        /*
-                         var reqParams = {
-                         n1: data.start + 1,
-                         n2: data.start + data.length,
-                         sortcolumn: orderCol + ' ' + data.order[0].dir
-                         };
-                         var countFilter = {filter: ''};
-                         if (reqFilters.length > 0) {
-                         reqParams.filter = reqFilters.join(' AND ');
-                         countFilter.filter = reqParams.filter;
-                         }
-                         */
+                        if (dateFilter != "") {
+                            reqFilters.push(dateFilter);
+                        }
+
                         var start = data.start + 1;
                         var end = data.start + data.length;
                         var request = 'n1=' + start + '&n2=' + end + '&sortcolumn=' +
@@ -326,44 +280,34 @@ tradesControllers.controller('TradesCtrl',
                             name: "openclientorderid"
                         },
                         {
-                            "data": "openbankorderid",
+                            "data": "slId",
                             save: true,
-                            name: "openbankorderid"
+                            name: "slId"
                         },
                         {
-                            "data": "closeorderid",
+                            "data": "slPrice",
                             save: true,
-                            name: "closeorderid"
+                            name: "slPrice"
                         },
                         {
-                            "data": "closeclientorderid",
+                            "data": "tpId",
                             save: true,
-                            name: "closeclientorderid"
+                            name: "tpId"
                         },
                         {
-                            "data": "closebankorderid",
+                            "data": "tpPrice",
                             save: true,
-                            name: "closebankorderid"
+                            name: "tpPrice"
                         },
                         {
-                            "data": "openbank",
+                            "data": "swapCharged",
                             save: true,
-                            name: "openbank"
+                            name: "swapCharged"
                         },
                         {
-                            "data": "closebank",
+                            "data": "swapTotal",
                             save: true,
-                            name: "closebank"
-                        },
-                        {
-                            "data": "openbanktradeid",
-                            save: true,
-                            name: "openbanktradeid"
-                        },
-                        {
-                            "data": "closebanktradeid",
-                            save: true,
-                            name: "closebanktradeid"
+                            name: "swapTotal"
                         },
                         {
                             "data": null,
@@ -377,15 +321,32 @@ tradesControllers.controller('TradesCtrl',
                                     {
                                         id: data.tradeid,
                                         items: [
-
                                             {
                                                 title: "Edit",
                                                 action: "Edit",
                                                 access: access.Edit,
                                                 class: 'edit-link text-bold'
-                                            },
-
-                                            {
+                                            },{
+                                                title: "Close",
+                                                action: "Close",
+                                                access: access.Close,
+                                                class: 'close-link text-bold'
+                                            },{
+                                                title: "Add Take Profit",
+                                                action: "addtp",
+                                                access: access.Close,
+                                                class: 'tp-link text-bold'
+                                            },{
+                                                title: "Add Stop Loss",
+                                                action: "addsl",
+                                                access: access.Close,
+                                                class: 'sl-link text-bold'
+                                            },{
+                                                title: "Adjust Swap Total",
+                                                action: "adjustSwap",
+                                                access: access.Close,
+                                                class: 'sl-link text-bold'
+                                            },{
                                                 title: "Details",
                                                 action: "Details",
                                                 access: access.Details
@@ -393,18 +354,20 @@ tradesControllers.controller('TradesCtrl',
                                         ]
                                     }).html();
                             }
-
                         }
                     ]
-
                 }
             }
+
             window.actionClick = function (link) {
                 var action = $(link).data('action');
                 var id = $(link).data('id');
                 switch (action.toUpperCase()) {
                     case 'EDIT':
                         $scope.editDialog(id);
+                        break;
+                    case 'CLOSE':
+                        $scope.closeTrade(id);
                         break;
                     case 'DETAILS':
                         // basic authentication in url:
@@ -417,8 +380,158 @@ tradesControllers.controller('TradesCtrl',
                         url = url + '/tradeaudit?tradeid=' + id;
                         openInNewTab(url);
                         break;
+                    case 'ADDTP':
+                        $scope.addTP(id);
+                        break;
+                    case 'ADDSL':
+                        $scope.addSL(id);
+                        break;
+                    case 'ADJUSTSWAP':
+                        $scope.adjustSwap(id);
+                        break;
                 }
             };
+
+            $scope.addTP = function(id) {
+                beforeDialog($scope);
+                $scope.trade = angular.extend({}, $rootScope.trades.getById(id));
+                $scope.trade.conditionaltype = "TP";
+                $scope.conditionaltype = "Take Profit";
+                $scope.tradeNotClosed = $scope.trade.closerate == null;
+                $scope.$apply(function () {
+                        $('#conditionalOrder').modal().on('shown.bs.modal',
+                            function () {
+                                
+                            }
+                        );
+                    }
+                );
+            }
+
+            $scope.addSL = function(id) {
+                beforeDialog($scope);
+                $scope.trade = angular.extend({}, $rootScope.trades.getById(id));
+                $scope.trade.conditionaltype = "SL";
+                $scope.conditionaltype = "Stop Loss";
+                $scope.tradeNotClosed = $scope.trade.closerate == null;
+                $scope.$apply(function () {
+                        $('#conditionalOrder').modal().on('shown.bs.modal',
+                            function () {
+                                
+                            }
+                        );
+                    }
+                );
+            }
+
+            $scope.adjustSwap = function(id) {
+                beforeDialog($scope);
+                $scope.trade = angular.extend({}, $rootScope.trades.getById(id));
+                $scope.$apply(function () {
+                        $('#swapAdjustment').modal().on('shown.bs.modal',
+                            function () {
+                                
+                            }
+                        );
+                    }
+                );
+            }
+
+            $scope.processConditional = function() {
+                if($scope.trade.conditionaltype == "TP" || $scope.trade.conditionaltype == "SL") {
+                    var req = {
+                        method: 'POST',
+                        url: apiurl + '/position/conditionalorder',
+                        data: {
+                            conditionaltype: $scope.trade.conditionaltype,
+                            price: $scope.trade.conditionalRate,
+                            orderRequestId: $scope.trade.openorderid
+                        }
+                    };
+                
+                    $http(req)
+                    .then(
+                        function (successResponse) {
+                            if (successResponse.data.status == 'OK') {
+                                $('#conditionalOrder').modal('hide');
+                                confirm("Successfully created conditional order " + successResponse.data.payload[0]);
+                            } else {
+                                confirm('Error uploading data: ' + successResponse.data.payload[0]);
+                            }
+                        },
+                        function (errorResponse) {
+                            var errorMessage = null;
+                
+                            if (errorResponse.data.payload && (errorResponse.data.payload.length > 0)) {
+                                errorMessage = 'Error uploading data: ' + errorResponse.data.payload[0];
+                            } else {
+                                errorMessage = 'Error uploading data';
+                            }
+                
+                            confirm(errorMessage);
+                        }
+                    )
+                    .catch(function (response) {
+                        confirm('Error uploading data');
+                    });
+                } else {
+                    $('#conditionalOrder').modal('hide');
+                    confirm("Invalid conditional type provided");
+                }
+            }
+
+            $scope.processSwapAdjustment = function() {
+                var req = {
+                    method: 'POST',
+                    url: apiurl + '/position/adjustSwap',
+                    data: {
+                        amount: $scope.trade.swapCharge,
+                        orderRequestId: $scope.trade.openorderid
+                    }
+                };
+
+                $http(req)
+                .then(
+                    function (successResponse) {
+                        if (successResponse.data.status == 'OK') {
+                            $('#swapAdjustment').modal('hide');
+                            confirm("Successfully adjusted swap total on position " + $scope.trade.openorderid);
+                        } else {
+                            confirm('Error uploading data: ' + successResponse.data.payload[0]);
+                        }
+                    },
+                    function (errorResponse) {
+                        var errorMessage = null;
+            
+                        if (errorResponse.data.payload && (errorResponse.data.payload.length > 0)) {
+                            errorMessage = 'Error uploading data: ' + errorResponse.data.payload[0];
+                        } else {
+                            errorMessage = 'Error uploading data';
+                        }
+            
+                        confirm(errorMessage);
+                    }
+                )
+                .catch(function (response) {
+                    confirm('Error uploading data');
+                });
+            }
+
+            $scope.closeTrade = function(id) {
+                var trade = $rootScope.trades.getById(id);
+
+                $scope.processing = false;
+                $scope.errorMessage = null;
+
+                $scope.orderrequestid = trade.openorderid;
+
+                $('#closeTradeDialog').modal();
+                document.getElementById("orderrequestid").value = trade.openorderid;
+            }
+
+            $scope.doClosePosition = function() {
+                processClosePosition($scope, $rootScope, $http);
+            }
 
             $scope.afterTableCreated = function () {
                 var table = $('#table').DataTable();
@@ -467,10 +580,11 @@ tradesControllers.controller('TradesCtrl',
             $scope.updateTrade = function () {
                 $scope.context.inprogress = true;
                 var trade = {
-                    "tradeid": $scope.trade.tradeid,
+                    "tradeid": $scope.trade.openorderid,
                     "openrate": $scope.trade.openrate,
                     "openamount": $scope.trade.openamount,
                 }
+
                 if ($scope.trade.closerate)
                     trade.closerate = $scope.trade.closerate;
                 if ($scope.trade.closeamount)
@@ -479,6 +593,7 @@ tradesControllers.controller('TradesCtrl',
                     trade.opendate = $scope.trade.opendate;
                 if ($scope.trade.closedate)
                     trade.closedate = $scope.trade.closedate;
+
                 api.updateTrade(trade, angular.extend(errorHandler($scope),
                     {
                         ok: function (response) {
@@ -492,7 +607,6 @@ tradesControllers.controller('TradesCtrl',
                     }
                 ));
             }
-
 
             $scope.Refresh = function () {
                 $('#table').DataTable().ajax.reload();
@@ -558,24 +672,6 @@ tradesControllers.controller('TradeCreateCtrl',
 
             var proxy = new tradeProxy($scope, $rootScope, api);
 
-            var pager;
-
-            $scope.accountFirst = function () {
-                $scope.accounts = pager.first();
-            }
-
-            $scope.accountLast = function () {
-                $scope.accounts = pager.last();
-            }
-
-            $scope.accountNext = function () {
-                $scope.accounts = pager.next();
-            }
-
-            $scope.accountPrev = function () {
-                $scope.accounts = pager.prev();
-            }
-
             $scope.$watch("context.filter", function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         pager.filter(newValue);
@@ -601,12 +697,7 @@ tradesControllers.controller('TradeCreateCtrl',
             }
 
             $scope.accountsList = $rootScope.accountslist.data;
-            pager = new Pager({
-                items: $scope.accountsList,
-                filterFields: ['accountn', 'systemid']
-            });
-            pager.filter('');
-            $scope.accounts = pager.first();
+            $scope.accounts = $scope.accountsList;
         }
-    ])
-
+    ]
+)

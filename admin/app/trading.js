@@ -19,36 +19,32 @@ function tradeProxy(scope, rootScope, api) {
     }
 
     scope.$watch("order.instrument", function (newValue, oldValue) {
-            scope.hint = getHint();
-            var name = scope.order.instrument.symbol;
-            var symbol = rootScope.symbols[name];
-            scope.order.quote = symbol[symbol.last];
-        }
+        scope.hint = getHint();
+        var name = scope.order.instrument.symbol;
+        var symbol = rootScope.symbols[name];
+        scope.order.quote = symbol[symbol.last];
+    }
     )
 
     scope.$watch("order.lots", function (newValue, oldValue) {
-            scope.hint = getHint();
-        }
+        scope.hint = getHint();
+    }
     )
 
     scope.$watch("order.bs", function (newValue, oldValue) {
-            scope.hint = getHint();
-        }
+        scope.hint = getHint();
+    }
     )
 
     return {
         createTrade: function (callback) {
             var trade = {
-                type: 'Market',
-                accountid: scope.order.account.systemid,
-                amount: scope.order.lots * scope.order.instrument.lotsize,
+                account: scope.order.accountn,
+                price: scope.order.price,
+                username: rootScope.portalUser.username,
+                side: scope.order.bs,
+                quantity: scope.order.lots * scope.order.instrument.lotsize,
                 symbol: scope.order.instrument.symbol
-            }
-            if (scope.order.bs == 'S') trade.amount = -trade.amount;
-            if (!Number.isInteger(trade.amount)) {
-                scope.context.errorMessage = 'Invalid lots value';
-                scope.context.error = true;
-                return;
             }
             scope.context.inprogress = true;
             api.createTrade(trade, angular.extend(errorHandler(scope),
@@ -86,21 +82,21 @@ function orderProxy(scope, rootScope, api) {
     }
 
     scope.$watch("order.instrument", function (newValue, oldValue) {
-            scope.hint = getHint();
-            var name = scope.order.instrument.symbol;
-            var symbol = rootScope.symbols[name];
-            scope.order.quote = symbol[symbol.last];
-        }
+        scope.hint = getHint();
+        var name = scope.order.instrument.symbol;
+        var symbol = rootScope.symbols[name];
+        scope.order.quote = symbol[symbol.last];
+    }
     )
 
     scope.$watch("order.lots", function (newValue, oldValue) {
-            scope.hint = getHint();
-        }
+        scope.hint = getHint();
+    }
     )
 
     scope.$watch("order.bs", function (newValue, oldValue) {
-            scope.hint = getHint();
-        }
+        scope.hint = getHint();
+    }
     )
 
     return {
@@ -114,7 +110,7 @@ function orderProxy(scope, rootScope, api) {
                 rate: scope.order.rate
             }
             if (scope.order.bs == 'S') trade.amount = -trade.amount;
-            
+
             scope.context.inprogress = true;
             api.createTrade(trade, angular.extend(errorHandler(scope),
                 {

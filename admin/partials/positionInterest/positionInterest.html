@@ -1,0 +1,64 @@
+<div ng-controller="posIntCtrl">
+    <div class="alert alert-danger" ng-show="error">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
+
+    <div class="panel panel-default table-wrapper">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Swap History
+                <a href='Javascript:;'
+                   class="pull-right"
+                   ng-click="Refresh()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="datatable" ng-show="context.dataloaded">
+                <table d-table id="table" class="table table-hover positionInterest" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Reference Number</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Transaction Date</th>
+                            <th>Link ID</th>
+                            <th>User ID</th>
+                            <th>User From</th>
+                            <th>Client Reference ID</th>
+                            <th>Trade Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <table-search name="accountId" size="5" placeholder="Acct. ID"></table-search>
+                            </td>
+                            <td>
+                                <table-search name="referencen" size="5" placeholder="Ref. Num."></table-search>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <table-search name="linkId" size="5" placeholder="Link ID"></table-search>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <table-search name="clientRefId" size="5" placeholder="Cl. Ref. ID"></table-search>
+                            </td>
+                            <td></td>
+                            <td>
+                                <a href="javascript:;" ng-click="clearAllFilters()" class='btn btn-warning btn-sm' role='button'>Clear All</a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
