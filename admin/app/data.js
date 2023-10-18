@@ -152,7 +152,7 @@ var instrumenttypemap =
     "8": 'Crypto',
     "9": 'CashEquities',
     "10": 'Futures',
-    "11": 'ETF
+    "11": 'ETF'
 };
 
 //from table rangetype
