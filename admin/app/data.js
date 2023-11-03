@@ -152,7 +152,11 @@ var instrumenttypemap =
     "8": 'Crypto',
     "9": 'CashEquities',
     "10": 'Futures',
-    "11": 'ETF'
+    "11": 'ETF',
+    "12": 'Energy SB',
+    "13": 'Forex SB',
+    "14": 'Indices SB',
+    "15": 'Metals SB'
 };
 
 //from table rangetype
