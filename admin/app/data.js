@@ -153,10 +153,10 @@ var instrumenttypemap =
     "9": 'CashEquities',
     "10": 'Futures',
     "11": 'ETF',
-    "12": 'Energy SB',
-    "13": 'Forex SB',
-    "14": 'Indices SB',
-    "15": 'Metals SB'
+    "12": 'EnergySB',
+    "13": 'ForexSB',
+    "14": 'IndicesSB',
+    "15": 'MetalsSB'
 };
 
 //from table rangetype
