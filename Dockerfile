@@ -11,5 +11,6 @@ ARG STP_URL
 ARG BEACON_URL
 ARG REPORTINGSERVICE_URL
 WORKDIR /usr/local/apache2/htdocs
+RUN chmod a+rx -R /usr/local/apache2/htdocs
 RUN sh entrypoint.sh
 RUN echo 'Done'
