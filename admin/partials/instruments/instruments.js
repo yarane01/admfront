@@ -202,6 +202,12 @@ instrumentsControllers.controller('InstrumentsCtrl',
                                                     class: 'edit-link text-bold'
                                                 },
                                                 {
+                                                    title: "Edit trading period",
+                                                    action: "editTradingPeriod",
+                                                    access: access.Edit,
+                                                    class: 'edit-link text-bold'
+                                                },
+                                                {
                                                     title: disableTitle,
                                                     action: disableTitle,
                                                     access: access.Edit
@@ -507,6 +513,29 @@ instrumentsControllers.controller('InstrumentsCtrl',
                                         q.reject('Request failed');
                                     }
                                 );
+                            }
+                            else {
+                                //highlightError($('#' + instrument.instrumentid + ' td'));
+                                q.reject(response.data.payload[0]);
+                            }
+                        },
+                        function (response) {
+                            //highlightError($('#' + instrument.instrumentid + ' td'));
+                            q.reject('Request failed');
+                        }
+                    );
+                return q.promise;
+            };
+
+            var submitTradingPeriod = function (instrument) {
+                var json = JSON.stringify(instrument);
+                var q = $q.defer();
+                $http.put(apiurl + '/instruments/TradingPeriod/' + instrument.instrumentid, json)
+                    .then(
+                        function (response) {
+                            if (response.data.status == 'OK') {
+                                updateInstrument(instrument);
+                                SubscriptionService.refresh(true);
                             }
                             else {
                                 //highlightError($('#' + instrument.instrumentid + ' td'));
